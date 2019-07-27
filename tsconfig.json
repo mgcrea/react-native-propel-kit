@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "noEmit": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@mgcrea/react-native-backdrop-provider": ["packages/backdrop-provider"],
+      "@mgcrea/react-native-button": ["packages/button"],
+      "@mgcrea/react-native-modal-dialog": ["packages/modal-dialog"]
+    }
+  }
+  // "include": ["packages"],
+  // "extends": "./tsconfig.paths.json"
+}

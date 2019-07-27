@@ -1,0 +1,30 @@
+{
+  "name": "@mgcrea/react-native-button",
+  "version": "1.0.0",
+  "private": true,
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel --source-maps --extensions .js,.ts --out-dir lib/ --ignore **/__tests__ src/",
+    "typecheck": "tsc --pretty --noEmit",
+    "test": "CI=true jest --runInBand --colors"
+  },
+  "peerDependencies": {
+    "react": ">=16.8",
+    "react-native": ">=0.59",
+    "styled-components": ">=4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@storybook/react-native": "^5.1.9",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.6.8",
+    "@types/react": "^16.8.23",
+    "@types/react-native": "^0.60.2",
+    "@types/react-test-renderer": "^16.8.2",
+    "react": "16.8.6",
+    "react-native": "0.60.3",
+    "react-native-testing-library": "^1.11.1",
+    "react-test-renderer": "16.8.6",
+    "typescript": "^3.5.3"
+  }
+}

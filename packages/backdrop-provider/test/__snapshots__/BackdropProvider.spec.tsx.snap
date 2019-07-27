@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BackdropProvider> renders correctly 1`] = `
+<View
+  opacity={0}
+  style={
+    Object {
+      "backgroundColor": "black",
+      "bottom": 0,
+      "display": "flex",
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+      "zIndex": 99,
+    }
+  }
+/>
+`;
