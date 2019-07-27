@@ -1,4 +1,4 @@
-# React Native KiteKit
+# React Native Kite Kit
 
 [![npm version](https://img.shields.io/npm/v/react-native-kite-kit.svg)](https://github.com/mgcrea/react-native-kite-kit/releases)
 [![license](https://img.shields.io/github/license/mgcrea/react-native-kite-kit.svg?style=flat)](https://tldrlegal.com/license/mit-license)
@@ -11,7 +11,7 @@
 
 - Carefully crafted functional components using hooks
 
-[![Banner](https://mgcrea.github.io/react-native-kite-kit/images/logo.png)](https://github.com/mgcrea/react-native-kite-kit)
+[![Banner](https://mgcrea.github.io/react-native-kite-kit/images/logo_social.png)](https://github.com/mgcrea/react-native-kite-kit)
 
 - Built with [TypeScript](https://www.typescriptlang.org/) for strong static type checking, types are exported along the library.
 
