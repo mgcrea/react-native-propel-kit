@@ -7,11 +7,11 @@
 [![devDependencies status](https://david-dm.org/mgcrea/react-native-kite-kit/dev-status.svg)](https://david-dm.org/mgcrea/react-native-kite-kit?type=dev)
 [![coverage](https://codecov.io/gh/mgcrea/react-native-kite-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/mgcrea/react-native-kite-kit)
 
+[![Banner](https://mgcrea.github.io/react-native-kite-kit/images/logo_social.png)](https://github.com/mgcrea/react-native-kite-kit)
+
 - React Native components to take off your next mobile app!
 
 - Carefully crafted functional components using hooks
-
-[![Banner](https://mgcrea.github.io/react-native-kite-kit/images/logo_social.png)](https://github.com/mgcrea/react-native-kite-kit)
 
 - Built with [TypeScript](https://www.typescriptlang.org/) for strong static type checking, types are exported along the library.
 
