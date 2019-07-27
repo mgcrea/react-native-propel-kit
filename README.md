@@ -1,17 +1,17 @@
-# React Native Kite
+# React Native KiteKit
 
-[![npm version](https://img.shields.io/npm/v/react-native-kite.svg)](https://github.com/mgcrea/react-native-kite/releases)
-[![license](https://img.shields.io/github/license/mgcrea/react-native-kite.svg?style=flat)](https://tldrlegal.com/license/mit-license)
-[![build status](https://travis-ci.com/mgcrea/react-native-kite.svg?branch=master)](https://travis-ci.com/mgcrea/react-native-kite)
-[![dependencies status](https://david-dm.org/mgcrea/react-native-kite/status.svg)](https://david-dm.org/mgcrea/react-native-kite)
-[![devDependencies status](https://david-dm.org/mgcrea/react-native-kite/dev-status.svg)](https://david-dm.org/mgcrea/react-native-kite?type=dev)
-[![coverage](https://codecov.io/gh/mgcrea/react-native-kite/branch/master/graph/badge.svg)](https://codecov.io/gh/mgcrea/react-native-kite)
+[![npm version](https://img.shields.io/npm/v/react-native-kite-kit.svg)](https://github.com/mgcrea/react-native-kite-kit/releases)
+[![license](https://img.shields.io/github/license/mgcrea/react-native-kite-kit.svg?style=flat)](https://tldrlegal.com/license/mit-license)
+[![build status](https://travis-ci.com/mgcrea/react-native-kite-kit.svg?branch=master)](https://travis-ci.com/mgcrea/react-native-kite-kit)
+[![dependencies status](https://david-dm.org/mgcrea/react-native-kite-kit/status.svg)](https://david-dm.org/mgcrea/react-native-kite-kit)
+[![devDependencies status](https://david-dm.org/mgcrea/react-native-kite-kit/dev-status.svg)](https://david-dm.org/mgcrea/react-native-kite-kit?type=dev)
+[![coverage](https://codecov.io/gh/mgcrea/react-native-kite-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/mgcrea/react-native-kite-kit)
 
 - React Native components to take off your next mobile app!
 
 - Carefully crafted functional components using hooks
 
-[![Banner](https://mgcrea.github.io/react-native-kite/images/logo.png)](https://github.com/mgcrea/react-native-kite)
+[![Banner](https://mgcrea.github.io/react-native-kite-kit/images/logo.png)](https://github.com/mgcrea/react-native-kite-kit)
 
 - Built with [TypeScript](https://www.typescriptlang.org/) for strong static type checking, types are exported along the library.
 
@@ -30,9 +30,9 @@
 ### Installation
 
 ```bash
-yarn add react-native-kite
+yarn add react-native-kite-kit
 # or
-npm install react-native-kite
+npm install react-native-kite-kit
 ```
 
 ### Available scripts
