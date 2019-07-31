@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppRegistry, View, YellowBox} from 'react-native';
+import {AppRegistry, View, YellowBox, PixelRatio, StyleSheet, StatusBar, Image} from 'react-native';
 import {getStorybookUI, addDecorator, configure} from '@storybook/react-native';
 import BackdropProvider from '@mgcrea/react-native-backdrop-provider';
 import ActionSheetProvider from '@mgcrea/react-native-action-sheet-provider';
@@ -7,6 +7,7 @@ import ActionSheetProvider from '@mgcrea/react-native-action-sheet-provider';
 import {name as appName} from './app.json';
 import Logo from './stories/components/Logo';
 import CenteredView from './stories/components/CenteredView';
+import screencap from './stories/fixtures/screencap_1.png';
 // import './rn-addons';
 
 // Disable noisy warnings
@@ -20,7 +21,17 @@ YellowBox.ignoreWarnings([
 addDecorator(storyFn => (
   <BackdropProvider>
     <ActionSheetProvider>
-      <View style={{flex: 1, alignItems: 'stretch', backgroundColor: '#3F51B5'}}>
+      <StatusBar barStyle="light-content" />
+      {/* <Image
+        source={screencap}
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          top: -30,
+          width: 1080 / PixelRatio.get(),
+          height: 2160 / PixelRatio.get()
+        }}
+      /> */}
+      <View style={{flex: 1, opacity: 1, alignItems: 'stretch', backgroundColor: '#3F51B5'}}>
         <Logo />
         <CenteredView>{storyFn()}</CenteredView>
       </View>
