@@ -1,13 +1,13 @@
-# React Native Kite Kit
+# React Native Propel Kit
 
-[![npm version](https://img.shields.io/npm/v/react-native-kite-kit.svg)](https://github.com/mgcrea/react-native-kite-kit/releases)
-[![license](https://img.shields.io/github/license/mgcrea/react-native-kite-kit.svg?style=flat)](https://tldrlegal.com/license/mit-license)
-[![build status](https://travis-ci.com/mgcrea/react-native-kite-kit.svg?branch=master)](https://travis-ci.com/mgcrea/react-native-kite-kit)
-[![dependencies status](https://david-dm.org/mgcrea/react-native-kite-kit/status.svg)](https://david-dm.org/mgcrea/react-native-kite-kit)
-[![devDependencies status](https://david-dm.org/mgcrea/react-native-kite-kit/dev-status.svg)](https://david-dm.org/mgcrea/react-native-kite-kit?type=dev)
-[![coverage](https://codecov.io/gh/mgcrea/react-native-kite-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/mgcrea/react-native-kite-kit)
+[![npm version](https://img.shields.io/npm/v/react-native-propel-kit.svg)](https://github.com/mgcrea/react-native-propel-kit/releases)
+[![license](https://img.shields.io/github/license/mgcrea/react-native-propel-kit.svg?style=flat)](https://tldrlegal.com/license/mit-license)
+[![build status](https://travis-ci.com/mgcrea/react-native-propel-kit.svg?branch=master)](https://travis-ci.com/mgcrea/react-native-propel-kit)
+[![dependencies status](https://david-dm.org/mgcrea/react-native-propel-kit/status.svg)](https://david-dm.org/mgcrea/react-native-propel-kit)
+[![devDependencies status](https://david-dm.org/mgcrea/react-native-propel-kit/dev-status.svg)](https://david-dm.org/mgcrea/react-native-propel-kit?type=dev)
+[![coverage](https://codecov.io/gh/mgcrea/react-native-propel-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/mgcrea/react-native-propel-kit)
 
-[![Banner](https://mgcrea.github.io/react-native-kite-kit/images/logo_social.png)](https://github.com/mgcrea/react-native-kite-kit)
+[![Banner](https://mgcrea.github.io/react-native-propel-kit/images/logo_social_white.png)](https://github.com/mgcrea/react-native-propel-kit)
 
 - React Native components to take off your next mobile app!
 
@@ -30,9 +30,9 @@
 ### Installation
 
 ```bash
-yarn add react-native-kite-kit
+yarn add react-native-propel-kit
 # or
-npm install react-native-kite-kit
+npm install react-native-propel-kit
 ```
 
 ### Available scripts
