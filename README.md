@@ -7,7 +7,7 @@
 [![devDependencies status](https://david-dm.org/mgcrea/react-native-propel-kit/dev-status.svg)](https://david-dm.org/mgcrea/react-native-propel-kit?type=dev)
 [![coverage](https://codecov.io/gh/mgcrea/react-native-propel-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/mgcrea/react-native-propel-kit)
 
-[![Banner](https://mgcrea.github.io/react-native-propel-kit/images/logo_social_white.png)](https://github.com/mgcrea/react-native-propel-kit)
+[![Banner](https://mgcrea.github.io/react-native-propel-kit/images/logo_social_white_lite.png)](https://github.com/mgcrea/react-native-propel-kit)
 
 - React Native components to take off your next mobile app!
 
