@@ -1,6 +1,7 @@
-import React, {useState, createElement, useRef} from 'react';
-import {Button, View, Modal, Text, StyleSheet} from 'react-native';
+import React, {useRef} from 'react';
+import {Text} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
+import Button from '@mgcrea/react-native-button';
 
 import ModalDialog, {ModalDialogHandle} from '../src';
 

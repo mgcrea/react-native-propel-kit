@@ -17,9 +17,9 @@ const Button: FunctionComponent<Props> = ({onPress, title, containerStyle, ...ot
   const formattedTitle = Platform.OS === 'android' ? title.toUpperCase() : title;
   return (
     <ButtonTouchable onPress={onPress}>
-      <View style={containerStyle}>
+      <ButtonView style={containerStyle}>
         <ButtonText {...otherProps}>{formattedTitle}</ButtonText>
-      </View>
+      </ButtonView>
     </ButtonTouchable>
   );
 };
@@ -31,20 +31,32 @@ const ButtonTouchable = styled(Platform.OS === 'android' ? TouchableNativeFeedba
   overflow: hidden;
 `;
 
-const ButtonText = styled.Text`
-  text-align: center;
-  /* flex: 0 0 auto; */
-  padding: 8px;
+const ButtonView = styled.View`
   ${Platform.select({
     ios: css`
+      padding: 5px;
+    `,
+    android: css`
+      margin: 0 6px;
+      padding: 10px 12px;
+      border-radius: 2px;
+    `
+  })}
+`;
+
+const ButtonText = styled.Text`
+  ${Platform.select({
+    ios: css`
+      text-align: center;
       color: #007aff;
-      font-size: 18px;
+      font-size: 20px;
+      /* font-weight: bold; */
     `,
     android: css`
       color: #009688;
-      font-size: 16px;
+      font-size: 14px;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: bold;
     `
   })};
 `;

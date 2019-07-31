@@ -47,7 +47,7 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
     animationType = Platform.OS === 'ios' ? 'slide' : 'fade',
     cancelTitle = 'Cancel',
     children,
-    confirmTitle = 'Confirm',
+    confirmTitle = Platform.select({android: 'OK', ios: 'Confirm'}),
     containerStyle,
     delay = 0,
     disabled = false,
@@ -135,7 +135,7 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
       animationType={animationType}
       {...{hardwareAccelerated, supportedOrientations, transparent}}
     >
-      <TouchableOpacity style={{flex: 1}} onPress={handleModalCancel}>
+      <TouchableWithoutFeedback style={{flex: 1}} onPress={handleModalCancel}>
         <ModalContainer style={containerStyle}>
           <TouchableWithoutFeedback>
             <View>
@@ -147,21 +147,23 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
                 ) : null}
                 <ModalBody>{children}</ModalBody>
                 <ModalFooter>
-                  {Platform.OS === 'android' ? (
-                    <Button containerStyle={{marginRight: 8}} onPress={handleModalCancel} title={cancelTitle} />
-                  ) : null}
+                  {Platform.OS === 'android' ? <Button onPress={handleModalCancel} title={cancelTitle} /> : null}
                   <Button onPress={handleModalConfirm} title={confirmTitle} />
                 </ModalFooter>
               </DialogContainer>
               {Platform.OS === 'ios' ? (
                 <DialogContainer>
-                  <Button style={{marginVertical: 12}} onPress={handleModalCancel} title={cancelTitle} />
+                  <Button
+                    style={{marginVertical: 12, fontWeight: 'bold'}}
+                    onPress={handleModalCancel}
+                    title={cancelTitle}
+                  />
                 </DialogContainer>
               ) : null}
             </View>
           </TouchableWithoutFeedback>
         </ModalContainer>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
@@ -185,12 +187,17 @@ const DialogContainer = styled.View`
   /* justify-content: center; */
   background-color: white;
   flex-direction: column;
-  margin: 0 24px 24px;
   padding: 0px;
-  border-radius: 12px;
   ${Platform.select({
     android: css`
+      border-radius: 2px;
+      margin: 0 62px;
       elevation: 4;
+    `,
+    ios: css`
+      border-radius: 12px;
+      margin: 0 8px 8px;
+      /* margin: 0 24px 24px; */
     `
   })}
 `;
@@ -232,16 +239,17 @@ const ModalBody = styled.View`
 `;
 
 const ModalFooter = styled.View`
-  border-top-width: 1px;
-  border-top-color: #eee;
-  padding: 12px;
   ${Platform.select({
     ios: css`
+      padding: 12px;
       flex-direction: column;
       align-items: stretch;
       justify-content: center;
     `,
     android: css`
+      /* border-top-width: 1px;
+  border-top-color: #eee; */
+      padding: 14px 16px;
       flex-direction: row;
       justify-content: flex-end;
     `

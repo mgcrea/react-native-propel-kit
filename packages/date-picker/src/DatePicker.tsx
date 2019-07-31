@@ -27,7 +27,6 @@ import defaultLabelExtractor, {LabelExtractorOptions} from './utils/defaultLabel
 import openAndroidDatePicker from './utils/openAndroidDatePicker';
 import asUTCDate from './utils/asUTCDate';
 import isUndefined from './utils/isUndefined';
-import defaults from './defaults';
 
 export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> &
   Pick<DatePickerIOSProps, 'mode' | 'locale'> & {
@@ -46,13 +45,12 @@ export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTit
 const CURRENT_YEAR = new Date().getFullYear();
 const FIRST_DAY_OF_YEAR = new Date(Date.UTC(CURRENT_YEAR, 0, 1));
 
-export const defaultProps: Required<
-  Pick<Props, 'androidMode' | 'initialValue' | 'InputButtonComponent' | 'labelExtractor' | 'mode' | 'utc'>
-> = {
-  androidMode: 'spinner',
+export const defaultProps = {
+  // androidMode: 'spinner',
   initialValue: FIRST_DAY_OF_YEAR,
   InputButtonComponent: InputButton,
   labelExtractor: defaultLabelExtractor,
+  locale: navigator.language,
   mode: 'date',
   utc: false
 };
@@ -73,9 +71,9 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
     initialValue: propInitialValue = defaultProps.initialValue,
     InputButtonComponent = defaultProps.InputButtonComponent,
     labelExtractor = defaultProps.labelExtractor,
-    locale,
-    mode,
-    utc,
+    locale = defaultProps.locale,
+    mode = defaultProps.mode,
+    utc = defaultProps.utc,
     onChange,
     onSubmitEditing,
     value: propValue,
