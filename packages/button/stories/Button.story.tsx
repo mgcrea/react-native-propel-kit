@@ -1,15 +1,8 @@
 import React, {useState, createElement, useCallback, useRef} from 'react';
-import {Button as NativeButton, View, Modal, Text, TextInput, StyleSheet} from 'react-native';
+import {Button as NativeButton, View, Modal, Text, TextInput, StyleSheet, Platform} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 
-import Button, {buttonDefaultProps} from '../src';
-
-Object.assign(buttonDefaultProps.style, {
-  backgroundColor: 'white',
-  color: 'black',
-  borderRadius: 4,
-  padding: 12
-});
+import Button from '../src';
 
 storiesOf('Button', module)
   .add('default view', () => {

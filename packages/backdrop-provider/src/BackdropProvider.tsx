@@ -49,13 +49,13 @@ const BackdropProvider: FunctionComponent<Props> = ({
     latestIsVisible.current = false;
   }, []);
 
-  // Track isVisible as a ref for context
+  // Track isVisible latest value with a ref
   useEffect(() => {
     latestIsVisible.current = isVisible;
   }, [isVisible]);
 
   // Toggle backdrop
-  // @NOTE latestIsVisible ref is used to provide a stable contextValue ref
+  // @NOTE a ref is used to provide a stable context accross renders
   const toggle = useCallback(() => {
     !latestIsVisible.current ? show() : hide();
   }, [latestIsVisible, show, hide]);

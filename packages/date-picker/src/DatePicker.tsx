@@ -46,7 +46,7 @@ const CURRENT_YEAR = new Date().getFullYear();
 const FIRST_DAY_OF_YEAR = new Date(Date.UTC(CURRENT_YEAR, 0, 1));
 
 export const defaultProps = {
-  // androidMode: 'spinner',
+  androidMode: 'spinner',
   initialValue: FIRST_DAY_OF_YEAR,
   InputButtonComponent: InputButton,
   labelExtractor: defaultLabelExtractor,
@@ -164,7 +164,13 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
           confirmTitle={confirmTitle}
           cancelTitle={cancelTitle}
         >
-          <DatePickerIOS mode={mode} date={modalValue} onDateChange={setModalValue} style={{flex: 1}} locale={locale} />
+          <DatePickerIOS
+            mode={mode}
+            date={modalValue}
+            onDateChange={setModalValue}
+            style={{flexGrow: 1}}
+            locale={locale}
+          />
         </ModalDialog>
       ) : null}
     </>

@@ -6,7 +6,8 @@ import React, {
   forwardRef,
   useContext,
   useEffect,
-  RefForwardingComponent
+  RefForwardingComponent,
+  useRef
 } from 'react';
 import {
   TouchableOpacity,
@@ -17,21 +18,34 @@ import {
   Platform,
   View,
   TouchableWithoutFeedback,
-  StyleProp
+  Text,
+  StyleProp,
+  TextStyle,
+  Dimensions
 } from 'react-native';
-import styled, {css} from 'styled-components/native';
 import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdrop-provider';
-import Button from './components/Button';
+// import Button from './components/Button';
+import Button from '@mgcrea/react-native-button';
 
 export type Props = ModalProps & {
+  backgroundColor?: string;
   cancelTitle?: string;
+  cancelStyle?: StyleProp<TextStyle>;
   children?: ReactNode;
   confirmTitle?: string;
+  confirmStyle?: StyleProp<TextStyle>;
+  modalStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  headerStyle?: StyleProp<ViewStyle>;
+  bodyStyle?: StyleProp<ViewStyle>;
+  footerStyle?: StyleProp<ViewStyle>;
   disabled?: boolean;
   onCancel?: () => void;
   onConfirm?: () => void;
   title?: string;
+  titleStyle?: StyleProp<TextStyle>;
+  message?: string;
+  messageStyle?: StyleProp<TextStyle>;
   delay?: number;
   initialVisible?: boolean;
 };
@@ -42,27 +56,106 @@ export type Handle = {
   toggle: () => void;
 };
 
+const MAX_HEIGHT = Dimensions.get('window').height;
+
+export const defaultProps = {
+  backgroundColor: 'white',
+  animationType: Platform.select<ModalProps['animationType']>({android: 'fade', ios: 'slide'}),
+  cancelTitle: 'Cancel',
+  confirmTitle: Platform.select<string>({android: 'OK', ios: 'Confirm'}),
+  transparent: true,
+  modalStyle: Platform.select<ViewStyle>({
+    ios: {flex: 1, justifyContent: 'flex-end'},
+    android: {flex: 1, justifyContent: 'center'}
+  }),
+  containerStyle: Platform.select<ViewStyle>({
+    ios: {marginHorizontal: 8, maxHeight: MAX_HEIGHT - 8},
+    android: {}
+  }),
+  headerStyle: Platform.select<ViewStyle>({
+    ios: {alignItems: 'center', padding: 16, borderTopLeftRadius: 12, borderTopRightRadius: 12},
+    android: {alignItems: 'flex-start', padding: 16}
+  }),
+  bodyStyle: Platform.select<ViewStyle>({
+    ios: {
+      flexShrink: 1,
+      flexDirection: 'column',
+      alignItems: 'stretch'
+    },
+    android: {
+      flexShrink: 1,
+      flexDirection: 'column',
+      alignItems: 'stretch'
+    }
+  }),
+  footerStyle: Platform.select<TextStyle>({
+    ios: {flex: 0, backgroundColor: 'transparent', marginBottom: 8, borderRadius: 12},
+    android: {}
+  }),
+  titleStyle: Platform.select<TextStyle>({
+    ios: {paddingBottom: 10, fontSize: 14, fontWeight: '500', textAlign: 'center', color: '#888'},
+    android: {fontSize: 20, fontWeight: '500', color: '#333'}
+  }),
+  messageStyle: Platform.select<TextStyle>({
+    ios: {paddingBottom: 8, fontSize: 13, fontWeight: '400', textAlign: 'center', color: '#888'},
+    android: {fontSize: 20, fontWeight: '400', color: '#333'}
+  }),
+  cancelStyle: Platform.select<TextStyle>({
+    ios: {
+      fontSize: 20,
+      color: '#007aff',
+      paddingVertical: 5,
+      borderRadius: 12,
+      fontWeight: '600'
+    },
+    android: {}
+  }),
+  confirmStyle: Platform.select<TextStyle>({
+    ios: {
+      fontSize: 20,
+      color: '#007aff',
+      paddingVertical: 5,
+      borderBottomLeftRadius: 12,
+      borderBottomRightRadius: 12,
+      marginBottom: 8,
+      fontWeight: '400'
+    },
+    android: {}
+  }),
+  style: {}
+};
+
 const ModalDialog: RefForwardingComponent<Handle, Props> = (
   {
-    animationType = Platform.OS === 'ios' ? 'slide' : 'fade',
-    cancelTitle = 'Cancel',
+    animationType = defaultProps.animationType,
+    backgroundColor = defaultProps.backgroundColor,
+    cancelTitle = defaultProps.cancelTitle,
+    cancelStyle = defaultProps.cancelStyle,
+    confirmTitle = defaultProps.confirmTitle,
+    confirmStyle = defaultProps.confirmStyle,
+    bodyStyle = defaultProps.bodyStyle,
+    modalStyle = defaultProps.modalStyle,
+    containerStyle = defaultProps.containerStyle,
     children,
-    confirmTitle = Platform.select({android: 'OK', ios: 'Confirm'}),
-    containerStyle,
     delay = 0,
     disabled = false,
-    hardwareAccelerated,
     onCancel,
     onConfirm,
-    supportedOrientations = ['portrait', 'landscape'],
     title,
-    transparent = true,
-    initialVisible = false
+    titleStyle = defaultProps.titleStyle,
+    message,
+    messageStyle = defaultProps.messageStyle,
+    headerStyle = defaultProps.headerStyle,
+    footerStyle = defaultProps.footerStyle,
+    transparent = defaultProps.transparent,
+    initialVisible = false,
+    ...otherModalProps
   },
   ref
 ) => {
   const backdrop = useContext<BackdropContextProps>(BackdropContext);
   const [isVisible, setIsVisible] = useState(initialVisible);
+  const latestIsVisible = useRef<boolean>(isVisible);
 
   // Show modal
   const show = useCallback(() => {
@@ -80,14 +173,19 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
     setIsVisible(false);
   }, [disabled]);
 
+  // Track isVisible latest value with a ref
+  useEffect(() => {
+    latestIsVisible.current = isVisible;
+  }, [isVisible]);
+
   // Toggle modal
+  // @NOTE a ref is used to provide a stable context accross renders
   const toggle = useCallback(() => {
-    !isVisible ? show() : hide();
-  }, [isVisible, hide, show]);
+    !latestIsVisible.current ? show() : hide();
+  }, [latestIsVisible, hide, show]);
 
   // Expose API via an imperative handle
   useImperativeHandle(ref, () => ({show, hide, toggle}), [show, hide, toggle]);
-  // useImperativeHandle(ref, () => ({show: () => setIsVisible(true), hide: () => setIsVisible(false), toggle: () => setIsVisible(value => !value)}), []);
 
   // Animate backdrop along "isVisible" prop
   useEffect(() => {
@@ -129,129 +227,34 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
     hide();
   }, [onConfirm, hide, delay]);
 
+  const isHeaderVisible = title || message;
+  const isFooterVisible = onCancel || onConfirm;
+
   return (
-    <Modal
-      visible={isVisible}
-      animationType={animationType}
-      {...{hardwareAccelerated, supportedOrientations, transparent}}
-    >
+    <Modal visible={isVisible} animationType={animationType} transparent={transparent} {...otherModalProps}>
       <TouchableWithoutFeedback style={{flex: 1}} onPress={handleModalCancel}>
-        <ModalContainer style={containerStyle}>
-          <TouchableWithoutFeedback>
-            <View>
-              <DialogContainer>
-                {title ? (
-                  <ModalHeader>
-                    <ModalTitle>{title}</ModalTitle>
-                  </ModalHeader>
-                ) : null}
-                <ModalBody>{children}</ModalBody>
-                <ModalFooter>
-                  {Platform.OS === 'android' ? <Button onPress={handleModalCancel} title={cancelTitle} /> : null}
-                  <Button onPress={handleModalConfirm} title={confirmTitle} />
-                </ModalFooter>
-              </DialogContainer>
-              {Platform.OS === 'ios' ? (
-                <DialogContainer>
-                  <Button
-                    style={{marginVertical: 12, fontWeight: 'bold'}}
-                    onPress={handleModalCancel}
-                    title={cancelTitle}
-                  />
-                </DialogContainer>
+        <View style={modalStyle}>
+          <TouchableWithoutFeedback style={{flex: 1}}>
+            <View style={containerStyle}>
+              {isHeaderVisible ? (
+                <View style={[{backgroundColor}, headerStyle]}>
+                  {title ? <Text style={titleStyle}>{title}</Text> : null}
+                  {message ? <Text style={messageStyle}>{message}</Text> : null}
+                </View>
+              ) : null}
+              <View style={[{backgroundColor}, bodyStyle]}>{children}</View>
+              {isFooterVisible ? (
+                <View style={[{backgroundColor}, footerStyle]}>
+                  {onConfirm ? <Button style={confirmStyle} onPress={handleModalConfirm} title={confirmTitle} /> : null}
+                  {onCancel ? <Button style={cancelStyle} onPress={handleModalCancel} title={cancelTitle} /> : null}
+                </View>
               ) : null}
             </View>
           </TouchableWithoutFeedback>
-        </ModalContainer>
+        </View>
       </TouchableWithoutFeedback>
     </Modal>
   );
 };
 
 export default forwardRef(ModalDialog);
-
-const ModalContainer = styled.View`
-  align-items: stretch;
-  height: 100%;
-  ${Platform.select({
-    ios: css`
-      justify-content: flex-end;
-    `,
-    android: css`
-      justify-content: center;
-    `
-  })}
-`;
-
-const DialogContainer = styled.View`
-  /* justify-content: center; */
-  background-color: white;
-  flex-direction: column;
-  padding: 0px;
-  ${Platform.select({
-    android: css`
-      border-radius: 2px;
-      margin: 0 62px;
-      elevation: 4;
-    `,
-    ios: css`
-      border-radius: 12px;
-      margin: 0 8px 8px;
-      /* margin: 0 24px 24px; */
-    `
-  })}
-`;
-
-const ModalHeader = styled.View`
-  padding: 18px;
-  justify-content: center;
-  border-bottom-width: 1px;
-  border-bottom-color: #eee;
-  ${Platform.select({
-    ios: css`
-      align-items: center;
-    `,
-    android: css`
-      align-items: flex-start;
-    `
-  })}
-`;
-
-const ModalTitle = styled.Text`
-  font-size: 18px;
-  ${Platform.select({
-    ios: css`
-      font-weight: 400;
-      color: #888;
-    `,
-    android: css`
-      font-weight: 500;
-      color: #333;
-      font-size: 20px;
-    `
-  })}
-`;
-
-const ModalBody = styled.View`
-  flex-direction: row;
-  justify-content: center;
-  max-height: 400px;
-`;
-
-const ModalFooter = styled.View`
-  ${Platform.select({
-    ios: css`
-      padding: 12px;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: center;
-    `,
-    android: css`
-      /* border-top-width: 1px;
-  border-top-color: #eee; */
-      padding: 14px 16px;
-      flex-direction: row;
-      justify-content: flex-end;
-    `
-  })}
-`;

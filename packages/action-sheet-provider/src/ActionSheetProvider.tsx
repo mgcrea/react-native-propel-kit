@@ -10,58 +10,51 @@ import {
 } from 'react-native';
 import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdrop-provider';
 import ActionSheet from './ActionSheet';
+import {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
 
 type Props = ModalProps & {
   containerStyle?: StyleProp<ViewStyle>;
+  native?: boolean;
 };
 
 const ActionSheetProvider: FunctionComponent<Props> = ({
   children,
   hardwareAccelerated,
   transparent = true,
-  supportedOrientations = ['portrait', 'landscape']
+  supportedOrientations = ['portrait', 'landscape'],
+  native = true
 }) => {
+  const modalDialogRef = useRef<ModalDialogHandle>(null);
   const backdrop = useContext<BackdropContextProps>(BackdropContext);
   const [isVisible, setIsVisible] = useState(false);
   const [globalOptions, setGlobalOptions] = useState<ActionSheetIOSOptions>({options: []});
   const latestCallback = useRef<((buttonIndex: number) => void) | null>(null);
 
   // Show actionSheet
-  const showWithOptions = useCallback((options, callback) => {
-    if (Platform.OS === 'ios') {
-      return ActionSheetIOS.showActionSheetWithOptions(options, callback);
-    }
-    setGlobalOptions(options);
-    latestCallback.current = callback;
-    setIsVisible(true);
-  }, []);
+  const showWithOptions = useCallback(
+    (options, callback) => {
+      if (native && Platform.OS === 'ios') {
+        ActionSheetIOS.showActionSheetWithOptions(options, callback);
+        return;
+      }
+      setGlobalOptions(options);
+      latestCallback.current = callback;
+      if (modalDialogRef.current) {
+        modalDialogRef.current.show();
+      }
+    },
+    [native]
+  );
 
   // Hide actionSheet
   const hide = useCallback(() => {
-    setIsVisible(false);
-  }, []);
-
-  // Animate backdrop along "isVisible" prop
-  useEffect(() => {
-    if (backdrop) {
-      isVisible ? backdrop.show() : backdrop.hide();
+    if (native && Platform.OS === 'ios') {
+      return;
     }
-  }, [backdrop, isVisible]);
-
-  // Toggle keyboard along "isVisible" prop
-  useEffect(() => {
-    // Force blur on other inputs
-    if (isVisible) {
-      Keyboard.dismiss();
+    if (modalDialogRef.current) {
+      modalDialogRef.current.hide();
     }
-  }, [isVisible]);
-
-  // Always hide on unmount
-  useEffect(() => {
-    return () => {
-      hide();
-    };
-  }, [hide]);
+  }, [native]);
 
   // Expose API via context
   const contextValue = useMemo(() => {
@@ -81,12 +74,44 @@ const ActionSheetProvider: FunctionComponent<Props> = ({
     hide();
   }, [hide]);
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     showWithOptions(
+  //       {
+  //         title: 'Hello',
+  //         message: `This component implements a custom ActionSheet and provides the same way to drawing it`,
+  //         options: [
+  //           'Cancel',
+  //           'Remove',
+  //           'Update',
+  //           'Cancel',
+  //           'Remove',
+  //           'Update',
+  //           'Cancel',
+  //           'Remove',
+  //           'Update',
+  //           'Update',
+  //           'Cancel',
+  //           'Remove',
+  //           'Update'
+  //         ],
+  //         destructiveButtonIndex: 1,
+  //         cancelButtonIndex: 0
+  //       },
+  //       buttonIndex => {
+  //         // console.warn('onButtonPress', {buttonIndex});
+  //       }
+  //     );
+  //   }, 50);
+  // }, []);
+
   return (
     <ActionSheetContext.Provider value={contextValue}>
       {children}
-      {Platform.OS === 'android' ? (
+      {!native || Platform.OS !== 'ios' ? (
         <ActionSheet
-          isVisible={isVisible}
+          ref={modalDialogRef}
+          // isVisible={isVisible}
           onButtonPress={onButtonPress}
           onCancel={onCancel}
           {...{hardwareAccelerated, supportedOrientations, transparent}}

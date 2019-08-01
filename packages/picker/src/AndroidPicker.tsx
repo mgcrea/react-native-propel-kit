@@ -9,7 +9,7 @@ export type Props = PickerProps;
 // @NOTE uncontrolled usage is not functionnal
 const AndroidPicker: FunctionComponent<Props> = ({children, onValueChange: propOnValueChange, selectedValue}) => {
   const flatListRef = useRef<FlatList<any>>(null);
-  const latestValue = useRef(selectedValue);
+  const latestValue = selectedValue;
   const data = useMemo(
     () =>
       Children.map(children, child => {

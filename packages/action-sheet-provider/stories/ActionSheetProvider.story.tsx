@@ -4,11 +4,11 @@ import {storiesOf} from '@storybook/react-native';
 import Button from '@mgcrea/react-native-button';
 import ModalDialog, {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
 import DatePicker from '@mgcrea/react-native-date-picker';
-import screencap from './fixtures/screencap_2.png';
 
 import {ActionSheetContext, ActionSheetContextProps} from '../src';
 
 storiesOf('ActionSheetProvider', module)
+  // .addParameters({options: {isToolshown: false, showNav: false, showPanel: false, isFullscreen: true}})
   .add('default view', () => (
     <ActionSheetContext.Consumer>
       {actionSheet => (
@@ -17,12 +17,44 @@ storiesOf('ActionSheetProvider', module)
             onPress={() => {
               (actionSheet as NonNullable<ActionSheetContextProps>).showWithOptions(
                 {
+                  title: 'Hello',
+                  message: `This component implements a custom ActionSheet and provides the same way to drawing it`,
+                  options: [
+                    'Cancel',
+                    'Remove',
+                    'Update',
+                    'Cancel',
+                    'Remove',
+                    'Update',
+                    'Cancel',
+                    'Remove',
+                    'Update',
+                    'Cancel',
+                    'Remove',
+                    'Update'
+                  ],
+                  destructiveButtonIndex: 1,
+                  cancelButtonIndex: 0
+                },
+                buttonIndex => {
+                  // console.warn('onButtonPress', {buttonIndex});
+                }
+              );
+            }}
+            title="Open"
+          />
+          <Button
+            onPress={() => {
+              (actionSheet as NonNullable<ActionSheetContextProps>).showWithOptions(
+                {
+                  title: 'Hello',
+                  message: `This component implements a custom ActionSheet and provides the same way to drawing it`,
                   options: ['Cancel', 'Remove', 'Update'],
                   destructiveButtonIndex: 1,
                   cancelButtonIndex: 0
                 },
                 buttonIndex => {
-                  console.warn('onButtonPress', {buttonIndex});
+                  // console.warn('onButtonPress', {buttonIndex});
                 }
               );
             }}

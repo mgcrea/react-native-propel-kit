@@ -149,7 +149,7 @@ const Select: RefForwardingComponent<Handle, Props> = (
         confirmTitle={confirmTitle}
         cancelTitle={cancelTitle}
       >
-        <Picker onValueChange={onValueChange} selectedValue={modalValue} style={{flex: 1}}>
+        <Picker onValueChange={onValueChange} selectedValue={modalValue} style={{flexGrow: 1}}>
           {pickerChildren}
         </Picker>
       </ModalDialog>

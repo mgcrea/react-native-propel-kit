@@ -51,7 +51,7 @@ export const defaultProps: Required<Omit<Props, keyof ButtonProps>> = {
   }),
   textStyle: Platform.select({
     ios: {fontSize: 18, color: '#007aff'},
-    android: {paddingLeft: 3, paddingBottom: 2, color: '#212121'}
+    android: {paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
   }),
   disabledTextStyle: Platform.select({
     ios: {color: '#cdcdcd'},
@@ -66,7 +66,7 @@ const Button: FunctionComponent<Props> = ({
   loading = defaultProps.loading,
   onPress,
   color,
-  viewStyle: propViewStyle,
+  viewStyle: propViewStyle = defaultProps.viewStyle,
   loadingStyle: propLoadingStyle = defaultProps.loadingStyle,
   disabledViewStyle = defaultProps.disabledViewStyle,
   textStyle: propTextStyle = defaultProps.textStyle,

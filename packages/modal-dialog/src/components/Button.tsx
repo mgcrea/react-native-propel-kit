@@ -34,7 +34,7 @@ const ButtonTouchable = styled(Platform.OS === 'android' ? TouchableNativeFeedba
 const ButtonView = styled.View`
   ${Platform.select({
     ios: css`
-      padding: 5px;
+      padding: 4px;
     `,
     android: css`
       margin: 0 6px;
