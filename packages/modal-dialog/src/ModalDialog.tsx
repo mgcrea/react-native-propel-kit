@@ -21,11 +21,13 @@ import {
   Text,
   StyleProp,
   TextStyle,
-  Dimensions
+  Dimensions,
+  SafeAreaView
 } from 'react-native';
 import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdrop-provider';
 // import Button from './components/Button';
 import Button from '@mgcrea/react-native-button';
+import ModalDialogButton from './components/ModalDialogButton';
 
 export type Props = ModalProps & {
   backgroundColor?: string;
@@ -69,8 +71,22 @@ export const defaultProps = {
     android: {flex: 1, justifyContent: 'center'}
   }),
   containerStyle: Platform.select<ViewStyle>({
-    ios: {marginHorizontal: 8, maxHeight: MAX_HEIGHT - 8},
-    android: {}
+    ios: {
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      // marginHorizontal: 8, // actionsheet
+      marginHorizontal: 24,
+      marginBottom: 24,
+      maxHeight: MAX_HEIGHT - 8
+    },
+    android: {
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      // marginHorizontal: 82, // timepicker/spinner
+      marginHorizontal: 24,
+      elevation: 4,
+      maxHeight: MAX_HEIGHT - 8
+    }
   }),
   headerStyle: Platform.select<ViewStyle>({
     ios: {alignItems: 'center', padding: 16, borderTopLeftRadius: 12, borderTopRightRadius: 12},
@@ -79,47 +95,46 @@ export const defaultProps = {
   bodyStyle: Platform.select<ViewStyle>({
     ios: {
       flexShrink: 1,
-      flexDirection: 'column',
-      alignItems: 'stretch'
+      flexDirection: 'column'
+      // alignItems: 'stretch'
     },
     android: {
       flexShrink: 1,
-      flexDirection: 'column',
-      alignItems: 'stretch'
+      flexDirection: 'column'
+      // alignItems: 'stretch'
     }
   }),
   footerStyle: Platform.select<TextStyle>({
-    ios: {flex: 0, backgroundColor: 'transparent', marginBottom: 8, borderRadius: 12},
-    android: {}
+    ios: {backgroundColor: 'transparent', borderRadius: 12},
+    android: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      borderBottomLeftRadius: 2,
+      borderBottomRightRadius: 2,
+      padding: 8
+    }
   }),
   titleStyle: Platform.select<TextStyle>({
-    ios: {paddingBottom: 10, fontSize: 14, fontWeight: '500', textAlign: 'center', color: '#888'},
-    android: {fontSize: 20, fontWeight: '500', color: '#333'}
+    ios: {paddingBottom: 12, fontSize: 14, fontWeight: '500', textAlign: 'center', color: '#888'},
+    android: {
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+      fontSize: 20,
+      fontWeight: '500',
+      textAlign: 'left',
+      color: '#333'
+    }
   }),
   messageStyle: Platform.select<TextStyle>({
-    ios: {paddingBottom: 8, fontSize: 13, fontWeight: '400', textAlign: 'center', color: '#888'},
-    android: {fontSize: 20, fontWeight: '400', color: '#333'}
+    ios: {paddingBottom: 12, fontSize: 13, fontWeight: '400', textAlign: 'center', color: '#888'},
+    android: {paddingVertical: 6, paddingHorizontal: 12, fontSize: 18, fontWeight: '400', color: '#666'}
   }),
   cancelStyle: Platform.select<TextStyle>({
-    ios: {
-      fontSize: 20,
-      color: '#007aff',
-      paddingVertical: 5,
-      borderRadius: 12,
-      fontWeight: '600'
-    },
+    ios: {marginTop: 24, borderRadius: 12, fontWeight: '600'},
     android: {}
   }),
   confirmStyle: Platform.select<TextStyle>({
-    ios: {
-      fontSize: 20,
-      color: '#007aff',
-      paddingVertical: 5,
-      borderBottomLeftRadius: 12,
-      borderBottomRightRadius: 12,
-      marginBottom: 8,
-      fontWeight: '400'
-    },
+    ios: {borderBottomLeftRadius: 12, borderBottomRightRadius: 12, fontWeight: '400'},
     android: {}
   }),
   style: {}
@@ -235,7 +250,7 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
       <TouchableWithoutFeedback style={{flex: 1}} onPress={handleModalCancel}>
         <View style={modalStyle}>
           <TouchableWithoutFeedback style={{flex: 1}}>
-            <View style={containerStyle}>
+            <SafeAreaView style={containerStyle}>
               {isHeaderVisible ? (
                 <View style={[{backgroundColor}, headerStyle]}>
                   {title ? <Text style={titleStyle}>{title}</Text> : null}
@@ -245,11 +260,18 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
               <View style={[{backgroundColor}, bodyStyle]}>{children}</View>
               {isFooterVisible ? (
                 <View style={[{backgroundColor}, footerStyle]}>
-                  {onConfirm ? <Button style={confirmStyle} onPress={handleModalConfirm} title={confirmTitle} /> : null}
-                  {onCancel ? <Button style={cancelStyle} onPress={handleModalCancel} title={cancelTitle} /> : null}
+                  {Platform.OS === 'ios' && onConfirm ? (
+                    <ModalDialogButton style={confirmStyle} onPress={handleModalConfirm} title={confirmTitle} />
+                  ) : null}
+                  {onCancel ? (
+                    <ModalDialogButton style={cancelStyle} onPress={handleModalCancel} title={cancelTitle} />
+                  ) : null}
+                  {Platform.OS === 'android' && onConfirm ? (
+                    <ModalDialogButton style={confirmStyle} onPress={handleModalConfirm} title={confirmTitle} />
+                  ) : null}
                 </View>
               ) : null}
-            </View>
+            </SafeAreaView>
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>

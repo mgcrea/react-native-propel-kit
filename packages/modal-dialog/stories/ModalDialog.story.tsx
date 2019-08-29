@@ -25,8 +25,24 @@ storiesOf('ModalDialog', module).add('default view', () => {
         }}
         title="Open"
       />
-      <ModalDialog title="Hello" message="World" ref={modalDialogRef} onCancel={() => {}} onConfirm={() => {}}>
-        <Text style={{fontSize: 32, padding: 32, backgroundColor: 'red'}}>Hello World</Text>
+      <ModalDialog
+        title="Some Title"
+        message="Some long message"
+        ref={modalDialogRef}
+        onCancel={() => {}}
+        // onConfirm={() => {}}
+      >
+        <Text
+          style={{
+            fontSize: 32,
+            paddingVertical: 44,
+            textAlign: 'center',
+            alignSelf: 'stretch',
+            backgroundColor: '#eee'
+          }}
+        >
+          Hello World
+        </Text>
       </ModalDialog>
     </>
   );
