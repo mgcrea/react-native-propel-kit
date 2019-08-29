@@ -1,21 +1,40 @@
 import React, {useMemo, useRef, useCallback, useEffect, Children, FunctionComponent} from 'react';
-import {FlatList, PickerProps} from 'react-native';
+import {FlatList, PickerProps, PickerItemProps, FlatListProperties} from 'react-native';
 import AndroidPickerItem from './AndroidPickerItem';
 
 const ITEM_HEIGHT = 60;
 
-export type Props = PickerProps;
+type ItemT = {
+  title?: string;
+  key?: string;
+  value: any;
+};
+export type Props = PickerProps & {
+  itemHeight?: number;
+  itemVisibleCount?: number;
+};
+
+export const defaultProps = {
+  itemHeight: 50,
+  itemVisibleCount: 5.5
+};
 
 // @NOTE uncontrolled usage is not functionnal
-const AndroidPicker: FunctionComponent<Props> = ({children, onValueChange: propOnValueChange, selectedValue}) => {
+const AndroidPicker: FunctionComponent<Props> = ({
+  children,
+  onValueChange: propOnValueChange,
+  selectedValue,
+  itemHeight = defaultProps.itemHeight,
+  itemVisibleCount = defaultProps.itemVisibleCount
+}) => {
   const flatListRef = useRef<FlatList<any>>(null);
-  const latestValue = selectedValue;
-  const data = useMemo(
+  const latestValue = useRef(selectedValue);
+  const data = useMemo<ReadonlyArray<ItemT>>(
     () =>
       Children.map(children, child => {
-        const {value, label} = child.props;
+        const {value, label} = (child as React.ReactElement).props;
         return {title: label, key: value, value};
-      }),
+      }).filter(Boolean),
     [children]
   );
 
@@ -26,7 +45,7 @@ const AndroidPicker: FunctionComponent<Props> = ({children, onValueChange: propO
     },
     [data]
   );
-  const initialScrollIndex = useMemo(() => getSelectedValueIndex(selectedValue), [getSelectedValueIndex]);
+  const initialScrollIndex = useMemo(() => getSelectedValueIndex(selectedValue), [getSelectedValueIndex]); // eslint-disable-line react-hooks/exhaustive-deps
   // Track parent selectedValue updates
   useEffect(() => {
     if (selectedValue !== latestValue.current) {
@@ -38,23 +57,24 @@ const AndroidPicker: FunctionComponent<Props> = ({children, onValueChange: propO
         flatListRef.current.scrollToIndex({animated: true, index: selectedValueIndex});
       }
     }
-  }, [selectedValue]);
+  }, [selectedValue, getSelectedValueIndex]);
 
   // Propagate changed value
   const onPress = useCallback(
     value => {
       latestValue.current = value;
       if (propOnValueChange) {
-        propOnValueChange(value);
+        const itemIndex = data.findIndex(item => item.value === value);
+        propOnValueChange(value, itemIndex);
       }
     },
-    [propOnValueChange]
+    [data, latestValue, propOnValueChange]
   );
 
   const keyExtractor = useCallback((item, _index: number) => item.value, []);
   const getItemLayout = useCallback(
-    (item, index: number) => ({length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}),
-    []
+    (item, index: number) => ({length: itemHeight, offset: itemHeight * index, index}),
+    [itemHeight]
   );
 
   // @NOTE TouchableNativeFeedback is broken
@@ -67,8 +87,7 @@ const AndroidPicker: FunctionComponent<Props> = ({children, onValueChange: propO
       keyExtractor={keyExtractor}
       initialScrollIndex={initialScrollIndex}
       getItemLayout={getItemLayout}
-      // style={{maxHeight: ITEM_HEIGHT * 5.5}}
-      // initialNumToRender={1000}
+      style={{maxHeight: itemHeight * itemVisibleCount}}
       overScrollMode="always"
       renderItem={({item}) => <AndroidPickerItem {...{item, selectedValue, onPress}} />}
     />

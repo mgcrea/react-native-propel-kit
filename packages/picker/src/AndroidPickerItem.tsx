@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 const ITEM_HEIGHT = 60;
 
-const PickerItem: FunctionComponent<any> = React.memo(({item, onPress, selectedValue}) => (
+const AndroidPickerItem: FunctionComponent<any> = React.memo(({item, onPress, selectedValue}) => (
   <TouchableHighlight
     delayPressIn={0}
     delayPressOut={0}
@@ -26,7 +26,7 @@ const PickerItem: FunctionComponent<any> = React.memo(({item, onPress, selectedV
   </TouchableHighlight>
 ));
 
-export default PickerItem;
+export default AndroidPickerItem;
 
 const ItemContainer = styled.View`
   background: white;
