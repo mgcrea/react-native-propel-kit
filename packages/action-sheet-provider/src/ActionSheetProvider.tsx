@@ -1,32 +1,15 @@
-import React, {useCallback, useRef, FunctionComponent, useState, useEffect, useMemo, useContext} from 'react';
-import {
-  ActionSheetIOS,
-  Platform,
-  ModalProps,
-  Keyboard,
-  StyleProp,
-  ViewStyle,
-  ActionSheetIOSOptions
-} from 'react-native';
-import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdrop-provider';
-import ActionSheet from './ActionSheet';
+import React, {useCallback, useRef, FunctionComponent, useState, useMemo} from 'react';
+import {ActionSheetIOS, Platform, StyleProp, ViewStyle, ActionSheetIOSOptions} from 'react-native';
 import {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
 
-type Props = ModalProps & {
-  containerStyle?: StyleProp<ViewStyle>;
+import ActionSheet, {Props as ActionSheetProps} from './ActionSheet';
+
+type Props = ActionSheetProps & {
   native?: boolean;
 };
 
-const ActionSheetProvider: FunctionComponent<Props> = ({
-  children,
-  hardwareAccelerated,
-  transparent = true,
-  supportedOrientations = ['portrait', 'landscape'],
-  native = true
-}) => {
+const ActionSheetProvider: FunctionComponent<Props> = ({children, native = true, ...otherActionSheetProps}) => {
   const modalDialogRef = useRef<ModalDialogHandle>(null);
-  const backdrop = useContext<BackdropContextProps>(BackdropContext);
-  const [isVisible, setIsVisible] = useState(false);
   const [globalOptions, setGlobalOptions] = useState<ActionSheetIOSOptions>({options: []});
   const latestCallback = useRef<((buttonIndex: number) => void) | null>(null);
 
@@ -74,47 +57,15 @@ const ActionSheetProvider: FunctionComponent<Props> = ({
     hide();
   }, [hide]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     showWithOptions(
-  //       {
-  //         title: 'Hello',
-  //         message: `This component implements a custom ActionSheet and provides the same way to drawing it`,
-  //         options: [
-  //           'Cancel',
-  //           'Remove',
-  //           'Update',
-  //           'Cancel',
-  //           'Remove',
-  //           'Update',
-  //           'Cancel',
-  //           'Remove',
-  //           'Update',
-  //           'Update',
-  //           'Cancel',
-  //           'Remove',
-  //           'Update'
-  //         ],
-  //         destructiveButtonIndex: 1,
-  //         cancelButtonIndex: 0
-  //       },
-  //       buttonIndex => {
-  //         // console.warn('onButtonPress', {buttonIndex});
-  //       }
-  //     );
-  //   }, 50);
-  // }, []);
-
   return (
     <ActionSheetContext.Provider value={contextValue}>
       {children}
       {!native || Platform.OS !== 'ios' ? (
         <ActionSheet
           ref={modalDialogRef}
-          // isVisible={isVisible}
           onButtonPress={onButtonPress}
           onCancel={onCancel}
-          {...{hardwareAccelerated, supportedOrientations, transparent}}
+          {...otherActionSheetProps}
           {...globalOptions}
         />
       ) : null}

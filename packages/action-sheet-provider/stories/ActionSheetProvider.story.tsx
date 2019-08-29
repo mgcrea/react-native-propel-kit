@@ -12,55 +12,59 @@ storiesOf('ActionSheetProvider', module)
   .add('default view', () => (
     <ActionSheetContext.Consumer>
       {actionSheet => (
-        <>
-          <Button
-            onPress={() => {
-              (actionSheet as NonNullable<ActionSheetContextProps>).showWithOptions(
-                {
-                  title: 'Hello',
-                  message: `This component implements a custom ActionSheet and provides the same way to drawing it`,
-                  options: [
-                    'Cancel',
-                    'Remove',
-                    'Update',
-                    'Cancel',
-                    'Remove',
-                    'Update',
-                    'Cancel',
-                    'Remove',
-                    'Update',
-                    'Cancel',
-                    'Remove',
-                    'Update'
-                  ],
-                  destructiveButtonIndex: 1,
-                  cancelButtonIndex: 0
-                },
-                buttonIndex => {
-                  // console.warn('onButtonPress', {buttonIndex});
-                }
-              );
-            }}
-            title="Open"
-          />
-          <Button
-            onPress={() => {
-              (actionSheet as NonNullable<ActionSheetContextProps>).showWithOptions(
-                {
-                  title: 'Hello',
-                  message: `This component implements a custom ActionSheet and provides the same way to drawing it`,
-                  options: ['Cancel', 'Remove', 'Update'],
-                  destructiveButtonIndex: 1,
-                  cancelButtonIndex: 0
-                },
-                buttonIndex => {
-                  // console.warn('onButtonPress', {buttonIndex});
-                }
-              );
-            }}
-            title="Open"
-          />
-        </>
+        <Button
+          onPress={() => {
+            (actionSheet as NonNullable<ActionSheetContextProps>).showWithOptions(
+              {
+                title: 'Hello',
+                message: `This component implements a custom ActionSheet and provides the same way to drawing it`,
+                options: ['Cancel', 'Remove', 'Update'],
+                destructiveButtonIndex: 1,
+                cancelButtonIndex: 0
+              },
+              buttonIndex => {
+                // console.warn('onButtonPress', {buttonIndex});
+              }
+            );
+          }}
+          title="Show ActionSheet"
+        />
+      )}
+    </ActionSheetContext.Consumer>
+  ))
+  .add('with many options', () => (
+    <ActionSheetContext.Consumer>
+      {actionSheet => (
+        <Button
+          onPress={() => {
+            (actionSheet as NonNullable<ActionSheetContextProps>).showWithOptions(
+              {
+                title: 'Hello',
+                message: `This component implements a custom ActionSheet and provides the same way to drawing it`,
+                options: [
+                  'Cancel',
+                  'Remove',
+                  'Update',
+                  'Cancel',
+                  'Remove',
+                  'Update',
+                  'Cancel',
+                  'Remove',
+                  'Update',
+                  'Cancel',
+                  'Remove',
+                  'Update'
+                ],
+                destructiveButtonIndex: 1,
+                cancelButtonIndex: 0
+              },
+              buttonIndex => {
+                // console.warn('onButtonPress', {buttonIndex});
+              }
+            );
+          }}
+          title="Show ActionSheet"
+        />
       )}
     </ActionSheetContext.Consumer>
   ))
@@ -86,7 +90,7 @@ storiesOf('ActionSheetProvider', module)
                     }
                   );
                 }}
-                title="Open ActionSheet"
+                title="Show ActionSheet"
               />
             </>
           )}
