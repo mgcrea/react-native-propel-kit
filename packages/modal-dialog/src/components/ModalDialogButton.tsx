@@ -13,8 +13,8 @@ export const defaultProps = {
       justifyContent: 'center',
       alignItems: 'center',
       // paddingVertical: 17,
-      height: 56,
-      backgroundColor: 'white'
+      height: 56
+      // backgroundColor: 'white'
     },
     android: {
       flex: 0,
