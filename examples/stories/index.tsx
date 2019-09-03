@@ -1,7 +1,7 @@
 // import React from 'react';
 // import {storiesOf} from '@storybook/react-native';
 // import {View, Text} from 'react-native';
-
+import './defaults';
 import '@mgcrea/react-native-backdrop-provider/stories';
 import '@mgcrea/react-native-modal-dialog/stories';
 import '@mgcrea/react-native-date-picker/stories';

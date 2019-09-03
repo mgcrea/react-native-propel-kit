@@ -1,29 +1,51 @@
 import React from 'react';
-import {AppRegistry, View, YellowBox, PixelRatio, StyleSheet, StatusBar, Image} from 'react-native';
-import {getStorybookUI, addDecorator, configure} from '@storybook/react-native';
+import {
+  AppRegistry,
+  View,
+  YellowBox,
+  Platform,
+  StyleSheet,
+  StatusBar,
+  Image,
+  Dimensions,
+} from 'react-native';
+import {
+  getStorybookUI,
+  addDecorator,
+  addParameters,
+  configure,
+} from '@storybook/react-native';
+import './stories/defaults';
+
 import BackdropProvider from '@mgcrea/react-native-backdrop-provider';
 import ActionSheetProvider from '@mgcrea/react-native-action-sheet-provider';
 
 import {name as appName} from './app.json';
 import Logo from './stories/components/Logo';
 import CenteredView from './stories/components/CenteredView';
-import screencap from './stories/fixtures/screencap_1.png';
+// import androidNativeTimePicker from './stories/fixtures/androidNativeTimePicker.png';
+// import iosNativeActionSheet from './stories/fixtures/iosNativeActionSheet.png';
 // import './rn-addons';
 
 // Disable noisy warnings
 YellowBox.ignoreWarnings([
-  'Warning: componentWillReceiveProps is deprecated',
-  'Warning: componentWillMount is deprecated',
-  'Warning: Async Storage has been extracted'
+  'Warning: DatePickerIOS has been merged',
+  'Warning: componentWillReceiveProps has been renamed',
+  'Warning: componentWillMount has been renamed',
+  'Warning: AsyncStorage has been extracted',
+  'Story with id',
 ]);
+
+const WITH_MOCKUP = false;
+const {width: DEVICE_WIDTH, height: DEVICE_HEIGHT} = Dimensions.get('screen');
 
 // Layout
 addDecorator(storyFn => (
   <BackdropProvider>
-    <ActionSheetProvider>
+    <ActionSheetProvider native={false}>
       <StatusBar barStyle="light-content" />
       {/* <Image
-        source={screencap}
+        source={androidNativeTimePicker}
         style={{
           ...StyleSheet.absoluteFillObject,
           top: -30,
@@ -31,7 +53,23 @@ addDecorator(storyFn => (
           height: 2160 / PixelRatio.get()
         }}
       /> */}
-      <View style={{flex: 1, opacity: 1, alignItems: 'stretch', backgroundColor: '#3F51B5'}}>
+      {/* {WITH_MOCKUP && Platform.OS === 'ios' ? (
+        <Image
+          source={iosNativeActionSheet}
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            width: DEVICE_WIDTH,
+            height: DEVICE_HEIGHT,
+          }}
+        />
+      ) : null} */}
+      <View
+        style={{
+          flex: 1,
+          opacity: WITH_MOCKUP ? 0.5 : 1,
+          alignItems: 'stretch',
+          backgroundColor: '#3F51B5',
+        }}>
         <Logo />
         <CenteredView>{storyFn()}</CenteredView>
       </View>
@@ -40,6 +78,15 @@ addDecorator(storyFn => (
 ));
 // Allow hooks
 addDecorator(Story => <Story />);
+
+// addParameters({
+//   // options: {
+//   isToolshown: false,
+//   showNav: false,
+//   showPanel: false,
+//   isFullscreen: true,
+//   // },
+// });
 
 // import stories
 configure(() => {
