@@ -8,16 +8,19 @@ import React, {
   RefForwardingComponent,
   forwardRef,
   ReactNode,
-  useEffect
+  useEffect,
+  ElementType
 } from 'react';
 // import {Picker} from 'react-native';
-import Picker, {Item as PickerItem} from './Picker';
-import InputButton from './InputButton';
-import ModalInput, {Handle as ModalInputHandle} from './ModalInput';
-import {Props as FormItemProps} from './FormItem';
-import dayjs from 'dayjs';
+import Picker, {Item as PickerItem} from '@mgcrea/react-native-picker';
+import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
+import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
+import {DatePickerIOSProps} from 'react-native';
+// import dayjs from 'dayjs';
 
-const isUndefined = (maybeUndefined: any): maybeUndefined is undefined => typeof maybeUndefined === 'undefined';
+import defaultLabelExtractor, {LabelExtractorOptions} from './utils/defaultLabelExtractor';
+import isUndefined from './utils/isUndefined';
+import asUTCDate from './utils/asUTCDate';
 
 const CURRENT_YEAR = new Date().getFullYear();
 const CURRENT_MONTH = new Date(Date.UTC(CURRENT_YEAR, 0, 1));
@@ -38,17 +41,27 @@ const DATEPICKER_MONTHS = [
 
 type MonthPickerValue = Date;
 
-export type Props = FormItemProps & {
-  cancelTitle?: string;
-  children?: ReactNode;
-  confirmTitle?: string;
-  initialValue?: MonthPickerValue;
-  onValueChange?: (value: MonthPickerValue) => void;
-  onSubmitEditing?: (value: MonthPickerValue) => void;
-  placeholder?: string;
-  minYear?: number;
-  maxYear?: number;
-  value?: MonthPickerValue;
+export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> &
+  Pick<DatePickerIOSProps, 'locale'> & {
+    children?: ReactNode;
+    initialValue?: MonthPickerValue;
+    InputButtonComponent?: ElementType<InputButtonProps>;
+    labelExtractor?: (value: Date, options: LabelExtractorOptions) => string;
+    onChange?: (value: MonthPickerValue) => void;
+    onSubmitEditing?: (value: MonthPickerValue) => void;
+    placeholder?: string;
+    minYear?: number;
+    maxYear?: number;
+    value?: MonthPickerValue;
+    utc?: boolean;
+  };
+
+export const defaultProps = {
+  initialValue: CURRENT_MONTH,
+  InputButtonComponent: InputButton,
+  labelExtractor: defaultLabelExtractor,
+  locale: navigator.language,
+  utc: true
 };
 
 export type Handle = {
@@ -56,32 +69,38 @@ export type Handle = {
 };
 const MonthPicker: RefForwardingComponent<Handle, Props> = (
   {
-    cancelTitle,
     children,
+    // ModalDialog props
+    cancelTitle,
     confirmTitle,
-    format = 'MM/YYYY',
-    initialValue: propInitialValue = CURRENT_MONTH,
-    onValueChange: propOnValueChange,
+    title,
+    // MonthPicker props
+    initialValue: propInitialValue = defaultProps.initialValue,
+    InputButtonComponent = defaultProps.InputButtonComponent,
+    labelExtractor = defaultProps.labelExtractor,
+    locale = defaultProps.locale,
+    utc = defaultProps.utc,
+    onChange: propOnChange,
     onSubmitEditing,
     placeholder,
     value: propValue,
-    minYear = CURRENT_YEAR - 50,
-    maxYear = CURRENT_YEAR + 1,
+    minYear = CURRENT_YEAR - 100,
+    maxYear = CURRENT_YEAR + 10,
     ...otherProps
   },
   ref
 ) => {
-  const modalInputRef = useRef<ModalInputHandle>(null);
+  const modalInputRef = useRef<ModalDialogHandle>(null);
   const [localValue, setLocalValue] = useState<MonthPickerValue>();
   const [modalMonthValue, setModalMonthValue] = useState<number>(propInitialValue.getMonth());
   const latestModalMonthValue = useRef(modalMonthValue);
   const [modalYearValue, setModalYearValue] = useState<number>(propInitialValue.getFullYear());
   const latestModalYearValue = useRef(modalYearValue);
 
-  // Track actual checked value
-  const inputValue = !isUndefined(propValue) ? propValue : localValue;
+  // Support both controlled/uncontrolled usage
+  const inputValue = useMemo(() => (!isUndefined(propValue) ? propValue : localValue), [propValue, localValue]);
 
-  // Catch-up for propValue changes
+  // Track parent propValue controlled updates
   useEffect(() => {
     if (!propValue) {
       setModalMonthValue(propInitialValue.getMonth());
@@ -96,6 +115,48 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
     }
   }, [propValue, propInitialValue]);
 
+  // Lazily compute displayed label
+  const labelValue = useMemo<string>(() => {
+    if (isUndefined(inputValue)) {
+      return '';
+    }
+    if (labelExtractor) {
+      return labelExtractor(inputValue, {mode: 'month', locale});
+    }
+    return `${inputValue}`;
+  }, [labelExtractor, inputValue, locale]);
+
+  // Propagate changed value
+  const onConfirm = useCallback(() => {
+    const nextValue = new Date(modalYearValue, modalMonthValue);
+    if (propOnChange) {
+      propOnChange(utc ? asUTCDate(nextValue, {mode: 'month'}) : nextValue);
+    }
+    if (onSubmitEditing) {
+      // @NOTE Add a timeout to prevent swallowing siblings focus events
+      setTimeout(() => {
+        onSubmitEditing(nextValue);
+      });
+    }
+    // Support uncontrolled usage
+    setLocalValue(nextValue);
+  }, [modalYearValue, modalMonthValue, onSubmitEditing, propOnChange]);
+
+  // Reset modalValue to the proper value
+  const onCancel = useCallback(() => {
+    setModalMonthValue((inputValue || propInitialValue).getMonth());
+    setModalYearValue((inputValue || propInitialValue).getFullYear());
+  }, [inputValue, propInitialValue]);
+
+  // Lazily compute year options
+  const yearOptions = useMemo(() => {
+    const options = [];
+    for (let i = minYear; i <= maxYear; i += 1) {
+      options.push({label: `${i}`, value: i});
+    }
+    return options;
+  }, [minYear, maxYear]);
+
   // Open the modal when user touches input
   const focus = useCallback(() => {
     if (modalInputRef.current) {
@@ -106,68 +167,32 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
   // Expose API via an imperative handle
   useImperativeHandle(ref, () => ({focus}), [focus]);
 
-  // Propagate changed value
-  const onConfirm = useCallback(() => {
-    const nextValue = new Date(Date.UTC(modalYearValue, modalMonthValue));
-    if (propOnValueChange) {
-      propOnValueChange(nextValue);
-    }
-    if (onSubmitEditing) {
-      // @NOTE Add a timeout to prevent swallowing siblings focus events
-      setTimeout(() => {
-        onSubmitEditing(nextValue);
-      });
-    }
-    // Support uncontrolled usage
-    setLocalValue(nextValue);
-  }, [modalYearValue, modalMonthValue, onSubmitEditing, propOnValueChange]);
-
-  // Reset modalValue to the proper value
-  const onCancel = useCallback(() => {
-    setModalMonthValue((inputValue || propInitialValue).getMonth());
-    setModalYearValue((inputValue || propInitialValue).getFullYear());
-  }, [inputValue, propInitialValue]);
-
-  // Lazily compute displayed label
-  const labelValue = useMemo(() => {
-    if (isUndefined(inputValue)) {
-      return '';
-    }
-    return dayjs(inputValue).format(format);
-  }, [format, inputValue]);
-
-  // Lazily compute year options
-  const yearOptions = useMemo(() => {
-    const options = [];
-    for (let i = minYear; i <= maxYear; i += 1) {
-      options.push({label: `${i}`, value: i});
-    }
-    return options;
-  }, [minYear, maxYear]);
-  console.warn({yearOptions});
+  // Drop second parameter leading to warnings
+  const onMonthValueChange = useCallback(value => setModalMonthValue(value), []);
+  const onYearValueChange = useCallback(value => setModalYearValue(value), []);
 
   return (
     <>
       <InputButton onFocus={focus} placeholder={placeholder} value={labelValue} {...otherProps} />
-      <ModalInput
+      <ModalDialog
         ref={modalInputRef}
-        title={placeholder}
+        title={title}
         onConfirm={onConfirm}
         onCancel={onCancel}
         confirmTitle={confirmTitle}
         cancelTitle={cancelTitle}
-      >
-        <Picker style={{flex: 1}} onValueChange={setModalMonthValue} selectedValue={modalMonthValue}>
+        bodyStyle={{flexDirection: 'row'}}>
+        <Picker style={{flex: 1}} onValueChange={onMonthValueChange} selectedValue={modalMonthValue}>
           {DATEPICKER_MONTHS.map(({label, value}) => (
-            <PickerItem key={value} label={label} value={value} />
+            <Picker.Item key={value} label={label} value={value} />
           ))}
         </Picker>
-        <Picker style={{flex: 1}} onValueChange={setModalYearValue} selectedValue={modalYearValue}>
+        <Picker style={{flex: 1}} onValueChange={onYearValueChange} selectedValue={modalYearValue}>
           {yearOptions.map(({label, value}) => (
-            <PickerItem key={value} label={label} value={value} />
+            <Picker.Item key={value} label={label} value={value} />
           ))}
         </Picker>
-      </ModalInput>
+      </ModalDialog>
     </>
   );
 };

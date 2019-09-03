@@ -46,12 +46,12 @@ const CURRENT_YEAR = new Date().getFullYear();
 const FIRST_DAY_OF_YEAR = new Date(Date.UTC(CURRENT_YEAR, 0, 1));
 
 export const defaultProps = {
-  androidMode: 'spinner',
+  androidMode: 'spinner' as DatePickerAndroidOpenOptions['mode'] | TimePickerAndroidOpenOptions['mode'],
   initialValue: FIRST_DAY_OF_YEAR,
   InputButtonComponent: InputButton,
   labelExtractor: defaultLabelExtractor,
   locale: navigator.language,
-  mode: 'date',
+  mode: 'date' as DatePickerIOSProps['mode'],
   utc: false
 };
 
@@ -74,7 +74,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
     locale = defaultProps.locale,
     mode = defaultProps.mode,
     utc = defaultProps.utc,
-    onChange,
+    onChange: propOnChange,
     onSubmitEditing,
     value: propValue,
     ...otherProps
@@ -90,13 +90,15 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
 
   // Track parent propValue controlled updates
   useEffect(() => {
-    if (!isUndefined(propValue)) {
-      setModalValue(propValue);
+    if (!propValue) {
+      setModalValue(propInitialValue);
+      return;
     }
-  }, [propValue]);
+    setModalValue(propValue);
+  }, [propValue, propInitialValue]);
 
   // Lazily compute displayed label
-  const labelValue = useMemo(() => {
+  const labelValue = useMemo<string>(() => {
     if (isUndefined(inputValue)) {
       return '';
     }
@@ -111,8 +113,8 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
     (value?: Date) => {
       // @NOTE android uses direct calls while ios relies on a modalValue
       const nextValue = Platform.select({ios: modalValue, android: value});
-      if (onChange) {
-        onChange(utc ? asUTCDate(nextValue, {mode}) : nextValue);
+      if (propOnChange) {
+        propOnChange(utc ? asUTCDate(nextValue, {mode}) : nextValue);
       }
       if (onSubmitEditing) {
         // @NOTE Add a timeout to prevent swallowing siblings focus events
@@ -125,7 +127,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
         setLocalValue(nextValue);
       }
     },
-    [mode, utc, propValue, modalValue, onChange, onSubmitEditing]
+    [mode, utc, propValue, modalValue, propOnChange, onSubmitEditing]
   );
 
   // Reset modalValue to the proper value
@@ -162,8 +164,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
           onConfirm={onConfirm}
           onCancel={onCancel}
           confirmTitle={confirmTitle}
-          cancelTitle={cancelTitle}
-        >
+          cancelTitle={cancelTitle}>
           <DatePickerIOS
             mode={mode}
             date={modalValue}

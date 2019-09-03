@@ -10,7 +10,8 @@ storiesOf('DatePicker', module)
     return (
       <>
         <Text style={{color: 'white', marginBottom: 12}}>Value: {date.toISOString()}</Text>
-        <DatePicker title="Pick a date" value={date} onChange={setDate} />
+        <DatePicker title="Pick a date" androidMode="calendar" value={date} onChange={setDate} />
+        <DatePicker title="Pick a date" androidMode="spinner" value={date} onChange={setDate} />
       </>
     );
   })

@@ -19,11 +19,15 @@ storiesOf('Button', module)
   .add('loading prop', () => {
     const [loading, setLoading] = useState<boolean>(false);
     const onPress = useCallback(() => {
-      setLoading(prevLoading => !prevLoading);
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }, []);
     return (
       <>
-        <Button onPress={onPress} title="Learn More" loading={loading} />
+        <Button onPress={onPress} title="Learn More" loading={loading} style={{marginBottom: 12}} />
+        <Button onPress={onPress} title="Learn More" loading={true} />
       </>
     );
   })

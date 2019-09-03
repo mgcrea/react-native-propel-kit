@@ -29,31 +29,40 @@ export type Props = ButtonProps & {
   textStyle?: StyleProp<TextStyle>;
   disabledTextStyle?: StyleProp<TextStyle>;
   TouchableComponent?: ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>;
+  activeOpacity?: TouchableOpacityProps['activeOpacity'];
 };
 
-export const defaultProps: Required<Omit<Props, keyof ButtonProps>> = {
-  loading: false,
-  loadingStyle: Platform.select({
-    ios: {marginRight: 8},
+export const defaultProps = {
+  loadingStyle: Platform.select<ViewStyle>({
+    ios: {
+      position: 'absolute',
+      backgroundColor: 'black',
+      opacity: 0.5,
+      height: 40,
+      width: 40,
+      marginRight: 8,
+      alignSelf: 'center',
+      borderRadius: 12
+    },
     android: {marginRight: 4}
   }),
   TouchableComponent: Platform.select<ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>>({
     android: TouchableNativeFeedback,
     default: TouchableOpacity
   }),
-  viewStyle: Platform.select({
-    ios: {justifyContent: 'center', flexDirection: 'row'},
+  viewStyle: Platform.select<ViewStyle>({
+    ios: {justifyContent: 'center', flexDirection: 'row', height: 50},
     android: {justifyContent: 'center', flexDirection: 'row', height: 50}
   }),
-  disabledViewStyle: Platform.select({
+  disabledViewStyle: Platform.select<ViewStyle>({
     ios: {},
     android: {}
   }),
-  textStyle: Platform.select({
-    ios: {fontSize: 18, color: '#007aff'},
+  textStyle: Platform.select<TextStyle>({
+    ios: {alignSelf: 'center', fontSize: 18, color: '#007aff'},
     android: {paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
   }),
-  disabledTextStyle: Platform.select({
+  disabledTextStyle: Platform.select<TextStyle>({
     ios: {color: '#cdcdcd'},
     android: {color: '#cdcdcd'}
   }),
@@ -62,8 +71,8 @@ export const defaultProps: Required<Omit<Props, keyof ButtonProps>> = {
 
 const Button: FunctionComponent<Props> = ({
   title,
-  disabled,
-  loading = defaultProps.loading,
+  disabled: propDisabled,
+  loading: propLoading,
   onPress,
   color,
   viewStyle: propViewStyle = defaultProps.viewStyle,
@@ -72,8 +81,14 @@ const Button: FunctionComponent<Props> = ({
   textStyle: propTextStyle = defaultProps.textStyle,
   disabledTextStyle = defaultProps.disabledTextStyle,
   style: propStyle = defaultProps.style,
-  TouchableComponent = defaultProps.TouchableComponent
+  TouchableComponent = defaultProps.TouchableComponent,
+  ...otherTouchableProps
 }) => {
+  // @NOTE we use flatten to properly split text/view related styles
+  const flattenStyle = useMemo<TextStyle>(() => StyleSheet.flatten(propStyle), [propStyle]);
+  const doesFlex = flattenStyle.flex === 1;
+  const disabled = propDisabled || propLoading;
+
   const handlePress = useCallback(
     (ev: GestureResponderEvent) => {
       if (disabled) {
@@ -85,9 +100,6 @@ const Button: FunctionComponent<Props> = ({
     },
     [disabled, onPress]
   );
-
-  // @NOTE we use flatten to properly split text/view related styles
-  const flattenStyle = useMemo<TextStyle>(() => StyleSheet.flatten(propStyle), [propStyle]);
 
   const viewStyle = useMemo<ViewStyle>(
     () => StyleSheet.flatten([propViewStyle, flattenStyle, disabled ? disabledViewStyle : null]),
@@ -106,9 +118,14 @@ const Button: FunctionComponent<Props> = ({
   );
 
   return (
-    <TouchableComponent disabled={disabled} onPress={handlePress}>
+    <TouchableComponent
+      style={{flex: doesFlex ? 1 : 0, flexDirection: 'row'}}
+      disabled={disabled}
+      onPress={handlePress}
+      {...otherTouchableProps}
+    >
       <View style={viewStyle}>
-        {loading ? <ActivityIndicator style={propLoadingStyle} color={textStyle.color} /> : null}
+        {propLoading ? <ActivityIndicator style={propLoadingStyle} color={textStyle.color} /> : null}
         <Text style={textStyle}>{title}</Text>
       </View>
     </TouchableComponent>
