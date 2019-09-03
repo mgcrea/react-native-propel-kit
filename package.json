@@ -1,6 +1,7 @@
 {
-  "name": "@mgcrea/react-native-kite-kit",
+  "name": "@mgcrea/react-native-propel-kit",
   "version": "1.0.0",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "test": "jest",
@@ -28,7 +29,6 @@
   },
   "workspaces": {
     "packages": [
-      "examples",
       "packages/*"
     ],
     "nohoist": [
