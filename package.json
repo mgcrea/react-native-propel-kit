@@ -6,26 +6,26 @@
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf node_modules; rm -rf examples/node_modules; scripts/runPackages.sh --eval \"rm -rf node_modules\""
+    "clean": "rm -rf node_modules; scripts/runPackages.sh --eval \"rm -rf node_modules\""
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.5.4",
+    "@babel/core": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
-    "babel-eslint": "^10.0.2",
-    "babel-jest": "^24.8.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
     "babel-plugin-styled-components": "^1.10.6",
-    "eslint": "^6.0.1",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-import": "^2.18.0",
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.2",
-    "jest": "^24.8.0",
-    "metro-react-native-babel-preset": "^0.55.0",
+    "eslint-plugin-react": "^7.14.3",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.0",
     "prettier": "^1.18.2",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.2"
   },
   "workspaces": {
     "packages": [
