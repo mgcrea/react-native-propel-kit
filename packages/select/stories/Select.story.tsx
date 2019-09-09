@@ -1,21 +1,9 @@
 import React, {useState, useEffect, useCallback, FunctionComponent} from 'react';
-import {Text, StyleSheet, ScrollView, View, TouchableWithoutFeedback, TextInputProps} from 'react-native';
+import {Text, ScrollView, TouchableWithoutFeedback, TextInputProps} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 
 import Select, {SelectItem} from '../src';
 import {NATIONALITY_SELECT_ITEMS} from './fixtures';
-
-const inputStyle = {
-  height: 40,
-  width: 240,
-  margin: 12,
-  fontSize: 14,
-  borderRadius: 4,
-  padding: 8,
-  backgroundColor: 'white',
-  borderColor: '#C5CAE9',
-  borderWidth: StyleSheet.hairlineWidth
-};
 
 const CustomBasicInputButtonComponent: FunctionComponent<TextInputProps> = ({value, onFocus, placeholder}) => {
   const handlePress = useCallback(
@@ -35,21 +23,21 @@ const CustomBasicInputButtonComponent: FunctionComponent<TextInputProps> = ({val
 
 storiesOf('Select', module)
   .add('two-item select', () => (
-    <Select placeholder="Genre" style={inputStyle}>
+    <Select placeholder="Language">
       <SelectItem label="Java" value="java" />
       <SelectItem label="JavaScript" value="js" />
     </Select>
   ))
   .add('two-item select with custom InputButton', () => {
     return (
-      <Select placeholder="Genre" style={inputStyle} InputButtonComponent={CustomBasicInputButtonComponent}>
+      <Select placeholder="Language" InputButtonComponent={CustomBasicInputButtonComponent}>
         <SelectItem label="Java" value="java" />
         <SelectItem label="JavaScript" value="js" />
       </Select>
     );
   })
   .add('many-items select', () => (
-    <Select placeholder="Nationalité" style={inputStyle}>
+    <Select placeholder="Nationalité">
       {NATIONALITY_SELECT_ITEMS.map(option => (
         <SelectItem key={option.value} {...option} />
       ))}
@@ -57,7 +45,7 @@ storiesOf('Select', module)
   ))
   .add('many-items select inside a ScrollView', () => (
     <ScrollView style={{flex: 1}}>
-      <Select placeholder="Nationalité" style={inputStyle}>
+      <Select placeholder="Nationalité">
         {NATIONALITY_SELECT_ITEMS.map(option => (
           <SelectItem key={option.value} {...option} />
         ))}
@@ -72,7 +60,7 @@ storiesOf('Select', module)
       }, 200);
     }, []);
     return (
-      <Select placeholder="Nationalité" style={inputStyle} value={value} onValueChange={setValue}>
+      <Select placeholder="Nationalité" value={value} onChange={setValue}>
         {NATIONALITY_SELECT_ITEMS.map(option => (
           <SelectItem key={option.value} {...option} />
         ))}

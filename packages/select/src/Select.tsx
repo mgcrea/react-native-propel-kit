@@ -1,5 +1,3 @@
-// @source https://github.com/lawnstarter/react-native-picker-select/blob/master/src/index.js
-
 import React, {
   ReactElement,
   useMemo,
@@ -17,20 +15,18 @@ import React, {
 import {StyleProp, TextStyle, TextInputProps} from 'react-native';
 
 import Picker, {PickerItem} from '@mgcrea/react-native-picker';
-import ModalDialog, {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
-import defaults from './defaults';
+import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
+import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
 
 const isUndefined = (maybeUndefined: any): maybeUndefined is undefined => typeof maybeUndefined === 'undefined';
 
 type SelectValue = string | number | undefined;
 
-export type Props = {
-  cancelTitle?: string;
+export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> & {
   children?: ReactNode;
-  confirmTitle?: string;
   initialValue?: SelectValue;
-  InputButtonComponent?: ElementType<TextInputProps>;
-  onValueChange?: (value: SelectValue) => void;
+  InputButtonComponent?: ElementType<InputButtonProps>;
+  onChange?: (value: SelectValue) => void;
   onEndEditing?: () => void;
   onSubmitEditing?: (value: SelectValue) => void;
   placeholder?: string;
@@ -42,79 +38,38 @@ export type Handle = {
   focus: () => void;
 };
 
+export const defaultProps = {
+  InputButtonComponent: InputButton
+};
+
 const Select: RefForwardingComponent<Handle, Props> = (
   {
     cancelTitle,
     children,
     confirmTitle,
-    InputButtonComponent = defaults.InputButtonComponent,
-    initialValue: propInitialValue = '',
-    onValueChange: propOnValueChange,
+    // Select props
+    initialValue: propInitialValue,
+    InputButtonComponent = defaultProps.InputButtonComponent,
+    onChange: propOnChange,
     onEndEditing,
     onSubmitEditing,
     placeholder,
     value: propValue,
-    ...otherProps
+    ...otherModalProps
   },
   ref
 ) => {
   const modalDialogRef = useRef<ModalDialogHandle>(null);
   const [localValue, setLocalValue] = useState<SelectValue>();
   const [modalValue, setModalValue] = useState<SelectValue>(propValue || propInitialValue);
-  // @NOTE always track latest value to properly detect outside propValue changes
-  // const latestValue = useRef(propValue || propInitialValue);
-  // const setModalValue = useCallback(value => {
-  //   latestValue.current = value;
-  //   _setModalValue(value);
-  // }, []);
 
-  // Track actual checked value
-  const inputValue = !isUndefined(propValue) ? propValue : localValue;
+  // Support both controlled/uncontrolled usage
+  const inputValue = useMemo(() => (!isUndefined(propValue) ? propValue : localValue), [propValue, localValue]);
 
-  // Catch-up for parent propValue changes
+  // Track parent propValue controlled updates
   useEffect(() => {
-    // if (propValue !== latestValue.current) {
     setModalValue(propValue || propInitialValue);
-    // }
-  }, [propValue, propInitialValue, setModalValue]);
-
-  // Open the modal when user touches input
-  const focus = useCallback(() => {
-    if (modalDialogRef.current) {
-      modalDialogRef.current.show();
-    }
-  }, []);
-
-  // Expose API via an imperative handle
-  useImperativeHandle(ref, () => ({focus}), [focus]);
-
-  // Propagate changed value
-  const onConfirm = useCallback(() => {
-    if (propOnValueChange) {
-      propOnValueChange(modalValue);
-    }
-    if (onEndEditing) {
-      onEndEditing();
-    }
-    if (onSubmitEditing) {
-      // @NOTE Add a timeout to prevent swallowing siblings focus events
-      setTimeout(() => {
-        onSubmitEditing(modalValue);
-      });
-    }
-    // Support uncontrolled usage
-    setLocalValue(modalValue);
-  }, [modalValue, onSubmitEditing, onEndEditing, propOnValueChange]);
-
-  // Reset modalValue to the proper value
-  const onCancel = useCallback(() => {
-    setModalValue(inputValue || propInitialValue);
-  }, [inputValue, propInitialValue]);
-
-  // Track modal value updates
-  const onValueChange = useCallback(value => {
-    setModalValue(value);
-  }, []);
+  }, [propValue, propInitialValue]);
 
   // Lazily compute displayed label
   const labelValue = useMemo(() => {
@@ -127,6 +82,39 @@ const Select: RefForwardingComponent<Handle, Props> = (
     return label;
   }, [children, inputValue]);
 
+  // Propagate changed value
+  const onConfirm = useCallback(() => {
+    if (propOnChange) {
+      propOnChange(modalValue);
+    }
+    if (onEndEditing) {
+      onEndEditing();
+    }
+    if (onSubmitEditing) {
+      // @NOTE Add a timeout to prevent swallowing siblings focus events
+      setTimeout(() => {
+        onSubmitEditing(modalValue);
+      });
+    }
+    // Support uncontrolled usage
+    setLocalValue(modalValue);
+  }, [modalValue, onSubmitEditing, onEndEditing, propOnChange]);
+
+  // Reset modalValue to the proper value
+  const onCancel = useCallback(() => {
+    setModalValue(inputValue || propInitialValue);
+  }, [inputValue, propInitialValue]);
+
+  // Open the modal when user touches input
+  const focus = useCallback(() => {
+    if (modalDialogRef.current) {
+      modalDialogRef.current.show();
+    }
+  }, []);
+
+  // Expose API via an imperative handle
+  useImperativeHandle(ref, () => ({focus}), [focus]);
+
   // @NOTE Hack around lousy handling of picker children (@see https://github.com/facebook/react-native/pull/8153)
   const pickerChildren = useMemo<ReactNode | ReactNode[]>(
     () =>
@@ -138,18 +126,22 @@ const Select: RefForwardingComponent<Handle, Props> = (
     [propInitialValue, children]
   );
 
+  // Track modal value updates
+  const onValueChange = useCallback(value => {
+    setModalValue(value);
+  }, []);
+
   return (
     <>
-      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherProps} />
+      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherModalProps} />
       <ModalDialog
         ref={modalDialogRef}
         title={placeholder}
         onConfirm={onConfirm}
         onCancel={onCancel}
         confirmTitle={confirmTitle}
-        cancelTitle={cancelTitle}
-      >
-        <Picker onValueChange={onValueChange} selectedValue={modalValue} style={{flexGrow: 1}}>
+        cancelTitle={cancelTitle}>
+        <Picker style={{flexGrow: 1}} onValueChange={onValueChange} selectedValue={modalValue}>
           {pickerChildren}
         </Picker>
       </ModalDialog>
