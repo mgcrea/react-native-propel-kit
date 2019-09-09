@@ -13,9 +13,7 @@ export type Props = {
 
 const IOS_OPACITY = 0.4; // @NOTE from native ActionSheet
 
-export const defaultProps: Required<
-  Pick<Props, 'backgroundColor' | 'duration' | 'easing' | 'opacity' | 'useNativeDriver' | 'zIndex'>
-> = {
+export const defaultProps = {
   backgroundColor: 'black',
   duration: 300,
   easing: Easing.inOut(Easing.ease),

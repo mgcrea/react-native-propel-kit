@@ -1,10 +1,13 @@
 {
   "name": "@mgcrea/react-native-button",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.8.0",
+  "license": "MIT",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "build": "babel --source-maps --extensions .js,.ts --out-dir lib/ --ignore **/__tests__ src/",
+    "build": "yarn build:source && yarn build:typings",
+    "build:source": "babel --verbose --source-maps --extensions .js,.ts,.tsx --out-dir lib/ --delete-dir-on-start --ignore **/__tests__ src/",
+    "build:typings": "tsc --declaration",
     "typecheck": "tsc --pretty --noEmit",
     "test": "CI=true jest --runInBand --colors"
   },

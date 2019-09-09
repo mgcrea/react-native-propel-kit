@@ -12,7 +12,7 @@ import React, {
   Children,
   ElementType
 } from 'react';
-import {StyleProp, TextStyle, TextInputProps} from 'react-native';
+import {StyleProp, TextStyle} from 'react-native';
 
 import Picker, {PickerItem} from '@mgcrea/react-native-picker';
 import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
