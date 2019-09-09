@@ -8,7 +8,7 @@
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf node_modules; scripts/runPackages.sh --eval \"rm -rf node_modules\"",
     "build": "scripts/runPackages.sh \"yarn build\"",
-    "publish": "scripts/runPackages.sh \"npm publish --access public\"",
+    "publish": "scripts/runPackages.sh \"yarn publish --non-interactive --access public\"",
     "version": "scripts/setVersion.sh"
   },
   "dependencies": {},
