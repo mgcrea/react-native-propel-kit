@@ -28,7 +28,8 @@ import openAndroidDatePicker from './utils/openAndroidDatePicker';
 import asUTCDate from './utils/asUTCDate';
 import isUndefined from './utils/isUndefined';
 
-export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> &
+export type Props = Pick<InputButtonProps, 'placeholder' | 'style'> &
+  Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> &
   Pick<DatePickerIOSProps, 'mode' | 'locale'> & {
     children?: ReactNode;
     // DatePicker props
@@ -77,7 +78,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
     onChange: propOnChange,
     onSubmitEditing,
     value: propValue,
-    ...otherProps
+    ...otherInputButtonProps
   },
   ref
 ) => {
@@ -156,7 +157,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
 
   return (
     <>
-      <InputButtonComponent onFocus={focus} value={labelValue} {...otherProps} />
+      <InputButtonComponent onFocus={focus} value={labelValue} {...otherInputButtonProps} />
       {Platform.OS === 'ios' ? (
         <ModalDialog
           ref={modalDialogRef}

@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
-import {TextInputProps, StyleProp, ViewStyle, TextStyle, Platform, PressableProps} from 'react-native';
-import Pressable from './Pressable';
+import {TextInputProps, StyleProp, ViewStyle, TextStyle, Platform} from 'react-native';
+import Pressable, {Props as PressableProps} from './Pressable';
 
 export type Props = Omit<TextInputProps, 'onPress'> & {
   onFocus: PressableProps['onPress'];

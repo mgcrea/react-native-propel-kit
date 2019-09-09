@@ -28,6 +28,7 @@ import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdr
 import ModalDialogButton from './components/ModalDialogButton';
 
 export type Props = ModalProps & {
+  defaultStyles?: typeof defaultStyles;
   backgroundColor?: string;
   cancelTitle?: string;
   cancelStyle?: StyleProp<TextStyle>;
@@ -48,7 +49,6 @@ export type Props = ModalProps & {
   messageStyle?: StyleProp<TextStyle>;
   delay?: number;
   initialVisible?: boolean;
-  defaultStyles: typeof defaultStyles;
 };
 
 export type Handle = {

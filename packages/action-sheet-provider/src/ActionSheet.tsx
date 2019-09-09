@@ -20,12 +20,12 @@ const WINDOW_HEIGHT = Dimensions.get('window').height;
 export type Props = Pick<ScrollViewProps, 'scrollEnabled'> &
   Omit<ModalDialogProps, 'onConfirm' | 'confirmTitle' | 'confirmStyle'> &
   ActionSheetIOSOptions & {
+    defaultStyles?: typeof defaultStyles;
     optionStyle?: StyleProp<TextStyle>;
     lastOptionExtraStyle?: StyleProp<TextStyle>;
     destructiveButtonColor?: string;
     onButtonPress: (buttonIndex: number) => void;
     onCancel: () => void;
-    defaultStyles: typeof defaultStyles;
   };
 
 export const defaultProps = {
