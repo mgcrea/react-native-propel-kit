@@ -11,8 +11,7 @@
   "dependencies": {},
   "peerDependencies": {
     "react": ">=16.8",
-    "react-native": ">=0.59",
-    "styled-components": ">=4"
+    "react-native": ">=0.59"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",

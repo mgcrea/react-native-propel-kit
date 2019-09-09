@@ -2,8 +2,6 @@ import React, {useMemo, useRef, useCallback, useEffect, Children, FunctionCompon
 import {FlatList, PickerProps, PickerItemProps, FlatListProperties} from 'react-native';
 import AndroidPickerItem from './AndroidPickerItem';
 
-const ITEM_HEIGHT = 60;
-
 type ItemT = {
   title?: string;
   key?: string;
@@ -20,7 +18,7 @@ export const defaultProps = {
 };
 
 // @NOTE uncontrolled usage is not functionnal
-const AndroidPicker: FunctionComponent<Props> = ({
+const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem} = ({
   children,
   onValueChange: propOnValueChange,
   selectedValue,
@@ -78,6 +76,7 @@ const AndroidPicker: FunctionComponent<Props> = ({
   );
 
   // @NOTE TouchableNativeFeedback is broken
+  // console.warn({initialScrollIndex});
   return (
     <FlatList
       // debug={true}
@@ -93,5 +92,7 @@ const AndroidPicker: FunctionComponent<Props> = ({
     />
   );
 };
+
+AndroidPicker.Item = AndroidPickerItem;
 
 export default AndroidPicker;
