@@ -31,31 +31,11 @@ export type Props = ButtonProps & {
   defaultStyles?: typeof defaultStyles;
 };
 
-export const defaultStyles = {
-  view: Platform.select<ViewStyle>({
-    ios: {justifyContent: 'center', flexDirection: 'row', height: 50},
-    android: {justifyContent: 'center', flexDirection: 'row', height: 50}
-  }),
-  disabledView: Platform.select<ViewStyle>({
-    ios: {},
-    android: {}
-  }),
-  text: Platform.select<TextStyle>({
-    ios: {alignSelf: 'center', fontSize: 18, color: '#007aff'},
-    android: {paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
-  }),
-  disabledText: Platform.select<TextStyle>({
-    ios: {color: '#cdcdcd'},
-    android: {color: '#cdcdcd'}
-  })
-};
-
 export const defaultProps = {
   TouchableComponent: Platform.select<ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>>({
     android: TouchableNativeFeedback,
     default: TouchableOpacity
-  }),
-  defaultStyles: typeof defaultStyles
+  })
 };
 
 const Button: FunctionComponent<Props> = ({
@@ -122,3 +102,22 @@ const Button: FunctionComponent<Props> = ({
 };
 
 export default Button;
+
+export const defaultStyles = {
+  view: Platform.select<ViewStyle>({
+    ios: {justifyContent: 'center', flexDirection: 'row', height: 50},
+    android: {justifyContent: 'center', flexDirection: 'row', height: 50}
+  }),
+  disabledView: Platform.select<ViewStyle>({
+    ios: {},
+    android: {}
+  }),
+  text: Platform.select<TextStyle>({
+    ios: {alignSelf: 'center', fontSize: 18, color: '#007aff'},
+    android: {paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
+  }),
+  disabledText: Platform.select<TextStyle>({
+    ios: {color: '#cdcdcd'},
+    android: {color: '#cdcdcd'}
+  })
+};

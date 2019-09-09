@@ -20,13 +20,11 @@ import {
   TouchableWithoutFeedback,
   Text,
   StyleProp,
-  StyleSheet,
   TextStyle,
   Dimensions,
   SafeAreaView
 } from 'react-native';
 import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdrop-provider';
-// import Button from '@mgcrea/react-native-button';
 import ModalDialogButton from './components/ModalDialogButton';
 
 export type Props = ModalProps & {
@@ -50,6 +48,7 @@ export type Props = ModalProps & {
   messageStyle?: StyleProp<TextStyle>;
   delay?: number;
   initialVisible?: boolean;
+  defaultStyles: typeof defaultStyles;
 };
 
 export type Handle = {
@@ -92,6 +91,7 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
     footerStyle,
     transparent = defaultProps.transparent,
     initialVisible = false,
+    defaultStyles: propDefaultStyles = defaultStyles,
     ...otherModalProps
   },
   ref
@@ -176,14 +176,14 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
     const inheritedStyles = {};
     if (!isHeaderVisible) {
       Object.assign(inheritedStyles, {
-        borderTopLeftRadius: defaultStyles.header.borderTopLeftRadius,
-        borderTopRightRadius: defaultStyles.header.borderTopRightRadius
+        borderTopLeftRadius: propDefaultStyles.header.borderTopLeftRadius,
+        borderTopRightRadius: propDefaultStyles.header.borderTopRightRadius
       });
     }
     if (!isFooterVisible) {
       Object.assign(inheritedStyles, {
-        borderBottomLeftRadius: defaultStyles.footer.borderBottomLeftRadius,
-        borderBottomRightRadius: defaultStyles.footer.borderBottomRightRadius
+        borderBottomLeftRadius: propDefaultStyles.footer.borderBottomLeftRadius,
+        borderBottomRightRadius: propDefaultStyles.footer.borderBottomRightRadius
       });
     }
     return inheritedStyles;
@@ -192,28 +192,28 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
   return (
     <Modal visible={isVisible} animationType={animationType} transparent={transparent} {...otherModalProps}>
       <TouchableWithoutFeedback style={{flex: 1}} onPress={handleModalCancel}>
-        <View style={[defaultStyles.modal, modalStyle]}>
+        <View style={[propDefaultStyles.modal, modalStyle]}>
           <TouchableWithoutFeedback style={{flex: 1}}>
-            <SafeAreaView style={[defaultStyles.container, containerStyle]}>
+            <SafeAreaView style={[propDefaultStyles.container, containerStyle]}>
               {isHeaderVisible ? (
-                <View style={[defaultStyles.header, {backgroundColor}, headerStyle]}>
-                  {title ? <Text style={titleStyle}>{title}</Text> : null}
-                  {message ? <Text style={messageStyle}>{message}</Text> : null}
+                <View style={[propDefaultStyles.header, {backgroundColor}, headerStyle]}>
+                  {title ? <Text style={[propDefaultStyles.title, titleStyle]}>{title}</Text> : null}
+                  {message ? <Text style={[propDefaultStyles.message, messageStyle]}>{message}</Text> : null}
                 </View>
               ) : null}
-              <View style={[defaultStyles.body, inheritedBodyStyle, {backgroundColor}, bodyStyle]}>{children}</View>
+              <View style={[propDefaultStyles.body, inheritedBodyStyle, {backgroundColor}, bodyStyle]}>{children}</View>
               {isFooterVisible ? (
-                <View style={[defaultStyles.footer, {backgroundColor}, footerStyle]}>
+                <View style={[propDefaultStyles.footer, {backgroundColor}, footerStyle]}>
                   {Platform.OS === 'android' && onCancel ? (
                     <ModalDialogButton
-                      style={[defaultStyles.cancel, cancelStyle]}
+                      style={[propDefaultStyles.cancel, cancelStyle]}
                       onPress={handleModalCancel}
                       title={cancelTitle}
                     />
                   ) : null}
                   {onConfirm ? (
                     <ModalDialogButton
-                      style={[defaultStyles.confirm, confirmStyle]}
+                      style={[propDefaultStyles.confirm, confirmStyle]}
                       onPress={handleModalConfirm}
                       title={confirmTitle}
                     />
@@ -222,7 +222,7 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
               ) : null}
               {Platform.OS === 'ios' && onCancel ? (
                 <ModalDialogButton
-                  style={[defaultStyles.cancel, {backgroundColor}, cancelStyle]}
+                  style={[propDefaultStyles.cancel, {backgroundColor}, cancelStyle]}
                   onPress={handleModalCancel}
                   title={cancelTitle}
                 />
