@@ -1,5 +1,4 @@
 import React, {
-  ReactElement,
   useMemo,
   useRef,
   useState,
@@ -11,33 +10,18 @@ import React, {
   useEffect,
   ElementType
 } from 'react';
-// import {Picker} from 'react-native';
-import Picker, {Item as PickerItem} from '@mgcrea/react-native-picker';
+import Picker from '@mgcrea/react-native-picker';
 import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
 import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
 import {DatePickerIOSProps} from 'react-native';
-// import dayjs from 'dayjs';
 
 import defaultLabelExtractor, {LabelExtractorOptions} from './utils/defaultLabelExtractor';
 import isUndefined from './utils/isUndefined';
 import asUTCDate from './utils/asUTCDate';
+import localizedMonths from './utils/localizedMonths';
 
 const CURRENT_YEAR = new Date().getFullYear();
 const CURRENT_MONTH = new Date(Date.UTC(CURRENT_YEAR, 0, 1));
-const DATEPICKER_MONTHS = [
-  {label: 'Janvier', value: 0},
-  {label: 'Février', value: 1},
-  {label: 'Mars', value: 2},
-  {label: 'Avril', value: 3},
-  {label: 'Mai', value: 4},
-  {label: 'Juin', value: 5},
-  {label: 'Juillet', value: 6},
-  {label: 'Août', value: 7},
-  {label: 'Septembre', value: 8},
-  {label: 'Octobre', value: 9},
-  {label: 'Novembre', value: 10},
-  {label: 'Décembre', value: 11}
-];
 
 type MonthPickerValue = Date;
 
@@ -167,13 +151,20 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
   // Expose API via an imperative handle
   useImperativeHandle(ref, () => ({focus}), [focus]);
 
-  // Drop second parameter leading to warnings
+  // Track modal value updates
   const onMonthValueChange = useCallback(value => setModalMonthValue(value), []);
   const onYearValueChange = useCallback(value => setModalYearValue(value), []);
 
+  // Compute localized values
+  const pickerValues = useMemo(() => {
+    const lang = locale.split('-')[0];
+    const months = localizedMonths[lang] || localizedMonths.en;
+    return months.map((label, value) => ({label, value}));
+  }, [locale]);
+
   return (
     <>
-      <InputButton onFocus={focus} placeholder={placeholder} value={labelValue} {...otherProps} />
+      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherProps} />
       <ModalDialog
         ref={modalInputRef}
         title={title}
@@ -182,12 +173,12 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
         confirmTitle={confirmTitle}
         cancelTitle={cancelTitle}
         bodyStyle={{flexDirection: 'row'}}>
-        <Picker style={{flex: 1}} onValueChange={onMonthValueChange} selectedValue={modalMonthValue}>
-          {DATEPICKER_MONTHS.map(({label, value}) => (
+        <Picker style={{flexGrow: 1}} onValueChange={onMonthValueChange} selectedValue={modalMonthValue}>
+          {pickerValues.map(({label, value}) => (
             <Picker.Item key={value} label={label} value={value} />
           ))}
         </Picker>
-        <Picker style={{flex: 1}} onValueChange={onYearValueChange} selectedValue={modalYearValue}>
+        <Picker style={{flexGrow: 1}} onValueChange={onYearValueChange} selectedValue={modalYearValue}>
           {yearOptions.map(({label, value}) => (
             <Picker.Item key={value} label={label} value={value} />
           ))}
