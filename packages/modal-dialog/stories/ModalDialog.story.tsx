@@ -32,7 +32,6 @@ storiesOf('ModalDialog', module).add('default view', () => {
         title="Open"
       />
       <ModalDialog
-        backgroundColor="red"
         title="Some Title"
         message="Some long message"
         ref={modalDialogRef}

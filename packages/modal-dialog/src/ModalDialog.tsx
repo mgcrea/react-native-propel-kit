@@ -176,14 +176,14 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
     const inheritedStyles = {};
     if (!isHeaderVisible) {
       Object.assign(inheritedStyles, {
-        borderTopLeftRadius: styles.headerStyle.borderTopLeftRadius,
-        borderTopRightRadius: styles.headerStyle.borderTopRightRadius
+        borderTopLeftRadius: defaultStyles.header.borderTopLeftRadius,
+        borderTopRightRadius: defaultStyles.header.borderTopRightRadius
       });
     }
     if (!isFooterVisible) {
       Object.assign(inheritedStyles, {
-        borderBottomLeftRadius: styles.footerStyle.borderBottomLeftRadius,
-        borderBottomRightRadius: styles.footerStyle.borderBottomRightRadius
+        borderBottomLeftRadius: defaultStyles.footer.borderBottomLeftRadius,
+        borderBottomRightRadius: defaultStyles.footer.borderBottomRightRadius
       });
     }
     return inheritedStyles;
@@ -192,28 +192,28 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
   return (
     <Modal visible={isVisible} animationType={animationType} transparent={transparent} {...otherModalProps}>
       <TouchableWithoutFeedback style={{flex: 1}} onPress={handleModalCancel}>
-        <View style={[styles.modalStyle, modalStyle]}>
+        <View style={[defaultStyles.modal, modalStyle]}>
           <TouchableWithoutFeedback style={{flex: 1}}>
-            <SafeAreaView style={[styles.containerStyle, containerStyle]}>
+            <SafeAreaView style={[defaultStyles.container, containerStyle]}>
               {isHeaderVisible ? (
-                <View style={[styles.headerStyle, {backgroundColor}, headerStyle]}>
+                <View style={[defaultStyles.header, {backgroundColor}, headerStyle]}>
                   {title ? <Text style={titleStyle}>{title}</Text> : null}
                   {message ? <Text style={messageStyle}>{message}</Text> : null}
                 </View>
               ) : null}
-              <View style={[styles.bodyStyle, inheritedBodyStyle, {backgroundColor}, bodyStyle]}>{children}</View>
+              <View style={[defaultStyles.body, inheritedBodyStyle, {backgroundColor}, bodyStyle]}>{children}</View>
               {isFooterVisible ? (
-                <View style={[styles.footerStyle, {backgroundColor}, footerStyle]}>
+                <View style={[defaultStyles.footer, {backgroundColor}, footerStyle]}>
                   {Platform.OS === 'android' && onCancel ? (
                     <ModalDialogButton
-                      style={[styles.cancelStyle, cancelStyle]}
+                      style={[defaultStyles.cancel, cancelStyle]}
                       onPress={handleModalCancel}
                       title={cancelTitle}
                     />
                   ) : null}
                   {onConfirm ? (
                     <ModalDialogButton
-                      style={[styles.confirmStyle, confirmStyle]}
+                      style={[defaultStyles.confirm, confirmStyle]}
                       onPress={handleModalConfirm}
                       title={confirmTitle}
                     />
@@ -222,7 +222,7 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
               ) : null}
               {Platform.OS === 'ios' && onCancel ? (
                 <ModalDialogButton
-                  style={[styles.cancelStyle, {backgroundColor}, cancelStyle]}
+                  style={[defaultStyles.cancel, {backgroundColor}, cancelStyle]}
                   onPress={handleModalCancel}
                   title={cancelTitle}
                 />
@@ -237,12 +237,12 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
 
 export default forwardRef(ModalDialog);
 
-export const styles: {[s: string]: ViewStyle | TextStyle} = {
-  modalStyle: Platform.select<ViewStyle>({
+export const defaultStyles: {[s: string]: ViewStyle | TextStyle} = {
+  modal: Platform.select<ViewStyle>({
     ios: {flex: 1, justifyContent: 'flex-end'},
     android: {flex: 1, justifyContent: 'center'}
   }),
-  containerStyle: Platform.select<ViewStyle>({
+  container: Platform.select<ViewStyle>({
     ios: {
       flexDirection: 'column',
       alignItems: 'stretch',
@@ -260,11 +260,11 @@ export const styles: {[s: string]: ViewStyle | TextStyle} = {
       maxHeight: MAX_HEIGHT - 8
     }
   }),
-  headerStyle: Platform.select<ViewStyle>({
+  header: Platform.select<ViewStyle>({
     ios: {alignItems: 'center', padding: 16, borderTopLeftRadius: 12, borderTopRightRadius: 12},
     android: {alignItems: 'flex-start', padding: 16}
   }),
-  bodyStyle: Platform.select<ViewStyle>({
+  body: Platform.select<ViewStyle>({
     ios: {
       flexShrink: 1,
       flexDirection: 'column'
@@ -274,7 +274,7 @@ export const styles: {[s: string]: ViewStyle | TextStyle} = {
       flexDirection: 'column'
     }
   }),
-  footerStyle: Platform.select<TextStyle>({
+  footer: Platform.select<TextStyle>({
     ios: {
       borderBottomLeftRadius: 12,
       borderBottomRightRadius: 12
@@ -287,7 +287,7 @@ export const styles: {[s: string]: ViewStyle | TextStyle} = {
       padding: 8
     }
   }),
-  titleStyle: Platform.select<TextStyle>({
+  title: Platform.select<TextStyle>({
     ios: {paddingBottom: 12, fontSize: 14, fontWeight: '500', textAlign: 'center', color: '#888'},
     android: {
       paddingVertical: 10,
@@ -298,15 +298,15 @@ export const styles: {[s: string]: ViewStyle | TextStyle} = {
       color: '#333'
     }
   }),
-  messageStyle: Platform.select<TextStyle>({
+  message: Platform.select<TextStyle>({
     ios: {paddingBottom: 12, fontSize: 13, fontWeight: '400', textAlign: 'center', color: '#888'},
     android: {paddingVertical: 6, paddingHorizontal: 12, fontSize: 18, fontWeight: '400', color: '#666'}
   }),
-  cancelStyle: Platform.select<TextStyle>({
+  cancel: Platform.select<TextStyle>({
     ios: {marginTop: 24, borderRadius: 12, fontWeight: '600'},
     android: {}
   }),
-  confirmStyle: Platform.select<TextStyle>({
+  confirm: Platform.select<TextStyle>({
     ios: {borderBottomLeftRadius: 12, borderBottomRightRadius: 12, fontWeight: '400'},
     android: {}
   })
