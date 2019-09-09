@@ -1,12 +1,15 @@
 {
   "name": "@mgcrea/react-native-propel-kit",
-  "version": "1.0.0",
+  "version": "0.8.0",
   "license": "MIT",
   "private": true,
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf node_modules; scripts/runPackages.sh --eval \"rm -rf node_modules\""
+    "clean": "rm -rf node_modules; scripts/runPackages.sh --eval \"rm -rf node_modules\"",
+    "build": "scripts/runPackages.sh \"yarn build\"",
+    "publish": "scripts/runPackages.sh \"npm publish --access public\"",
+    "version": "scripts/setVersion.sh"
   },
   "dependencies": {},
   "devDependencies": {
@@ -14,7 +17,7 @@
     "@babel/preset-typescript": "^7.6.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
-    "babel-plugin-styled-components": "^1.10.6",
+    "babel-plugin-module-name-mapper": "^1.2.0",
     "eslint": "^6.3.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.2.0",

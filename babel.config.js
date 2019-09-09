@@ -14,6 +14,6 @@ module.exports = {
         }
       }
     ],
-    'babel-plugin-styled-components'
+    '@babel/plugin-transform-runtime'
   ]
 };

@@ -12,15 +12,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "noEmit": true,
-    "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "@mgcrea/react-native-backdrop-provider": ["packages/backdrop-provider"],
-      "@mgcrea/react-native-button": ["packages/button"],
-      "@mgcrea/react-native-modal-dialog": ["packages/modal-dialog"]
-    }
-  }
-  // "include": ["packages"],
-  // "extends": "./tsconfig.paths.json"
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "jsx": "react"
+  },
+  "include": ["packages/*/src"]
 }
