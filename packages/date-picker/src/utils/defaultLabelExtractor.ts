@@ -1,7 +1,7 @@
 import {DatePickerIOSProps, Platform} from 'react-native';
 
 export type LabelExtractorOptions = {
-  mode: DatePickerIOSProps['mode'] | 'month';
+  mode: DatePickerIOSProps['mode'] | 'month' | 'year';
   locale: DatePickerIOSProps['locale'];
 };
 

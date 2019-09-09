@@ -1,40 +1,53 @@
 import React, {useMemo, forwardRef, RefForwardingComponent} from 'react';
-import Select, {Item as SelectItem, Props as SelectItemProps} from './Select';
-import {Props as FormItemProps} from './FormItem';
+import Select, {SelectItem, SelectProps} from '@mgcrea/react-native-select';
+import {InputButton} from '@mgcrea/react-native-button';
+
+import {LabelExtractorOptions} from './utils/defaultLabelExtractor';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-type Props = FormItemProps &
-  SelectItemProps & {
-    minValue?: number;
-    maxValue?: number;
-    labelPrefix?: string;
-  };
+export type Props = SelectProps & {
+  onChange?: (value: number) => void;
+  labelExtractor?: (value: number, options: LabelExtractorOptions) => string;
+  minValue?: number;
+  maxValue?: number;
+  locale?: string;
+};
 
 export type Handle = {
   focus: () => void;
 };
 
+export const defaultProps = {
+  initialValue: CURRENT_YEAR,
+  InputButtonComponent: InputButton,
+  labelExtractor: (value: number) => `${value}`,
+  locale: navigator.language,
+  minValue: CURRENT_YEAR - 50,
+  maxValue: CURRENT_YEAR + 20
+};
+
 const YearPicker: RefForwardingComponent<Handle, Props> = (
   {
-    initialValue = CURRENT_YEAR,
-    maxValue = CURRENT_YEAR + 1,
-    minValue = CURRENT_YEAR - 50,
-    placeholder = 'Year',
-    labelPrefix = '',
-    ...otherProps
+    initialValue: propInitialValue = defaultProps.initialValue,
+    InputButtonComponent = defaultProps.InputButtonComponent,
+    labelExtractor = defaultProps.labelExtractor,
+    locale = defaultProps.locale,
+    minValue = defaultProps.minValue,
+    maxValue = defaultProps.maxValue,
+    ...otherSelectProps
   },
   ref
 ) => {
   const yearOptions = useMemo(() => {
     const options = [];
-    for (let i = minValue; i <= maxValue; i += 1) {
-      options.push({label: `${labelPrefix}${i}`, value: i});
+    for (let value = minValue; value <= maxValue; value += 1) {
+      options.push({label: labelExtractor ? labelExtractor(value, {mode: 'year', locale}) : `${value}`, value});
     }
     return options;
-  }, [minValue, maxValue]);
+  }, [locale, minValue, maxValue]);
   return (
-    <Select placeholder={placeholder} initialValue={initialValue} ref={ref} {...otherProps}>
+    <Select InputButtonComponent={InputButtonComponent} initialValue={propInitialValue} ref={ref} {...otherSelectProps}>
       {yearOptions.map(({label, value}) => (
         <SelectItem key={value} label={label} value={value} />
       ))}
