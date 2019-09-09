@@ -237,7 +237,7 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
 
 export default forwardRef(ModalDialog);
 
-export const defaultStyles: {[s: string]: ViewStyle | TextStyle} = {
+export const defaultStyles = {
   modal: Platform.select<ViewStyle>({
     ios: {flex: 1, justifyContent: 'flex-end'},
     android: {flex: 1, justifyContent: 'center'}

@@ -1,7 +1,7 @@
 // @see https://github.com/facebook/react-native/blob/master/Libraries/Components/Button.js
 // @see https://github.com/react-native-training/react-native-elements/blob/next/src/buttons/Button.js
 
-import React, {useCallback, FunctionComponent, useMemo, ElementType} from 'react';
+import React, {useCallback, FunctionComponent, useMemo, ElementType, ReactNode} from 'react';
 import {
   Text,
   View,
@@ -13,7 +13,6 @@ import {
   GestureResponderEvent,
   TouchableNativeFeedbackProps,
   TouchableOpacityProps,
-  // ActivityIndicator,
   Platform,
   TouchableNativeFeedback,
   TouchableOpacity
@@ -21,8 +20,7 @@ import {
 import pickTextStyles from './utils/pickTextStyles';
 
 export type Props = ButtonProps & {
-  // loading?: boolean;
-  // loadingStyle?: StyleProp<ViewStyle>;
+  children?: ReactNode;
   style?: StyleProp<TextStyle>;
   viewStyle?: StyleProp<ViewStyle>;
   disabledViewStyle?: StyleProp<ViewStyle>;
@@ -50,19 +48,6 @@ export const defaultStyles = {
     ios: {color: '#cdcdcd'},
     android: {color: '#cdcdcd'}
   })
-  // loading: Platform.select<ViewStyle>({
-  //   ios: {
-  //     position: 'absolute',
-  //     backgroundColor: 'black',
-  //     opacity: 0.5,
-  //     height: 40,
-  //     width: 40,
-  //     marginRight: 8,
-  //     alignSelf: 'center',
-  //     borderRadius: 12
-  //   },
-  //   android: {marginRight: 4}
-  // })
 };
 
 export const defaultProps = {
@@ -74,13 +59,12 @@ export const defaultProps = {
 };
 
 const Button: FunctionComponent<Props> = ({
+  children,
   title,
   disabled,
-  // loading: propLoading,
   onPress,
   color,
   viewStyle: propViewStyle,
-  // loadingStyle: propLoadingStyle,
   disabledViewStyle,
   textStyle: propTextStyle,
   disabledTextStyle,
@@ -92,7 +76,6 @@ const Button: FunctionComponent<Props> = ({
   // @NOTE we use flatten to properly split text/view related styles
   const flattenStyle = useMemo<TextStyle>(() => (propStyle ? StyleSheet.flatten(propStyle) : {}), [propStyle]);
   const doesFlex = flattenStyle.flex === 1;
-  // const disabled = propDisabled || propLoading;
 
   const handlePress = useCallback(
     (ev: GestureResponderEvent) => {
@@ -131,12 +114,7 @@ const Button: FunctionComponent<Props> = ({
       onPress={handlePress}
       {...otherTouchableProps}>
       <View style={viewStyle}>
-        {/* {propLoading ? (
-          <ActivityIndicator
-            style={[propDefaultStyles.loading, propLoadingStyle]}
-            color={textStyle && textStyle.color ? textStyle.color : propDefaultStyles.text.color}
-          />
-        ) : null} */}
+        {children}
         <Text style={textStyle}>{title}</Text>
       </View>
     </TouchableComponent>

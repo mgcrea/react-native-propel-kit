@@ -1,30 +1,33 @@
 import React, {FunctionComponent} from 'react';
 import {ViewStyle, TextStyle, Platform} from 'react-native';
-import Button, {ButtonProps} from '@mgcrea/react-native-button';
+import {Pressable, PressableProps} from '@mgcrea/react-native-button';
 
-export type Props = ButtonProps;
+export type Props = PressableProps;
 
-// @NOTE Fork defaults away from base button
-export const defaultProps = {
-  viewStyle: Platform.select<ViewStyle>({
+export const defaultStyles = {
+  view: Platform.select<ViewStyle>({
     ios: {
-      flex: 1,
-      flexDirection: 'row',
+      flexGrow: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      flexDirection: 'row',
       height: 56,
+      alignItems: 'center',
       backgroundColor: 'white'
     },
     android: {
-      flex: 1,
-      flexDirection: 'row',
+      flexGrow: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      flexDirection: 'row',
       height: 56,
+      alignItems: 'center',
       backgroundColor: 'white'
     }
   }),
-  textStyle: Platform.select<TextStyle>({
+  disabledView: Platform.select<ViewStyle>({
+    ios: {},
+    android: {}
+  }),
+  text: Platform.select<TextStyle>({
     ios: {
       fontSize: 20,
       color: '#007aff' // iOS.systemBlue (@see https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/)
@@ -35,15 +38,15 @@ export const defaultProps = {
       fontWeight: 'bold',
       color: '#009688' // android.teal500 (@see https://material.io/design/color/the-color-system.html)
     }
+  }),
+  disabledText: Platform.select<TextStyle>({
+    ios: {color: '#cdcdcd'},
+    android: {color: '#cdcdcd'}
   })
 };
 
-const ActionSheetOption: FunctionComponent<Props> = ({
-  viewStyle = defaultProps.viewStyle,
-  textStyle = defaultProps.textStyle,
-  ...otherProps
-}) => {
-  return <Button viewStyle={viewStyle} textStyle={textStyle} activeOpacity={0.5} {...otherProps} />;
+const ActionSheetOption: FunctionComponent<Props> = ({...otherPressableProps}) => {
+  return <Pressable defaultStyles={defaultStyles} activeOpacity={0.5} {...otherPressableProps} />;
 };
 
 export default ActionSheetOption;
