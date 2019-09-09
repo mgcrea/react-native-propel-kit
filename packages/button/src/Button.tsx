@@ -33,40 +33,10 @@ export type Props = ButtonProps & {
 };
 
 export const defaultProps = {
-  loadingStyle: Platform.select<ViewStyle>({
-    ios: {
-      position: 'absolute',
-      backgroundColor: 'black',
-      opacity: 0.5,
-      height: 40,
-      width: 40,
-      marginRight: 8,
-      alignSelf: 'center',
-      borderRadius: 12
-    },
-    android: {marginRight: 4}
-  }),
   TouchableComponent: Platform.select<ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>>({
     android: TouchableNativeFeedback,
     default: TouchableOpacity
-  }),
-  viewStyle: Platform.select<ViewStyle>({
-    ios: {justifyContent: 'center', flexDirection: 'row', height: 50},
-    android: {justifyContent: 'center', flexDirection: 'row', height: 50}
-  }),
-  disabledViewStyle: Platform.select<ViewStyle>({
-    ios: {},
-    android: {}
-  }),
-  textStyle: Platform.select<TextStyle>({
-    ios: {alignSelf: 'center', fontSize: 18, color: '#007aff'},
-    android: {paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
-  }),
-  disabledTextStyle: Platform.select<TextStyle>({
-    ios: {color: '#cdcdcd'},
-    android: {color: '#cdcdcd'}
-  }),
-  style: {}
+  })
 };
 
 const Button: FunctionComponent<Props> = ({
@@ -75,17 +45,17 @@ const Button: FunctionComponent<Props> = ({
   loading: propLoading,
   onPress,
   color,
-  viewStyle: propViewStyle = defaultProps.viewStyle,
-  loadingStyle: propLoadingStyle = defaultProps.loadingStyle,
-  disabledViewStyle = defaultProps.disabledViewStyle,
-  textStyle: propTextStyle = defaultProps.textStyle,
-  disabledTextStyle = defaultProps.disabledTextStyle,
+  viewStyle: propViewStyle,
+  loadingStyle: propLoadingStyle,
+  disabledViewStyle,
+  textStyle: propTextStyle,
+  disabledTextStyle,
   style: propStyle = defaultProps.style,
   TouchableComponent = defaultProps.TouchableComponent,
   ...otherTouchableProps
 }) => {
   // @NOTE we use flatten to properly split text/view related styles
-  const flattenStyle = useMemo<TextStyle>(() => StyleSheet.flatten(propStyle), [propStyle]);
+  const flattenStyle = useMemo<TextStyle>(() => (propStyle ? StyleSheet.flatten(propStyle) : {}), [propStyle]);
   const doesFlex = flattenStyle.flex === 1;
   const disabled = propDisabled || propLoading;
 
@@ -102,13 +72,14 @@ const Button: FunctionComponent<Props> = ({
   );
 
   const viewStyle = useMemo<ViewStyle>(
-    () => StyleSheet.flatten([propViewStyle, flattenStyle, disabled ? disabledViewStyle : null]),
+    () => StyleSheet.flatten([defaultStyles.view, propViewStyle, flattenStyle, disabled ? disabledViewStyle : null]),
     [propViewStyle, flattenStyle, disabled, disabledViewStyle]
   );
 
   const textStyle = useMemo<TextStyle>(
     () =>
       StyleSheet.flatten([
+        defaultStyles.text,
         propTextStyle,
         pickTextStyles(flattenStyle),
         color ? {color} : null,
@@ -122,10 +93,14 @@ const Button: FunctionComponent<Props> = ({
       style={{flex: doesFlex ? 1 : 0, flexDirection: 'row'}}
       disabled={disabled}
       onPress={handlePress}
-      {...otherTouchableProps}
-    >
+      {...otherTouchableProps}>
       <View style={viewStyle}>
-        {propLoading ? <ActivityIndicator style={propLoadingStyle} color={textStyle.color} /> : null}
+        {propLoading ? (
+          <ActivityIndicator
+            style={[defaultStyles.loading, propLoadingStyle]}
+            color={textStyle && textStyle.color ? textStyle.color : defaultStyles.text.color}
+          />
+        ) : null}
         <Text style={textStyle}>{title}</Text>
       </View>
     </TouchableComponent>
@@ -133,3 +108,35 @@ const Button: FunctionComponent<Props> = ({
 };
 
 export default Button;
+
+export const defaultStyles: {[s: string]: ViewStyle | TextStyle} = {
+  view: Platform.select<ViewStyle>({
+    ios: {justifyContent: 'center', flexDirection: 'row', height: 50},
+    android: {justifyContent: 'center', flexDirection: 'row', height: 50}
+  }),
+  disabledView: Platform.select<ViewStyle>({
+    ios: {},
+    android: {}
+  }),
+  text: Platform.select<TextStyle>({
+    ios: {alignSelf: 'center', fontSize: 18, color: '#007aff'},
+    android: {paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
+  }),
+  disabledText: Platform.select<TextStyle>({
+    ios: {color: '#cdcdcd'},
+    android: {color: '#cdcdcd'}
+  }),
+  loading: Platform.select<ViewStyle>({
+    ios: {
+      position: 'absolute',
+      backgroundColor: 'black',
+      opacity: 0.5,
+      height: 40,
+      width: 40,
+      marginRight: 8,
+      alignSelf: 'center',
+      borderRadius: 12
+    },
+    android: {marginRight: 4}
+  })
+};

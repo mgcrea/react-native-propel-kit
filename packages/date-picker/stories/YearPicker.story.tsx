@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 
 import {YearPicker} from '../src';

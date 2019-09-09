@@ -11,7 +11,6 @@ import React, {
   useMemo
 } from 'react';
 import {
-  TouchableOpacity,
   ModalProps,
   ViewStyle,
   Modal,
@@ -21,6 +20,7 @@ import {
   TouchableWithoutFeedback,
   Text,
   StyleProp,
+  StyleSheet,
   TextStyle,
   Dimensions,
   SafeAreaView
