@@ -6,8 +6,8 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "yarn build:source && yarn build:typings",
-    "build:source": "babel --verbose --source-maps --extensions .js,.ts,.tsx --out-dir lib/ --delete-dir-on-start --ignore **/__tests__ src/",
-    "build:typings": "tsc --declaration",
+    "build:source": "NODE_ENV=production babel --verbose --source-maps --extensions .js,.ts,.tsx --out-dir lib/ --delete-dir-on-start --ignore **/__tests__ src/",
+    "build:typings": "NODE_ENV=production tsc --declaration",
     "typecheck": "tsc --pretty --noEmit",
     "test": "CI=true jest --runInBand --colors"
   },

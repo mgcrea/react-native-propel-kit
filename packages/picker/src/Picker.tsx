@@ -8,6 +8,6 @@ const IS_IOS = Platform.OS === 'ios';
 
 export default IS_IOS ? Picker : AndroidPicker;
 
-export const Item = IS_IOS ? Picker.Item : AndroidPickerItem;
+export const Item: typeof Picker.Item = IS_IOS ? Picker.Item : ((AndroidPickerItem as unknown) as typeof Picker.Item);
 
 export {Props};

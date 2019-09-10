@@ -6,6 +6,7 @@ import DateTimePicker, {Props as DateTimePickerProps} from './DateTimePicker';
 
 export default DatePicker;
 export {
+  DatePicker,
   DatePickerProps,
   DatePickerHandle,
   TimePicker,

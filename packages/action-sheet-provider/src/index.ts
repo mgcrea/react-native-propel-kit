@@ -4,5 +4,5 @@ import ActionSheetProvider, {
   ContextProps as ActionSheetContextProps
 } from './ActionSheetProvider';
 
-export {ActionSheetProviderProps, ActionSheetContext, ActionSheetContextProps};
 export default ActionSheetProvider;
+export {ActionSheetProvider, ActionSheetProviderProps, ActionSheetContext, ActionSheetContextProps};

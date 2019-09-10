@@ -5,5 +5,5 @@ import BackdropProvider, {
   defaultProps as backdropProviderDefaultProps
 } from './BackdropProvider';
 
-export {BackdropProviderProps, backdropProviderDefaultProps, BackdropContext, BackdropContextProps};
 export default BackdropProvider;
+export {BackdropProvider, BackdropProviderProps, backdropProviderDefaultProps, BackdropContext, BackdropContextProps};

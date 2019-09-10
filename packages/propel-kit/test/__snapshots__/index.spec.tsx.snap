@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`propel-kit export a proper interface 1`] = `
+Object {
+  "ActionSheetContext": Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": Object {
+      "$$typeof": Symbol(react.context),
+      "_calculateChangedBits": null,
+      "_context": [Circular],
+    },
+    "Provider": Object {
+      "$$typeof": Symbol(react.provider),
+      "_context": [Circular],
+    },
+    "_calculateChangedBits": null,
+    "_currentRenderer": null,
+    "_currentRenderer2": null,
+    "_currentValue": null,
+    "_currentValue2": null,
+    "_threadCount": 0,
+  },
+  "ActionSheetContextProps": undefined,
+  "ActionSheetProvider": [Function],
+  "ActionSheetProviderProps": undefined,
+  "BackdropContext": Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": Object {
+      "$$typeof": Symbol(react.context),
+      "_calculateChangedBits": null,
+      "_context": [Circular],
+    },
+    "Provider": Object {
+      "$$typeof": Symbol(react.provider),
+      "_context": [Circular],
+    },
+    "_calculateChangedBits": null,
+    "_currentRenderer": null,
+    "_currentRenderer2": null,
+    "_currentValue": null,
+    "_currentValue2": null,
+    "_threadCount": 0,
+  },
+  "BackdropContextProps": undefined,
+  "BackdropProvider": [Function],
+  "BackdropProviderProps": undefined,
+  "Button": [Function],
+  "ButtonProps": undefined,
+  "DatePicker": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "DatePickerHandle": undefined,
+  "DatePickerProps": undefined,
+  "DateTimePicker": [Function],
+  "DateTimePickerProps": undefined,
+  "InputButton": [Function],
+  "InputButtonProps": undefined,
+  "ModalDialog": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "ModalDialogHandle": undefined,
+  "ModalDialogProps": undefined,
+  "MonthPicker": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "MonthPickerProps": undefined,
+  "Picker": [Function],
+  "PickerItem": [Function],
+  "PickerProps": undefined,
+  "Pressable": [Function],
+  "PressableProps": undefined,
+  "Select": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "SelectItem": [Function],
+  "SelectProps": undefined,
+  "TimePicker": [Function],
+  "TimePickerProps": undefined,
+  "YearPicker": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "YearPickerProps": undefined,
+  "backdropProviderDefaultProps": Object {
+    "backgroundColor": "black",
+    "duration": 300,
+    "easing": [Function],
+    "opacity": 0.4,
+    "useNativeDriver": true,
+    "zIndex": 99,
+  },
+  "buttonDefaultProps": Object {
+    "TouchableComponent": [Function],
+    "defaultStyles": "object",
+  },
+  "buttonDefaultStyles": Object {
+    "disabledText": Object {
+      "color": "#cdcdcd",
+    },
+    "disabledView": Object {},
+    "text": Object {
+      "alignSelf": "center",
+      "color": "#007aff",
+      "fontSize": 18,
+    },
+    "view": Object {
+      "flexDirection": "row",
+      "height": 50,
+      "justifyContent": "center",
+    },
+  },
+  "inputButtonDefaultProps": Object {
+    "placeholderTextColor": "#c7c7cc",
+  },
+  "inputButtonDefaultStyles": Object {
+    "disabledText": Object {
+      "color": "#cdcdcd",
+    },
+    "disabledView": Object {},
+    "text": Object {
+      "alignSelf": "flex-start",
+      "color": "#007aff",
+      "fontSize": 18,
+    },
+    "view": Object {
+      "justifyContent": "flex-start",
+    },
+  },
+  "pressableDefaultProps": Object {
+    "TouchableComponent": [Function],
+  },
+  "pressableDefaultStyles": Object {
+    "disabledText": Object {
+      "color": "#cdcdcd",
+    },
+    "disabledView": Object {},
+    "text": Object {
+      "alignSelf": "center",
+      "color": "#007aff",
+      "fontSize": 18,
+    },
+    "view": Object {
+      "flexDirection": "row",
+      "height": 50,
+      "justifyContent": "center",
+    },
+  },
+}
+`;
