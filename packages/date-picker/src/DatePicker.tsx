@@ -41,6 +41,7 @@ export type Props = Pick<InputButtonProps, 'placeholder' | 'style'> &
     value?: Date;
     utc?: boolean;
     androidMode?: DatePickerAndroidOpenOptions['mode'] | TimePickerAndroidOpenOptions['mode'];
+    [s: string]: any; // otherInputButtonProps
   };
 
 const CURRENT_YEAR = new Date().getFullYear();

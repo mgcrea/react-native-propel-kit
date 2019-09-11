@@ -38,6 +38,7 @@ export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTit
     maxYear?: number;
     value?: MonthPickerValue;
     utc?: boolean;
+    [s: string]: any; // otherInputButtonProps
   };
 
 export const defaultProps = {
@@ -70,7 +71,7 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
     value: propValue,
     minYear = CURRENT_YEAR - 100,
     maxYear = CURRENT_YEAR + 10,
-    ...otherProps
+    ...otherInputButtonProps
   },
   ref
 ) => {
@@ -164,7 +165,7 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
 
   return (
     <>
-      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherProps} />
+      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
       <ModalDialog
         ref={modalInputRef}
         title={title}
