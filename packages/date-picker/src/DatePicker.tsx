@@ -162,7 +162,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
       {Platform.OS === 'ios' ? (
         <ModalDialog
           ref={modalDialogRef}
-          title={title}
+          title={title || placeholder}
           onConfirm={onConfirm}
           onCancel={onCancel}
           confirmTitle={confirmTitle}

@@ -45,9 +45,11 @@ export const defaultProps = {
 
 const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem} = (
   {
-    cancelTitle,
     children,
+    // ModalDialog props
+    cancelTitle,
     confirmTitle,
+    title,
     // Select props
     initialValue: propInitialValue,
     InputButtonComponent = defaultProps.InputButtonComponent,
@@ -137,7 +139,7 @@ const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem} 
       <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherProps} />
       <ModalDialog
         ref={modalDialogRef}
-        title={placeholder}
+        title={title || placeholder}
         onConfirm={onConfirm}
         onCancel={onCancel}
         confirmTitle={confirmTitle}

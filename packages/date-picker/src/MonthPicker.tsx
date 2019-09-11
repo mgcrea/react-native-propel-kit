@@ -168,7 +168,7 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
       <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
       <ModalDialog
         ref={modalInputRef}
-        title={title}
+        title={title || placeholder}
         onConfirm={onConfirm}
         onCancel={onCancel}
         confirmTitle={confirmTitle}
