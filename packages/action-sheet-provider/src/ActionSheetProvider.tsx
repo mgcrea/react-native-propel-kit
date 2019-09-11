@@ -1,5 +1,5 @@
 import React, {useCallback, useRef, FunctionComponent, useState, useMemo} from 'react';
-import {ActionSheetIOS, Platform, StyleProp, ViewStyle, ActionSheetIOSOptions} from 'react-native';
+import {ActionSheetIOS, Platform, ActionSheetIOSOptions} from 'react-native';
 import {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
 
 import ActionSheet, {Props as ActionSheetProps} from './ActionSheet';

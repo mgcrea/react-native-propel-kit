@@ -32,6 +32,7 @@ export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTit
   placeholder?: string;
   style?: StyleProp<TextStyle>;
   value?: SelectValue;
+  [s: string]: any; // otherProps
 };
 
 export type Handle = {
@@ -42,7 +43,7 @@ export const defaultProps = {
   InputButtonComponent: InputButton
 };
 
-const Select: RefForwardingComponent<Handle, Props> = (
+const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem} = (
   {
     cancelTitle,
     children,
@@ -55,7 +56,7 @@ const Select: RefForwardingComponent<Handle, Props> = (
     onSubmitEditing,
     placeholder,
     value: propValue,
-    ...otherModalProps
+    ...otherProps
   },
   ref
 ) => {
@@ -133,7 +134,7 @@ const Select: RefForwardingComponent<Handle, Props> = (
 
   return (
     <>
-      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherModalProps} />
+      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherProps} />
       <ModalDialog
         ref={modalDialogRef}
         title={placeholder}
@@ -149,6 +150,8 @@ const Select: RefForwardingComponent<Handle, Props> = (
   );
 };
 
+Select.Item = PickerItem;
+
 export default forwardRef(Select);
 
-export const Item = PickerItem; // eslint-disable-line prefer-destructuring
+export const Item = PickerItem;
