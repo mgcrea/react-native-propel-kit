@@ -4,7 +4,7 @@ import {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
 
 import ActionSheet, {Props as ActionSheetProps} from './ActionSheet';
 
-export type Props = ActionSheetProps & {
+export type Props = Omit<ActionSheetProps, 'options'> & {
   native?: boolean;
 };
 
