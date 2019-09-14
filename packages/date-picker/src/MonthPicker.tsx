@@ -45,7 +45,7 @@ export const defaultProps = {
   initialValue: CURRENT_MONTH,
   InputButtonComponent: InputButton,
   labelExtractor: defaultLabelExtractor,
-  locale: navigator.language,
+  locale: navigator.language || 'en-US',
   utc: true
 };
 

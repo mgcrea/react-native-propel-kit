@@ -21,7 +21,7 @@ const AndroidPickerItem: FunctionComponent<any> = React.memo(
       style={{zIndex: 99, flex: 1}}>
       <View style={[defaultStyles.container, containerStyle, {height: itemHeight}]}>
         <Text style={[defaultStyles.title, titleStyle]}>{item.title}</Text>
-        {item.value === selectedValue ? (
+        {item.value === selectedValue && typeof selectedValue !== 'undefined' ? (
           <Image
             source={{
               uri:
