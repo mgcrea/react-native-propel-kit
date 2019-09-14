@@ -38,6 +38,7 @@ export type Props = Pick<InputButtonProps, 'placeholder' | 'style'> &
     labelExtractor?: (value: Date, options: LabelExtractorOptions) => string;
     onChange?: (value: Date) => void;
     onSubmitEditing?: (value: Date) => void;
+    placeholder?: string;
     value?: Date;
     utc?: boolean;
     androidMode?: DatePickerAndroidOpenOptions['mode'] | TimePickerAndroidOpenOptions['mode'];
@@ -78,6 +79,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
     utc = defaultProps.utc,
     onChange: propOnChange,
     onSubmitEditing,
+    placeholder,
     value: propValue,
     ...otherInputButtonProps
   },
@@ -158,7 +160,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
 
   return (
     <>
-      <InputButtonComponent onFocus={focus} value={labelValue} {...otherInputButtonProps} />
+      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
       {Platform.OS === 'ios' ? (
         <ModalDialog
           ref={modalDialogRef}
