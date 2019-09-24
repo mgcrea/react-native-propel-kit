@@ -29,6 +29,8 @@ import CenteredView from './stories/components/CenteredView';
 
 // Disable noisy warnings
 YellowBox.ignoreWarnings([
+  'Warning: TimePickerAndroid has been merged',
+  'Warning: DatePickerAndroid has been merged',
   'Warning: DatePickerIOS has been merged',
   'Warning: componentWillReceiveProps has been renamed',
   'Warning: componentWillMount has been renamed',
