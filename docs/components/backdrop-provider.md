@@ -6,7 +6,7 @@ hide_title: true
 
 # Backdrop Provider
 
-This component is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform backdrop component anywhere in your application.
+`<ActionSheetProvider />` is a is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform backdrop component anywhere in your application.
 
 - Can be easily re-used by any other component that requires a backdrop
 
@@ -14,7 +14,7 @@ This component is a <a href="https://reactjs.org/docs/context.html#contextprovid
 
 |                 iOS                  |               Android                |
 | :----------------------------------: | :----------------------------------: |
-| ![](https://i.imgur.com/Nv7bSi7.gif) | ![](https://i.imgur.com/zxBdIUJ.gif) |
+| ![](https://i.imgur.com/DMgwbDP.gif) | ![](https://i.imgur.com/kYhoTsr.gif) |
 
 ## Usage
 
@@ -22,11 +22,11 @@ This component is a <a href="https://reactjs.org/docs/context.html#contextprovid
 
 First you need to wrap your application with a `<BackdropProvider />` component. You usually want to wrap it as high as possible in your tree so that the backdrop properly covers the whole screen.
 
-```jsx
-// App.jsx
+```tsx
+// App.tsx
 
 import React, {FunctionComponent} from 'react';
-import BackdropProvider from '@mgcrea/react-native-backdrop-provider';
+import {BackdropProvider} from 'react-native-propel-kit';
 
 const App: FunctionComponent = () => {
   return (
@@ -48,7 +48,7 @@ Then, the easiest way to use the backdrop in a component is to use react [useCon
 
 import React, {FunctionComponent} from 'react';
 import {Button} from 'react-native';
-import {BackdropContext} from '@mgcrea/react-native-backdrop-provider';
+import {BackdropContext} from 'react-native-propel-kit';
 
 const MyComponent: FunctionComponent = () => {
   const backdrop = useContext(BackdropContext);
@@ -70,7 +70,7 @@ An alternative way to use the backdrop is to use the `<BackdropContext.Consumer 
 
 import React, {FunctionComponent} from 'react';
 import {Button} from 'react-native';
-import {BackdropContext} from '@mgcrea/react-native-backdrop-provider';
+import {BackdropContext} from 'react-native-propel-kit';
 
 const MyComponent: FunctionComponent = () => {
   return (
@@ -93,7 +93,7 @@ export default MyComponent;
 ## Props
 
 ```ts
-type BackdropProps = {
+export type Props = {
   backgroundColor?: string;
   children?: ReactNode;
   duration?: number;
@@ -107,11 +107,11 @@ type BackdropProps = {
 ### Defaults
 
 ```ts
-const defaultProps = {
+export const defaultProps = {
   backgroundColor: 'black',
   duration: 300,
   easing: Easing.inOut(Easing.ease),
-  opacity: 0.4,
+  opacity: IOS_OPACITY,
   useNativeDriver: true,
   zIndex: 99
 };

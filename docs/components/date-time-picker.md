@@ -6,7 +6,7 @@ hide_title: true
 
 # DateTimePicker
 
-Components that gives your a easy-to-use cross platform DateTimePicker leveraging <a href="https://facebook.github.io/react-native/docs/datepickerandroid" target="_blank">DatePickerAndroid</a> on Android and <a href="https://facebook.github.io/react-native/docs/datepickerios" target="_blank">DatePickerIOS</a> on iOS using an unified API.
+The `<DateTimePicker />` component gives you an easy-to-use cross platform datetime picker leveraging <a href="https://facebook.github.io/react-native/docs/datepickerandroid" target="_blank">DatePickerAndroid</a> on Android and <a href="https://facebook.github.io/react-native/docs/datepickerios" target="_blank">DatePickerIOS</a> on iOS using an unified API.
 
 - Integrates well in forms as a themable TextInput-like button
 - Properly unified API and casted results (aligned on iOS).
@@ -18,7 +18,7 @@ This component is an alias to `<DatePicker mode="datetime" />`
 
 |                 iOS                  |               Android                |
 | :----------------------------------: | :----------------------------------: |
-| ![](https://i.imgur.com/oXtY7lf.gif) | ![](https://i.imgur.com/dkBIgEs.gif) |
+| ![](https://i.imgur.com/GKJf4Qp.gif) | ![](https://i.imgur.com/4VZdvnp.gif) |
 
 ## Usage
 

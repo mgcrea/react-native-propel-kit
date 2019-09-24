@@ -6,7 +6,7 @@ hide_title: true
 
 # TimePicker
 
-Components that gives your a easy-to-use cross platform TimePicker leveraging <a href="https://facebook.github.io/react-native/docs/datepickerandroid" target="_blank">DatePickerAndroid</a> on Android and <a href="https://facebook.github.io/react-native/docs/datepickerios" target="_blank">DatePickerIOS</a> on iOS using an unified API.
+The `<TimePicker />` component gives you an easy-to-use cross platform time picker leveraging <a href="https://facebook.github.io/react-native/docs/datepickerandroid" target="_blank">DatePickerAndroid</a> on Android and <a href="https://facebook.github.io/react-native/docs/datepickerios" target="_blank">DatePickerIOS</a> on iOS using an unified API.
 
 - Integrates well in forms as a themable TextInput-like button
 - Properly unified API and casted results (aligned on iOS).
@@ -18,7 +18,7 @@ This component is an alias to `<DatePicker mode="time" />`
 
 |                 iOS                  |               Android                |
 | :----------------------------------: | :----------------------------------: |
-| ![](https://i.imgur.com/fivmGX2.gif) | ![](https://i.imgur.com/IE5ZZVq.gif) |
+| ![](https://i.imgur.com/kLAfTBi.gif) | ![](https://i.imgur.com/oMscMs4.gif) |
 
 ## Usage
 

@@ -1,22 +1,22 @@
 ---
-id: date-picker
-title: DatePicker
+id: month-picker
+title: MonthPicker
 hide_title: true
 ---
 
-# DatePicker
+# MonthPicker
 
-The `<DatePicker />`component gives your a easy-to-use cross platform date picker leveraging <a href="https://facebook.github.io/react-native/docs/datepickerandroid" target="_blank">DatePickerAndroid</a> on Android and <a href="https://facebook.github.io/react-native/docs/datepickerios" target="_blank">DatePickerIOS</a> on iOS using an unified API.
+The `<MonthPicker />` component gives you easy-to-use cross platform month picker leveraging this library [ModalDialog](./modal-dialog.md) and cross-platform [Picker](./picker.md) using an unified API.
 
 - Integrates well in forms as a themable TextInput-like button
-- Properly unified API and casted results (aligned on iOS).
+- Properly unified API and casted results.
 - Supports an UTC-mode for tz-proofing the data.
 
 ## Preview
 
 |                 iOS                  |               Android                |
 | :----------------------------------: | :----------------------------------: |
-| ![](https://i.imgur.com/CDkg113.gif) | ![](https://i.imgur.com/bSzWdjP.gif) |
+| ![](https://i.imgur.com/92dhe1i.gif) | ![](https://i.imgur.com/eYgSSCy.gif) |
 
 ## Usage
 
@@ -28,7 +28,7 @@ Since this components uses a backdrop, you need to wrap your application with a 
 // App.jsx
 
 import React from 'react';
-import {BackdropProvider} from 'react-native-propel-kit';
+import BackdropProvider from '@mgcrea/react-native-backdrop-provider';
 
 const App: FunctionComponent = () => {
   return (
@@ -50,14 +50,14 @@ The basic API is relatively close to a regular <a href="https://facebook.github.
 
 import React from 'react';
 import {Button} from 'react-native';
-import {BackdropContext, DatePicker} from 'react-native-propel-kit';
+import {BackdropContext} from '@mgcrea/react-native-backdrop-provider';
 
 const MyComponent = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date>(new Date());
   return (
     <View>
-      <Text style={{color: 'white', marginBottom: 12}}>Value: {date.toISOString()}</Text>
-      <DatePicker title="Pick a date" value={date} onChange={setDate} />
+      <Text style={{color: 'white', marginBottom: 12}}>Value: {time.toISOString()}</Text>
+      <MonthPicker title="Pick a month" value={date} onChange={setDate} />
     </View>
   );
 };
@@ -68,20 +68,19 @@ export default MyComponent;
 ## Props
 
 ```ts
-export type Props = Pick<InputButtonProps, 'placeholder' | 'style'> &
-  Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> &
-  Pick<DatePickerIOSProps, 'mode' | 'locale'> & {
+export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> &
+  Pick<DatePickerIOSProps, 'locale'> & {
     children?: ReactNode;
-    // DatePicker props
-    initialValue?: Date;
+    initialValue?: MonthPickerValue;
     InputButtonComponent?: ElementType<InputButtonProps>;
     labelExtractor?: (value: Date, options: LabelExtractorOptions) => string;
-    onChange?: (value: Date) => void;
-    onSubmitEditing?: (value: Date) => void;
+    onChange?: (value: MonthPickerValue) => void;
+    onSubmitEditing?: (value: MonthPickerValue) => void;
     placeholder?: string;
-    value?: Date;
+    minYear?: number;
+    maxYear?: number;
+    value?: MonthPickerValue;
     utc?: boolean;
-    androidMode?: DatePickerAndroidOpenOptions['mode'] | TimePickerAndroidOpenOptions['mode'];
     [s: string]: any; // otherInputButtonProps
   };
 ```
@@ -90,12 +89,10 @@ export type Props = Pick<InputButtonProps, 'placeholder' | 'style'> &
 
 ```ts
 export const defaultProps = {
-  androidMode: 'spinner' as DatePickerAndroidOpenOptions['mode'] | TimePickerAndroidOpenOptions['mode'],
-  initialValue: FIRST_DAY_OF_YEAR,
+  initialValue: CURRENT_MONTH,
   InputButtonComponent: InputButton,
   labelExtractor: defaultLabelExtractor,
-  locale: navigator.language,
-  mode: 'date' as DatePickerIOSProps['mode'],
-  utc: false
+  locale: navigator.language || 'en-US',
+  utc: true
 };
 ```

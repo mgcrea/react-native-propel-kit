@@ -6,7 +6,7 @@ hide_title: true
 
 # ActionSheet Provider
 
-<a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform ActionSheet component anywhere in your application.
+`<ActionSheetProvider />` is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform ActionSheet component anywhere in your application.
 
 - On iOS, defaults to the native <a href="https://facebook.github.io/react-native/docs/actionsheetios.html">ActionSheetIOS</a>, but you can opt-in for a software pixel perfect implementation if you need more customization.
 
@@ -16,21 +16,21 @@ hide_title: true
 
 |                 iOS                  |               Android                |
 | :----------------------------------: | :----------------------------------: |
-| ![](https://i.imgur.com/Nv7bSi7.gif) | ![](https://i.imgur.com/zxBdIUJ.gif) |
+| ![](https://i.imgur.com/Wp45M8o.gif) | ![](https://i.imgur.com/nmcoll0.gif) |
 
 ## Usage
 
 ### Required setup
 
-Since this component requires a backdrop, you also need to wrap your application with a `<BackdropProvider />` component. You usually want to wrap it as high as possible in your tree so that the backdrop properly covers the whole screen.
+As this component leverages a backdrop, you also need to wrap your application with a `<BackdropProvider />` component. You usually want to wrap it as high as possible in your tree so that the backdrop properly covers the whole screen.
 
-```tsx
+```jsx
 // App.jsx
 
 import React from 'react';
-import ActionSheetProvider, {BackdropProvider} from '@mgcrea/react-native-backdrop-provider';
+import {ActionSheetProvider, BackdropProvider} from 'react-native-propel-kit';
 
-const App: FunctionComponent = () => {
+const App = () => {
   return (
     <BackdropProvider>
       <ActionSheetProvider>
@@ -50,11 +50,11 @@ Easiest way to use the backdrop in a component is to use react [useContext](http
 ```jsx
 // MyComponent.jsx
 
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 import {Button} from 'react-native';
-import {ActionSheetContext} from '@mgcrea/react-native-action-sheet-provider';
+import {ActionSheetContext} from 'react-native-propel-kit';
 
-const MyComponent: FunctionComponent = () => {
+const MyComponent = () => {
   const actionSheet = useContext(ActionSheetContext);
   const handlePress = useCallback(() => {
     actionSheet.showWithOptions(
@@ -83,11 +83,11 @@ An alternative way to use the backdrop is to use the `<ActionSheetContext.Consum
 ```jsx
 // MyComponent.jsx
 
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 import {Button} from 'react-native';
-import {ActionSheetContext} from '@mgcrea/react-native-action-sheet-provider';
+import {ActionSheetContext} from 'react-native-propel-kit';
 
-const MyComponent: FunctionComponent = () => {
+const MyComponent = () => {
   return (
     <ActionSheetContext.Consumer>
       {actionSheet => (
@@ -121,9 +121,10 @@ export default MyComponent;
 ### ActionSheet
 
 ```ts
-export type ActionSheetProps = Pick<ScrollViewProps, 'scrollEnabled'> &
+export type Props = Pick<ScrollViewProps, 'scrollEnabled'> &
   Omit<ModalDialogProps, 'onConfirm' | 'confirmTitle' | 'confirmStyle'> &
   ActionSheetIOSOptions & {
+    defaultStyles?: typeof defaultStyles;
     optionStyle?: StyleProp<TextStyle>;
     lastOptionExtraStyle?: StyleProp<TextStyle>;
     destructiveButtonColor?: string;
@@ -132,45 +133,64 @@ export type ActionSheetProps = Pick<ScrollViewProps, 'scrollEnabled'> &
   };
 ```
 
-### ActionSheetProvider
+#### Defaults
 
 ```ts
-type ActionSheetProviderProps = ActionSheetProps & {
-  native?: boolean;
-};
-```
-
-### Defaults
-
-```ts
-const defaultProps = {
+export const defaultProps = {
   backgroundColor: 'white',
   cancelTitle: 'Cancel',
   destructiveButtonColor: Platform.select({
     ios: '#ff3b30', // iOS.systemRed (@see https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/)
     android: '#f44336' // android.red500 (@see https://material.io/design/color/the-color-system.html)
+  })
+};
+```
+
+### ActionSheetProvider
+
+```ts
+export type Props = Omit<ActionSheetProps, 'options'> & {
+  native?: boolean;
+};
+```
+
+## Styles
+
+```ts
+export const defaultStyles = {
+  modal: Platform.select<ViewStyle>({
+    ios: {flex: 1, justifyContent: 'flex-end'},
+    android: {flex: 1, justifyContent: 'center'}
   }),
-  containerStyle: Platform.select<ViewStyle>({
-    ios: {margin: 8, maxHeight: MAX_HEIGHT - 8 * 2},
+  container: Platform.select<ViewStyle>({
+    ios: {margin: 8, maxHeight: WINDOW_HEIGHT - 8 * 2},
     android: {
       flexDirection: 'column',
       alignItems: 'stretch',
       // marginHorizontal: 82, // timepicker/spinner
       margin: 24,
-      maxHeight: MAX_HEIGHT - 24 * 2,
+      maxHeight: WINDOW_HEIGHT - 24 * 2,
       elevation: 4
     }
   }),
-  headerStyle: Platform.select<ViewStyle>({
-    ios: {alignItems: 'center', padding: 16, borderTopLeftRadius: 12, borderTopRightRadius: 12, opacity: 0.94},
+  header: Platform.select<ViewStyle>({
+    ios: {
+      alignItems: 'center',
+      padding: 16,
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+      opacity: IOS_OPACITY
+    },
     android: {alignItems: 'flex-start', paddingVertical: 24, paddingHorizontal: 32}
   }),
-  bodyStyle: Platform.select<ViewStyle>({
-    default: {
+  body: Platform.select<ViewStyle>({
+    ios: {
       flexShrink: 1,
       flexDirection: 'column',
       backgroundColor: 'transparent',
-      opacity: 0.94
+      opacity: IOS_OPACITY,
+      borderBottomStartRadius: 12,
+      borderBottomEndRadius: 12
     },
     android: {
       flexShrink: 1,
@@ -178,8 +198,8 @@ const defaultProps = {
       backgroundColor: 'transparent'
     }
   }),
-  footerStyle: Platform.select<TextStyle>({
-    ios: {flex: 0, backgroundColor: 'transparent', borderRadius: 12},
+  footer: Platform.select<TextStyle>({
+    ios: {}, // @NOTE we don't have a footer on iOS
     android: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
@@ -188,7 +208,7 @@ const defaultProps = {
       padding: 8
     }
   }),
-  titleStyle: Platform.select<TextStyle>({
+  title: Platform.select<TextStyle>({
     ios: {paddingBottom: 12, fontSize: 14, fontWeight: '500', textAlign: 'center', color: '#888'},
     android: {
       paddingBottom: 12,
@@ -198,15 +218,19 @@ const defaultProps = {
       color: '#333'
     }
   }),
-  messageStyle: Platform.select<TextStyle>({
+  message: Platform.select<TextStyle>({
     ios: {paddingBottom: 12, fontSize: 13, fontWeight: '400', textAlign: 'center', color: '#888'},
     android: {paddingBottom: 12, fontSize: 18, fontWeight: '400', color: '#666'}
   }),
-  cancelStyle: Platform.select<TextStyle>({
+  cancel: Platform.select<TextStyle>({
     ios: {marginTop: 8, borderRadius: 12, fontWeight: '600'},
     android: {}
   }),
-  optionStyle: Platform.select<TextStyle>({
+  confirm: Platform.select<TextStyle>({
+    ios: {}, // @NOTE we don't have a confirm on iOS
+    android: {}
+  }),
+  option: Platform.select<TextStyle>({
     ios: {
       marginTop: StyleSheet.hairlineWidth
     },
@@ -214,7 +238,7 @@ const defaultProps = {
       marginTop: StyleSheet.hairlineWidth
     }
   }),
-  lastOptionExtraStyle: Platform.select<TextStyle>({
+  lastOptionExtra: Platform.select<TextStyle>({
     ios: {
       borderBottomLeftRadius: 12,
       borderBottomRightRadius: 12
