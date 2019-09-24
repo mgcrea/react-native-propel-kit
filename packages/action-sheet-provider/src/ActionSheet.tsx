@@ -16,6 +16,7 @@ import ActionSheetOption from './components/ActionSheetOption';
 import isUndefined from './utils/isUndefined';
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
+const IOS_OPACITY = 0.85; // @NOTE from native ActionSheet (though it uses blur)
 
 export type Props = Pick<ScrollViewProps, 'scrollEnabled'> &
   Omit<ModalDialogProps, 'onConfirm' | 'confirmTitle' | 'confirmStyle'> &
@@ -56,10 +57,10 @@ const ActionSheet: RefForwardingComponent<ModalDialogHandle, Props> = (
   const cancelTitle = !isUndefined(cancelButtonIndex) && options[cancelButtonIndex] ? options[cancelButtonIndex] : '';
   const scrollEnabled = !isUndefined(cancelButtonIndex) ? options.length > 6 : propScrollEnabled;
 
-  const optionStyle = useMemo<ViewStyle>(() => StyleSheet.flatten([propDefaultStyles.option, propOptionStyle]), [
-    propDefaultStyles,
-    propOptionStyle
-  ]);
+  const optionStyle = useMemo<ViewStyle>(
+    () => StyleSheet.flatten([propDefaultStyles.option, {backgroundColor}, propOptionStyle]),
+    [propDefaultStyles, backgroundColor, propOptionStyle]
+  );
   const lastOptionExtraStyle = useMemo<ViewStyle>(
     () => StyleSheet.flatten([propDefaultStyles.lastOptionExtra, propLastOptionExtraStyle]),
     [propDefaultStyles, propLastOptionExtraStyle]
@@ -71,6 +72,7 @@ const ActionSheet: RefForwardingComponent<ModalDialogHandle, Props> = (
       defaultStyles={propDefaultStyles}
       backgroundColor={backgroundColor}
       cancelTitle={cancelTitle}
+      bodyStyle={{backgroundColor: 'transparent'}}
       {...otherModalDialogProps}>
       <ScrollView scrollEnabled={scrollEnabled}>
         {options.map((buttonTitle, buttonIndex) => {
@@ -117,16 +119,23 @@ export const defaultStyles = {
     }
   }),
   header: Platform.select<ViewStyle>({
-    ios: {alignItems: 'center', padding: 16, borderTopLeftRadius: 12, borderTopRightRadius: 12, opacity: 0.94},
+    ios: {
+      alignItems: 'center',
+      padding: 16,
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+      opacity: IOS_OPACITY
+    },
     android: {alignItems: 'flex-start', paddingVertical: 24, paddingHorizontal: 32}
   }),
   body: Platform.select<ViewStyle>({
-    default: {
+    ios: {
       flexShrink: 1,
       flexDirection: 'column',
       backgroundColor: 'transparent',
-      opacity: 0.94,
-      borderRadius: 12
+      opacity: IOS_OPACITY,
+      borderBottomStartRadius: 12,
+      borderBottomEndRadius: 12
     },
     android: {
       flexShrink: 1,
@@ -163,7 +172,7 @@ export const defaultStyles = {
     android: {}
   }),
   confirm: Platform.select<TextStyle>({
-    ios: {borderBottomLeftRadius: 12, borderBottomRightRadius: 12, fontWeight: '400'},
+    ios: {}, // @NOTE we don't have a confirm on iOS
     android: {}
   }),
   option: Platform.select<TextStyle>({

@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {ViewStyle, TextStyle, Platform} from 'react-native';
+import {ViewStyle, TextStyle, StyleSheet, Platform} from 'react-native';
 import {Pressable, PressableProps} from '@mgcrea/react-native-button';
 
 export type Props = PressableProps;
@@ -11,16 +11,14 @@ export const defaultStyles = {
       justifyContent: 'center',
       flexDirection: 'row',
       height: 56,
-      alignItems: 'center',
-      backgroundColor: 'white'
+      alignItems: 'center'
     },
     android: {
       flexGrow: 1,
       justifyContent: 'center',
       flexDirection: 'row',
       height: 56,
-      alignItems: 'center',
-      backgroundColor: 'white'
+      alignItems: 'center'
     }
   }),
   disabledView: Platform.select<ViewStyle>({

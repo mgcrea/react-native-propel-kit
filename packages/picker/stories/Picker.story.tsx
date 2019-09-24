@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {storiesOf} from '@storybook/react-native';
 // import {View} from 'react-native';
 
-import Picker, {PickerItem} from '../src';
+import Picker from '../src';
 import {NATIONALITY_SELECT_ITEMS} from './fixtures';
 
 const defaultStyle = {backgroundColor: 'white', alignSelf: 'stretch', margin: 24};
@@ -16,8 +16,8 @@ storiesOf('Picker', module)
     }, []);
     return (
       <Picker selectedValue={value} onValueChange={handleValueChange} style={defaultStyle}>
-        <PickerItem label="Java" value="java" />
-        <PickerItem label="JavaScript" value="js" />
+        <Picker.Item label="Java" value="java" />
+        <Picker.Item label="JavaScript" value="js" />
       </Picker>
     );
   })
@@ -30,7 +30,7 @@ storiesOf('Picker', module)
     return (
       <Picker selectedValue={value} onValueChange={handleValueChange} style={defaultStyle}>
         {NATIONALITY_SELECT_ITEMS.map(option => (
-          <PickerItem key={option.value} {...option} />
+          <Picker.Item key={option.value} {...option} />
         ))}
       </Picker>
     );
@@ -49,7 +49,7 @@ storiesOf('Picker', module)
     return (
       <Picker selectedValue={value} onValueChange={handleValueChange} style={defaultStyle}>
         {NATIONALITY_SELECT_ITEMS.map(option => (
-          <PickerItem key={option.value} {...option} />
+          <Picker.Item key={option.value} {...option} />
         ))}
       </Picker>
     );

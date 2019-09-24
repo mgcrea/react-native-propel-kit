@@ -13,7 +13,7 @@ import React, {
 import Picker from '@mgcrea/react-native-picker';
 import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
 import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
-import {DatePickerIOSProps} from 'react-native';
+import {DatePickerIOSProps, View} from 'react-native';
 
 import defaultLabelExtractor, {LabelExtractorOptions} from './utils/defaultLabelExtractor';
 import isUndefined from './utils/isUndefined';
@@ -174,12 +174,18 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
         confirmTitle={confirmTitle}
         cancelTitle={cancelTitle}
         bodyStyle={{flexDirection: 'row'}}>
-        <Picker style={{flexGrow: 1}} onValueChange={onMonthValueChange} selectedValue={modalMonthValue}>
+        <Picker
+          style={{flexBasis: '50%', flexGrow: 0, flexShrink: 0}}
+          onValueChange={onMonthValueChange}
+          selectedValue={modalMonthValue}>
           {pickerValues.map(({label, value}) => (
             <Picker.Item key={value} label={label} value={value} />
           ))}
         </Picker>
-        <Picker style={{flexGrow: 1}} onValueChange={onYearValueChange} selectedValue={modalYearValue}>
+        <Picker
+          style={{flexBasis: '50%', flexGrow: 0, flexShrink: 0}}
+          onValueChange={onYearValueChange}
+          selectedValue={modalYearValue}>
           {yearOptions.map(({label, value}) => (
             <Picker.Item key={value} label={label} value={value} />
           ))}

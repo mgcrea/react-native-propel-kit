@@ -9,7 +9,7 @@ storiesOf('YearPicker', module).add('default view', () => {
   return (
     <>
       <Text style={{color: 'white', marginBottom: 12}}>Value: {year}</Text>
-      <YearPicker title="Pick a month" value={year} onChange={setYear} />
+      <YearPicker title="Pick a year" value={year} onChange={setYear} />
     </>
   );
 });

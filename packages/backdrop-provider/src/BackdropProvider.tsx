@@ -11,7 +11,7 @@ export type Props = {
   zIndex?: number;
 };
 
-const IOS_OPACITY = 0.4; // @NOTE from native ActionSheet
+const IOS_OPACITY = 0.4; // @NOTE from native ActionSheet backdrop
 
 export const defaultProps = {
   backgroundColor: 'black',

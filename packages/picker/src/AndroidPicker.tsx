@@ -23,7 +23,8 @@ const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem}
   onValueChange: propOnValueChange,
   selectedValue,
   itemHeight = defaultProps.itemHeight,
-  itemVisibleCount = defaultProps.itemVisibleCount
+  itemVisibleCount = defaultProps.itemVisibleCount,
+  style
 }) => {
   const flatListRef = useRef<FlatList<any>>(null);
   const latestValue = useRef(selectedValue);
@@ -86,7 +87,7 @@ const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem}
       keyExtractor={keyExtractor}
       initialScrollIndex={initialScrollIndex}
       getItemLayout={getItemLayout}
-      style={{maxHeight: itemHeight * itemVisibleCount}}
+      style={[{maxHeight: itemHeight * itemVisibleCount}, style]}
       overScrollMode="always"
       renderItem={({item}) => <AndroidPickerItem {...{item, selectedValue, onPress}} />}
     />

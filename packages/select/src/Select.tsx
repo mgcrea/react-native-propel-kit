@@ -32,7 +32,7 @@ export type Props = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTit
   placeholder?: string;
   style?: StyleProp<TextStyle>;
   value?: SelectValue;
-  [s: string]: any; // otherProps
+  [s: string]: unknown; // unknown otherProps for InputButtonComponent
 };
 
 export type Handle = {
@@ -123,7 +123,7 @@ const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem} 
     () =>
       propInitialValue
         ? children
-        : [<PickerItem key="undefined" label="" value={undefined} />].concat(
+        : [<Picker.Item key="undefined" label="" value={undefined} />].concat(
             Children.toArray<ReactElement>(children as ReactElement)
           ),
     [propInitialValue, children]
@@ -152,8 +152,8 @@ const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem} 
   );
 };
 
-Select.Item = PickerItem;
+Select.Item = Picker.Item;
 
 export default forwardRef(Select);
 
-export const Item = PickerItem;
+export const Item = Picker.Item;
