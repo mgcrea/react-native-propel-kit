@@ -1,4 +1,4 @@
-# React Native Propel Kit
+# [React Native Propel Kit](https://mgcrea.github.io/react-native-propel-kit/)
 
 [![npm version](https://img.shields.io/npm/v/react-native-propel-kit.svg)](https://github.com/mgcrea/react-native-propel-kit/releases)
 [![license](https://img.shields.io/github/license/mgcrea/react-native-propel-kit.svg?style=flat)](https://tldrlegal.com/license/mit-license)
@@ -7,9 +7,9 @@
 [![devDependencies status](https://david-dm.org/mgcrea/react-native-propel-kit/dev-status.svg)](https://david-dm.org/mgcrea/react-native-propel-kit?type=dev)
 [![coverage](https://codecov.io/gh/mgcrea/react-native-propel-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/mgcrea/react-native-propel-kit)
 
-[![Banner](https://mgcrea.github.io/react-native-propel-kit/images/logo_social_white_lite.png)](https://github.com/mgcrea/react-native-propel-kit)
+[![Banner](https://mgcrea.github.io/react-native-propel-kit/img/logo_social_white_lite.png)](https://mgcrea.github.io/react-native-propel-kit/)
 
-- React Native components to take off your next mobile app!
+- React Native library providing basic building blocks for your next mobile application!
 
 - Carefully crafted functional components using hooks
 
@@ -35,19 +35,27 @@ yarn add react-native-propel-kit
 npm install react-native-propel-kit
 ```
 
+## Communication
+
+- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/angular-strap). (Tag 'angular-strap')
+- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/angular-strap).
+- If you **found a bug**, open an issue.
+- If you **have a feature request**, open an issue.
+- If you **want to contribute**, submit a pull request.
+
+## Developers
+
 ### Available scripts
 
-| **Script**    | **Description**              |
-| ------------- | ---------------------------- |
-| start         | alias to `spec:watch`        |
-| test          | Run all tests                |
-| spec          | Run unit tests               |
-| spec:coverage | Run unit tests with coverage |
-| spec:watch    | Watch unit tests             |
-| lint          | Run eslint static tests      |
-| pretty        | Run prettier static tests    |
-| build         | Compile the library          |
-| build:watch   | Watch compilation            |
+| **Script**  | **Description**             |
+| ----------- | --------------------------- |
+| start       | alias to `spec:watch`       |
+| test        | Run all tests               |
+| lint        | Run eslint static tests     |
+| prettycheck | Run prettier static tests   |
+| typecheck   | Run typescript static tests |
+| build       | Compile library             |
+| publish     | Publish library             |
 
 ## Authors
 
