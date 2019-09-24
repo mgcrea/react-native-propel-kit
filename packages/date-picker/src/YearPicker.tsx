@@ -45,7 +45,7 @@ const YearPicker: RefForwardingComponent<Handle, Props> = (
       options.push({label: labelExtractor ? labelExtractor(value, {mode: 'year', locale}) : `${value}`, value});
     }
     return options;
-  }, [locale, minValue, maxValue]);
+  }, [locale, labelExtractor, minValue, maxValue]);
   return (
     <Select InputButtonComponent={InputButtonComponent} initialValue={propInitialValue} ref={ref} {...otherSelectProps}>
       {yearOptions.map(({label, value}) => (

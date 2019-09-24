@@ -125,7 +125,7 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
     }
     // Support uncontrolled usage
     setLocalValue(nextValue);
-  }, [modalYearValue, modalMonthValue, onSubmitEditing, propOnChange]);
+  }, [modalYearValue, modalMonthValue, onSubmitEditing, utc, propOnChange]);
 
   // Reset modalValue to the proper value
   const onCancel = useCallback(() => {

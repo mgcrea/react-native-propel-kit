@@ -10,7 +10,8 @@ import React, {
   ReactNode,
   useEffect,
   Children,
-  ElementType
+  ElementType,
+  FunctionComponent
 } from 'react';
 import {StyleProp, TextStyle} from 'react-native';
 
@@ -43,7 +44,7 @@ export const defaultProps = {
   InputButtonComponent: InputButton
 };
 
-const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem} = (
+const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem | FunctionComponent<any>} = (
   {
     children,
     // ModalDialog props
@@ -156,4 +157,4 @@ Select.Item = Picker.Item;
 
 export default forwardRef(Select);
 
-export const Item = Picker.Item;
+export const Item = Picker.Item; // eslint-disable-line prefer-destructuring
