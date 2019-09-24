@@ -7,7 +7,7 @@ sidebar_label: Quick Start
 
 # Quick Start
 
-## Introduction
+## Description
 
 > **React Native Propel Kit** is a [React Native](https://facebook.github.io/react-native/) library providing basic **building blocks** for your next mobile application! This library is written in [TypeScript](https://www.typescriptlang.org/) using exclusively functional components leveraging [React hooks](https://reactjs.org/docs/hooks-intro.html).
 

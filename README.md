@@ -9,23 +9,26 @@
 
 [![Banner](https://mgcrea.github.io/react-native-propel-kit/img/logo_social_white_lite.png)](https://mgcrea.github.io/react-native-propel-kit/)
 
-- React Native library providing basic building blocks for your next mobile application!
+## Description
 
-- Carefully crafted functional components using hooks
+**React Native Propel Kit** is a [React Native](https://facebook.github.io/react-native/) library providing basic **building blocks** for your next mobile application! This library is written in [TypeScript](https://www.typescriptlang.org/) using exclusively functional components leveraging [React hooks](https://reactjs.org/docs/hooks-intro.html).
 
-- Built with [TypeScript](https://www.typescriptlang.org/) for strong static type checking, types are exported along the library.
+## Documentation and examples
 
-## Documentation
+- Check the [documentation](https://mgcrea.github.io/react-native-propel-kit/) and [releases changelog](https://github.com/mgcrea/react-native-propel-kit/releases).
 
 ### Components
 
-- [ActionSheetProvider](./packages/action-sheet-provider)
-- [BackdropProvider](./packages/backdrop-provider)
-- [Button](./packages/button)
-- [DatePicker](./packages/date-picker)
-- [ModalDialog](./packages/modal-dialog)
-- [Picker](./packages/picker)
-- [Select](./packages/select)
+- [ActionSheetProvider](./packages/action-sheet-provider) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/action-sheet-provider))
+- [BackdropProvider](./packages/backdrop-provider) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/backdrop-provider))
+- [ModalDialog](./packages/modal-dialog) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/modal-dialog))
+- [Select](./packages/select) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/select))
+- [DatePicker](./packages/date-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/date-picker))
+- [TimePicker](./packages/time-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/time-picker))
+- [DateTimePicker](./packages/date-time-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/date-time-picker))
+- [MonthPicker](./packages/month-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/month-picker))
+- [YearPicker](./packages/year-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/year-picker))
+- [Picker](./packages/picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/picker))
 
 ### Installation
 
