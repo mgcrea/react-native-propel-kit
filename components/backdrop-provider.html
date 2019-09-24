@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>BackdropProvider · Propel Kit</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# Backdrop Provider"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="BackdropProvider · Propel Kit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mgcrea.github.io/react-native-propel-kit/"/><meta property="og:description" content="# Backdrop Provider"/><meta property="og:image" content="https://mgcrea.github.io/react-native-propel-kit/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://mgcrea.github.io/react-native-propel-kit/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/react-native-propel-kit/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="/scripts/sidebarScroll.js"></script><script type="text/javascript" src="/scripts/codeblock.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/react-native-propel-kit/js/scrollSpy.js"></script><link rel="stylesheet" href="/react-native-propel-kit/css/main.css"/><script src="/react-native-propel-kit/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-native-propel-kit/"><img class="logo" src="/react-native-propel-kit/img/favicon.svg" alt="Propel Kit"/><h2 class="headerTitleWithLogo">Propel Kit</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/react-native-propel-kit/index" target="_self">Quick Start</a></li><li class="siteNavGroupActive"><a href="/react-native-propel-kit/components/action-sheet-provider" target="_self">Components</a></li><li class=""><a href="https://www.github.com/mgcrea/react-native-propel-kit" target="_self">Github</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Components</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/index">Quick Start</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Components</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/action-sheet-provider">ActionSheetProvider</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/react-native-propel-kit/components/backdrop-provider">BackdropProvider</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/modal-dialog">ModalDialog</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/select">Select</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/date-picker">DatePicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/time-picker">TimePicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/date-time-picker">DateTimePicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/month-picker">MonthPicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/year-picker">YearPicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/picker">Picker</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Recipes</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/recipes/customizing-styles">Customizing styles</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="backdrop-provider"></a><a href="#backdrop-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Backdrop Provider</h1>
+<p><code>&lt;ActionSheetProvider /&gt;</code> is a is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform backdrop component anywhere in your application.</p>
+<ul>
+<li>Can be easily re-used by any other component that requires a backdrop</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="preview"></a><a href="#preview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preview</h2>
+<table>
+<thead>
+<tr><th style="text-align:center">iOS</th><th style="text-align:center">Android</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center"><img src="https://i.imgur.com/DMgwbDP.gif" alt=""></td><td style="text-align:center"><img src="https://i.imgur.com/kYhoTsr.gif" alt=""></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<h3><a class="anchor" aria-hidden="true" id="required-setup"></a><a href="#required-setup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Required setup</h3>
+<p>First you need to wrap your application with a <code>&lt;BackdropProvider /&gt;</code> component. You usually want to wrap it as high as possible in your tree so that the backdrop properly covers the whole screen.</p>
+<pre><code class="hljs css language-tsx"><span class="hljs-comment">// App.tsx</span>
+
+<span class="hljs-keyword">import</span> React, {FunctionComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {BackdropProvider} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-propel-kit'</span>;
+
+<span class="hljs-keyword">const</span> App: FunctionComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BackdropProvider</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">RootNavigator</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">BackdropProvider</span>&gt;</span></span>
+  );
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="usage-with-context"></a><a href="#usage-with-context" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage with context</h3>
+<p>Then, the easiest way to use the backdrop in a component is to use react <a href="https://reactjs.org/docs/hooks-reference.html#usecontext">useContext</a> hook</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-comment">// MyComponent.jsx</span>
+
+<span class="hljs-keyword">import</span> React, {FunctionComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {Button} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+<span class="hljs-keyword">import</span> {BackdropContext} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-propel-kit'</span>;
+
+<span class="hljs-keyword">const</span> MyComponent: FunctionComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> backdrop = useContext(BackdropContext);
+  <span class="hljs-keyword">const</span> handlePress = useCallback(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    backdrop.show();
+  }, [backdrop]);
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onPress</span>=<span class="hljs-string">{handlePress}</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Show Backdrop"</span> /&gt;</span>;
+};
+
+export default MyComponent;
+</span></code></pre>
+<h3><a class="anchor" aria-hidden="true" id="usage-with-consumer"></a><a href="#usage-with-consumer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage with consumer</h3>
+<p>An alternative way to use the backdrop is to use the <code>&lt;BackdropContext.Consumer /&gt;</code> component as a higher order component providing the backdrop context API.</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-comment">// MyComponent.jsx</span>
+
+<span class="hljs-keyword">import</span> React, {FunctionComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {Button} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+<span class="hljs-keyword">import</span> {BackdropContext} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-propel-kit'</span>;
+
+<span class="hljs-keyword">const</span> MyComponent: FunctionComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BackdropContext.Consumer</span>&gt;</span>
+      {backdrop =&gt; (
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+          <span class="hljs-attr">onPress</span>=<span class="hljs-string">{()</span> =&gt;</span> {
+            backdrop.show();
+          }}
+          title="Open"
+        /&gt;
+      )}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">BackdropContext.Consumer</span>&gt;</span>
+  );
+};
+
+export default MyComponent;
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="props"></a><a href="#props" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Props</h2>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> Props = {
+  backgroundColor?: <span class="hljs-built_in">string</span>;
+  children?: ReactNode;
+  duration?: <span class="hljs-built_in">number</span>;
+  easing?: EasingFunction;
+  opacity?: <span class="hljs-built_in">number</span>;
+  useNativeDriver?: <span class="hljs-built_in">boolean</span>;
+  zIndex?: <span class="hljs-built_in">number</span>;
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="defaults"></a><a href="#defaults" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Defaults</h3>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> defaultProps = {
+  backgroundColor: <span class="hljs-string">'black'</span>,
+  duration: <span class="hljs-number">300</span>,
+  easing: Easing.inOut(Easing.ease),
+  opacity: IOS_OPACITY,
+  useNativeDriver: <span class="hljs-literal">true</span>,
+  zIndex: <span class="hljs-number">99</span>
+};
+</code></pre>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 9/11/2019</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/react-native-propel-kit/components/action-sheet-provider"><span class="arrow-prev">← </span><span class="function-name-prevnext">ActionSheetProvider</span></a><a class="docs-next button" href="/react-native-propel-kit/components/modal-dialog"><span class="function-name-prevnext">ModalDialog</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#preview">Preview</a></li><li><a href="#usage">Usage</a><ul class="toc-headings"><li><a href="#required-setup">Required setup</a></li><li><a href="#usage-with-context">Usage with context</a></li><li><a href="#usage-with-consumer">Usage with consumer</a></li></ul></li><li><a href="#props">Props</a><ul class="toc-headings"><li><a href="#defaults">Defaults</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-native-propel-kit/" class="nav-home"><img src="/react-native-propel-kit/img/favicon.svg" alt="Propel Kit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/react-native-propel-kit/en/doc1.html">Getting Started (or other categories)</a><a href="/react-native-propel-kit/en/doc2.html">Guides (or other categories)</a><a href="/react-native-propel-kit/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/react-native-propel-kit/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/react-native-propel-kit/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" href="https://github.com/mgcrea/react-native-propel-kit" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/react-native-propel-kit/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Olivier Louvignes</section></footer></div></body></html>

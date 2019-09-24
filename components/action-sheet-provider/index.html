@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>ActionSheetProvider · Propel Kit</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# ActionSheet Provider"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="ActionSheetProvider · Propel Kit"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mgcrea.github.io/react-native-propel-kit/"/><meta property="og:description" content="# ActionSheet Provider"/><meta property="og:image" content="https://mgcrea.github.io/react-native-propel-kit/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://mgcrea.github.io/react-native-propel-kit/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/react-native-propel-kit/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script type="text/javascript" src="/scripts/sidebarScroll.js"></script><script type="text/javascript" src="/scripts/codeblock.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/react-native-propel-kit/js/scrollSpy.js"></script><link rel="stylesheet" href="/react-native-propel-kit/css/main.css"/><script src="/react-native-propel-kit/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-native-propel-kit/"><img class="logo" src="/react-native-propel-kit/img/favicon.svg" alt="Propel Kit"/><h2 class="headerTitleWithLogo">Propel Kit</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/react-native-propel-kit/index" target="_self">Quick Start</a></li><li class="siteNavGroupActive siteNavItemActive"><a href="/react-native-propel-kit/components/action-sheet-provider" target="_self">Components</a></li><li class=""><a href="https://www.github.com/mgcrea/react-native-propel-kit" target="_self">Github</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Components</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/index">Quick Start</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Components</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/react-native-propel-kit/components/action-sheet-provider">ActionSheetProvider</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/backdrop-provider">BackdropProvider</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/modal-dialog">ModalDialog</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/select">Select</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/date-picker">DatePicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/time-picker">TimePicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/date-time-picker">DateTimePicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/month-picker">MonthPicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/year-picker">YearPicker</a></li><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/components/picker">Picker</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Recipes</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-native-propel-kit/recipes/customizing-styles">Customizing styles</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="actionsheet-provider"></a><a href="#actionsheet-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ActionSheet Provider</h1>
+<p><code>&lt;ActionSheetProvider /&gt;</code> is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform ActionSheet component anywhere in your application.</p>
+<ul>
+<li><p>On iOS, defaults to the native <a href="https://facebook.github.io/react-native/docs/actionsheetios.html">ActionSheetIOS</a>, but you can opt-in for a software pixel perfect implementation if you need more customization.</p></li>
+<li><p>On android, uses a custom software implementation that aims to blend nicely with the OS interface.</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="preview"></a><a href="#preview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preview</h2>
+<table>
+<thead>
+<tr><th style="text-align:center">iOS</th><th style="text-align:center">Android</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center"><img src="https://i.imgur.com/Wp45M8o.gif" alt=""></td><td style="text-align:center"><img src="https://i.imgur.com/nmcoll0.gif" alt=""></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<h3><a class="anchor" aria-hidden="true" id="required-setup"></a><a href="#required-setup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Required setup</h3>
+<p>As this component leverages a backdrop, you also need to wrap your application with a <code>&lt;BackdropProvider /&gt;</code> component. You usually want to wrap it as high as possible in your tree so that the backdrop properly covers the whole screen.</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-comment">// App.jsx</span>
+
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {ActionSheetProvider, BackdropProvider} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-propel-kit'</span>;
+
+<span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BackdropProvider</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">ActionSheetProvider</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">RootNavigator</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">ActionSheetProvider</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">BackdropProvider</span>&gt;</span></span>
+  );
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="usage-with-context"></a><a href="#usage-with-context" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage with context</h3>
+<p>Easiest way to use the backdrop in a component is to use react <a href="https://reactjs.org/docs/hooks-reference.html#usecontext">useContext</a> hook</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-comment">// MyComponent.jsx</span>
+
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {Button} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+<span class="hljs-keyword">import</span> {ActionSheetContext} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-propel-kit'</span>;
+
+<span class="hljs-keyword">const</span> MyComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> actionSheet = useContext(ActionSheetContext);
+  <span class="hljs-keyword">const</span> handlePress = useCallback(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    actionSheet.showWithOptions(
+      {
+        <span class="hljs-attr">title</span>: <span class="hljs-string">'Are you sure?'</span>,
+        <span class="hljs-attr">message</span>: <span class="hljs-string">'Please confirm the removal'</span>,
+        <span class="hljs-attr">options</span>: [<span class="hljs-string">'Cancel'</span>, <span class="hljs-string">'Remove'</span>],
+        <span class="hljs-attr">destructiveButtonIndex</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">cancelButtonIndex</span>: <span class="hljs-number">0</span>
+      },
+      buttonIndex =&gt; {
+        <span class="hljs-built_in">console</span>.warn(<span class="hljs-string">'onButtonPress'</span>, {buttonIndex});
+      }
+    );
+  }, [actionSheet]);
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onPress</span>=<span class="hljs-string">{handlePress}</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"Show ActionSheet"</span> /&gt;</span>;
+};
+
+export default MyComponent;
+</span></code></pre>
+<h3><a class="anchor" aria-hidden="true" id="usage-with-consumer"></a><a href="#usage-with-consumer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage with consumer</h3>
+<p>An alternative way to use the backdrop is to use the <code>&lt;ActionSheetContext.Consumer /&gt;</code> component as a higher order component providing the <code>actionSheet</code> context API.</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-comment">// MyComponent.jsx</span>
+
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> {Button} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native'</span>;
+<span class="hljs-keyword">import</span> {ActionSheetContext} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-native-propel-kit'</span>;
+
+<span class="hljs-keyword">const</span> MyComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ActionSheetContext.Consumer</span>&gt;</span>
+      {actionSheet =&gt; (
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+          <span class="hljs-attr">onPress</span>=<span class="hljs-string">{()</span> =&gt;</span> {
+            actionSheet.showWithOptions(
+              {
+                title: 'Are you sure?',
+                message: 'Please confirm the removal',
+                options: ['Cancel', 'Remove'],
+                destructiveButtonIndex: 1,
+                cancelButtonIndex: 0
+              },
+              buttonIndex =&gt; {
+                console.warn('onButtonPress', {buttonIndex});
+              }
+            );
+          }}
+          title="Open"
+        /&gt;
+      )}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ActionSheetContext.Consumer</span>&gt;</span>
+  );
+};
+
+export default MyComponent;
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" id="props"></a><a href="#props" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Props</h2>
+<h3><a class="anchor" aria-hidden="true" id="actionsheet"></a><a href="#actionsheet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ActionSheet</h3>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> Props = Pick&lt;ScrollViewProps, <span class="hljs-string">'scrollEnabled'</span>&gt; &amp;
+  Omit&lt;ModalDialogProps, <span class="hljs-string">'onConfirm'</span> | <span class="hljs-string">'confirmTitle'</span> | <span class="hljs-string">'confirmStyle'</span>&gt; &amp;
+  ActionSheetIOSOptions &amp; {
+    defaultStyles?: <span class="hljs-keyword">typeof</span> defaultStyles;
+    optionStyle?: StyleProp&lt;TextStyle&gt;;
+    lastOptionExtraStyle?: StyleProp&lt;TextStyle&gt;;
+    destructiveButtonColor?: <span class="hljs-built_in">string</span>;
+    onButtonPress: <span class="hljs-function">(<span class="hljs-params">buttonIndex: <span class="hljs-built_in">number</span></span>) =&gt;</span> <span class="hljs-built_in">void</span>;
+    onCancel: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">void</span>;
+  };
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="defaults"></a><a href="#defaults" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Defaults</h4>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> defaultProps = {
+  backgroundColor: <span class="hljs-string">'white'</span>,
+  cancelTitle: <span class="hljs-string">'Cancel'</span>,
+  destructiveButtonColor: Platform.select({
+    ios: <span class="hljs-string">'#ff3b30'</span>, <span class="hljs-comment">// iOS.systemRed (@see https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/)</span>
+    android: <span class="hljs-string">'#f44336'</span> <span class="hljs-comment">// android.red500 (@see https://material.io/design/color/the-color-system.html)</span>
+  })
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="actionsheetprovider"></a><a href="#actionsheetprovider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ActionSheetProvider</h3>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> Props = Omit&lt;ActionSheetProps, <span class="hljs-string">'options'</span>&gt; &amp; {
+  native?: <span class="hljs-built_in">boolean</span>;
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="styles"></a><a href="#styles" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Styles</h2>
+<pre><code class="hljs css language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> defaultStyles = {
+  modal: Platform.select&lt;ViewStyle&gt;({
+    ios: {flex: <span class="hljs-number">1</span>, justifyContent: <span class="hljs-string">'flex-end'</span>},
+    android: {flex: <span class="hljs-number">1</span>, justifyContent: <span class="hljs-string">'center'</span>}
+  }),
+  container: Platform.select&lt;ViewStyle&gt;({
+    ios: {margin: <span class="hljs-number">8</span>, maxHeight: WINDOW_HEIGHT - <span class="hljs-number">8</span> * <span class="hljs-number">2</span>},
+    android: {
+      flexDirection: <span class="hljs-string">'column'</span>,
+      alignItems: <span class="hljs-string">'stretch'</span>,
+      <span class="hljs-comment">// marginHorizontal: 82, // timepicker/spinner</span>
+      margin: <span class="hljs-number">24</span>,
+      maxHeight: WINDOW_HEIGHT - <span class="hljs-number">24</span> * <span class="hljs-number">2</span>,
+      elevation: <span class="hljs-number">4</span>
+    }
+  }),
+  header: Platform.select&lt;ViewStyle&gt;({
+    ios: {
+      alignItems: <span class="hljs-string">'center'</span>,
+      padding: <span class="hljs-number">16</span>,
+      borderTopLeftRadius: <span class="hljs-number">12</span>,
+      borderTopRightRadius: <span class="hljs-number">12</span>,
+      opacity: IOS_OPACITY
+    },
+    android: {alignItems: <span class="hljs-string">'flex-start'</span>, paddingVertical: <span class="hljs-number">24</span>, paddingHorizontal: <span class="hljs-number">32</span>}
+  }),
+  body: Platform.select&lt;ViewStyle&gt;({
+    ios: {
+      flexShrink: <span class="hljs-number">1</span>,
+      flexDirection: <span class="hljs-string">'column'</span>,
+      backgroundColor: <span class="hljs-string">'transparent'</span>,
+      opacity: IOS_OPACITY,
+      borderBottomStartRadius: <span class="hljs-number">12</span>,
+      borderBottomEndRadius: <span class="hljs-number">12</span>
+    },
+    android: {
+      flexShrink: <span class="hljs-number">1</span>,
+      flexDirection: <span class="hljs-string">'column'</span>,
+      backgroundColor: <span class="hljs-string">'transparent'</span>
+    }
+  }),
+  footer: Platform.select&lt;TextStyle&gt;({
+    ios: {}, <span class="hljs-comment">// @NOTE we don't have a footer on iOS</span>
+    android: {
+      flexDirection: <span class="hljs-string">'row'</span>,
+      justifyContent: <span class="hljs-string">'flex-end'</span>,
+      borderBottomLeftRadius: <span class="hljs-number">2</span>,
+      borderBottomRightRadius: <span class="hljs-number">2</span>,
+      padding: <span class="hljs-number">8</span>
+    }
+  }),
+  title: Platform.select&lt;TextStyle&gt;({
+    ios: {paddingBottom: <span class="hljs-number">12</span>, fontSize: <span class="hljs-number">14</span>, fontWeight: <span class="hljs-string">'500'</span>, textAlign: <span class="hljs-string">'center'</span>, color: <span class="hljs-string">'#888'</span>},
+    android: {
+      paddingBottom: <span class="hljs-number">12</span>,
+      fontSize: <span class="hljs-number">20</span>,
+      fontWeight: <span class="hljs-string">'500'</span>,
+      textAlign: <span class="hljs-string">'left'</span>,
+      color: <span class="hljs-string">'#333'</span>
+    }
+  }),
+  message: Platform.select&lt;TextStyle&gt;({
+    ios: {paddingBottom: <span class="hljs-number">12</span>, fontSize: <span class="hljs-number">13</span>, fontWeight: <span class="hljs-string">'400'</span>, textAlign: <span class="hljs-string">'center'</span>, color: <span class="hljs-string">'#888'</span>},
+    android: {paddingBottom: <span class="hljs-number">12</span>, fontSize: <span class="hljs-number">18</span>, fontWeight: <span class="hljs-string">'400'</span>, color: <span class="hljs-string">'#666'</span>}
+  }),
+  cancel: Platform.select&lt;TextStyle&gt;({
+    ios: {marginTop: <span class="hljs-number">8</span>, borderRadius: <span class="hljs-number">12</span>, fontWeight: <span class="hljs-string">'600'</span>},
+    android: {}
+  }),
+  confirm: Platform.select&lt;TextStyle&gt;({
+    ios: {}, <span class="hljs-comment">// @NOTE we don't have a confirm on iOS</span>
+    android: {}
+  }),
+  option: Platform.select&lt;TextStyle&gt;({
+    ios: {
+      marginTop: StyleSheet.hairlineWidth
+    },
+    android: {
+      marginTop: StyleSheet.hairlineWidth
+    }
+  }),
+  lastOptionExtra: Platform.select&lt;TextStyle&gt;({
+    ios: {
+      borderBottomLeftRadius: <span class="hljs-number">12</span>,
+      borderBottomRightRadius: <span class="hljs-number">12</span>
+    },
+    android: {
+      marginBottom: StyleSheet.hairlineWidth
+    }
+  })
+};
+</code></pre>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 9/11/2019</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/react-native-propel-kit/index"><span class="arrow-prev">← </span><span>Quick Start</span></a><a class="docs-next button" href="/react-native-propel-kit/components/backdrop-provider"><span class="function-name-prevnext">BackdropProvider</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#preview">Preview</a></li><li><a href="#usage">Usage</a><ul class="toc-headings"><li><a href="#required-setup">Required setup</a></li><li><a href="#usage-with-context">Usage with context</a></li><li><a href="#usage-with-consumer">Usage with consumer</a></li></ul></li><li><a href="#props">Props</a><ul class="toc-headings"><li><a href="#actionsheet">ActionSheet</a></li><li><a href="#actionsheetprovider">ActionSheetProvider</a></li></ul></li><li><a href="#styles">Styles</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-native-propel-kit/" class="nav-home"><img src="/react-native-propel-kit/img/favicon.svg" alt="Propel Kit" width="66" height="58"/></a><div><h5>Docs</h5><a href="/react-native-propel-kit/en/doc1.html">Getting Started (or other categories)</a><a href="/react-native-propel-kit/en/doc2.html">Guides (or other categories)</a><a href="/react-native-propel-kit/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/react-native-propel-kit/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/react-native-propel-kit/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" href="https://github.com/mgcrea/react-native-propel-kit" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/react-native-propel-kit/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Olivier Louvignes</section></footer></div></body></html>
