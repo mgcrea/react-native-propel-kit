@@ -6,11 +6,13 @@ hide_title: true
 
 # ActionSheet Provider
 
-`<ActionSheetProvider />` is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform ActionSheet component anywhere in your application.
+`<ActionSheetProvider />` is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform `<ActionSheet />` component anywhere in your application.
 
 - On iOS, defaults to the native <a href="https://facebook.github.io/react-native/docs/actionsheetios.html">ActionSheetIOS</a>, but you can opt-in for a software pixel perfect implementation if you need more customization.
 
 - On android, uses a custom software implementation that aims to blend nicely with the OS interface.
+
+It is built upon the [`<ModalDialog />`](./modal-dialog.md) component.
 
 ## Preview
 

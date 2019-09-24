@@ -6,7 +6,7 @@ hide_title: true
 
 # ModalDialog
 
-The `<ModalDialog />`component gives your a easy-to-use cross platform modal dialog that tries to blend in as much as possible in the respective platforms. It is the basic bloc behind most other modal components (eg. `<ActionSheet />`, `<DatePicker />`, `<Select />`, etc.).
+The `<ModalDialog />`component gives your a easy-to-use cross platform modal dialog that tries to blend in as much as possible in the respective platforms. It is the basic block behind most other modal components (eg. `<ActionSheet />`, `<DatePicker />`, `<Select />`, etc.).
 
 - Can easily be built upon.
 - Provides a simple API `{show, hide, toggle}` to control.
