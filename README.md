@@ -21,16 +21,16 @@ This library **does not have any external dependencies** beside react/react-nati
 
 ### Components
 
-- [ActionSheetProvider](./packages/action-sheet-provider) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/action-sheet-provider))
-- [BackdropProvider](./packages/backdrop-provider) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/backdrop-provider))
-- [ModalDialog](./packages/modal-dialog) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/modal-dialog))
-- [Select](./packages/select) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/select))
-- [DatePicker](./packages/date-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/date-picker))
-- [TimePicker](./packages/time-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/time-picker))
-- [DateTimePicker](./packages/date-time-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/date-time-picker))
-- [MonthPicker](./packages/month-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/month-picker))
-- [YearPicker](./packages/year-picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/year-picker))
-- [Picker](./packages/picker) ([docs](https://mgcrea.github.io/react-native-propel-kit/components/picker))
+- [ActionSheetProvider](https://mgcrea.github.io/react-native-propel-kit/components/action-sheet-provider)
+- [BackdropProvider](https://mgcrea.github.io/react-native-propel-kit/components/backdrop-provider)
+- [ModalDialog](https://mgcrea.github.io/react-native-propel-kit/components/modal-dialog)
+- [Select](https://mgcrea.github.io/react-native-propel-kit/components/select)
+- [DatePicker](https://mgcrea.github.io/react-native-propel-kit/components/date-picker)
+- [TimePicker](https://mgcrea.github.io/react-native-propel-kit/components/time-picker)
+- [DateTimePicker](https://mgcrea.github.io/react-native-propel-kit/components/date-time-picker)
+- [MonthPicker](https://mgcrea.github.io/react-native-propel-kit/components/month-picker)
+- [YearPicker](https://mgcrea.github.io/react-native-propel-kit/components/year-picker)
+- [Picker](https://mgcrea.github.io/react-native-propel-kit/components/picker)
 
 ### Installation
 
