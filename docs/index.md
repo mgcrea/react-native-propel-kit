@@ -11,7 +11,7 @@ sidebar_label: Quick Start
 
 > **React Native Propel Kit** is a [React Native](https://facebook.github.io/react-native/) library providing basic **building blocks** for your next mobile application! This library is written in [TypeScript](https://www.typescriptlang.org/) using exclusively functional components leveraging [React hooks](https://reactjs.org/docs/hooks-intro.html).
 
-> This library **does not have any external dependencies** beside react/react-native, and **does not use any native code** to work. It is light and safe to use! This library is also **structured as a monorepo** that enables you to require only specific sub-packages if you ever want to build upon it.
+This library **does not have any external dependencies** beside react/react-native, and **does not use any native code** to work. It is light and safe to use! This library is also **structured as a monorepo** that enables you to require only specific sub-packages if you ever want to build upon it.
 
 ## Installation
 

@@ -6,7 +6,7 @@ hide_title: true
 
 # Backdrop Provider
 
-`<ActionSheetProvider />` is a is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform backdrop component anywhere in your application.
+`<BackdropProvider />` is a is a <a href="https://reactjs.org/docs/context.html#contextprovider" target="_blank">Context Provider</a> that enables the usage of a cross-platform backdrop component anywhere in your application.
 
 - Can be easily re-used by any other component that requires a backdrop
 

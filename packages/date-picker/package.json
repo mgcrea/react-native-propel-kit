@@ -17,25 +17,24 @@
   },
   "peerDependencies": {
     "react": ">=16.8",
-    "react-native": ">=0.59",
-    "styled-components": ">=4"
+    "react-native": ">=0.59"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.2",
-    "@babel/core": "^7.6.2",
-    "@storybook/react-native": "^5.2.1",
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.7",
-    "@types/react": "^16.9.3",
-    "@types/react-native": "^0.60.15",
-    "@types/react-test-renderer": "^16.9.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@storybook/react-native": "^5.2.5",
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.3",
+    "@types/react": "^16.9.11",
+    "@types/react-native": "^0.60.22",
+    "@types/react-test-renderer": "^16.9.1",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "react": "^16.9.0",
     "react-native": "^0.61.0",
     "react-native-testing-library": "^1.11.1",
-    "react-test-renderer": "^16.9.0",
+    "react-test-renderer": "^16.11.0",
     "styled-components": "^4.4.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.4"
   }
 }

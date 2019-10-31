@@ -72,7 +72,7 @@ const Button: FunctionComponent<Props> = ({
   const viewStyle = useMemo<ViewStyle>(
     () =>
       StyleSheet.flatten([propDefaultStyles.view, propViewStyle, flattenStyle, disabled ? disabledViewStyle : null]),
-    [propViewStyle, flattenStyle, disabled, disabledViewStyle]
+    [propDefaultStyles.view, propViewStyle, flattenStyle, disabled, disabledViewStyle]
   );
 
   const textStyle = useMemo<TextStyle>(
@@ -84,7 +84,7 @@ const Button: FunctionComponent<Props> = ({
         color ? {color} : null,
         disabled ? disabledTextStyle : null
       ]),
-    [propTextStyle, flattenStyle, disabled, color, disabledTextStyle]
+    [propDefaultStyles.text, propTextStyle, flattenStyle, disabled, color, disabledTextStyle]
   );
 
   return (
