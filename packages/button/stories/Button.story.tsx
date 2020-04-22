@@ -51,6 +51,8 @@ storiesOf('Button', module)
           disabled
           accessibilityLabel="Learn more about this purple button"
         />
+        {/* <Button onPress={onPress} title={title} accessibilityLabel="Learn more about this purple button" />
+        <NativeButton onPress={onPress} title={title} accessibilityLabel="Learn more about this purple button" /> */}
       </>
     );
   });

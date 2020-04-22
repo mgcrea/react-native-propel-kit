@@ -81,7 +81,7 @@ const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem |
       return '';
     }
     const childrenAsArray: ReactElement[] = React.Children.toArray(children) as ReactElement[];
-    const selectedChild = childrenAsArray.find(child => child.props.value === inputValue);
+    const selectedChild = childrenAsArray.find((child) => child.props.value === inputValue);
     const label = selectedChild ? selectedChild.props.label || selectedChild.props.value : '';
     return label;
   }, [children, inputValue]);
@@ -131,7 +131,7 @@ const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem |
   );
 
   // Track modal value updates
-  const onValueChange = useCallback(value => {
+  const onValueChange = useCallback((value) => {
     setModalValue(value);
   }, []);
 

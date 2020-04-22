@@ -153,8 +153,8 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
   useImperativeHandle(ref, () => ({focus}), [focus]);
 
   // Track modal value updates
-  const onMonthValueChange = useCallback(value => setModalMonthValue(value), []);
-  const onYearValueChange = useCallback(value => setModalYearValue(value), []);
+  const onMonthValueChange = useCallback((value) => setModalMonthValue(value), []);
+  const onYearValueChange = useCallback((value) => setModalYearValue(value), []);
 
   // Compute localized values
   const pickerValues = useMemo(() => {

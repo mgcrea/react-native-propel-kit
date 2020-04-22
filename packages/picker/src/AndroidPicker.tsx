@@ -30,7 +30,7 @@ const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem}
   const latestValue = useRef(selectedValue);
   const data = useMemo<ReadonlyArray<ItemT>>(
     () =>
-      Children.map(children, child => {
+      Children.map(children, (child) => {
         const {value, label} = (child as React.ReactElement).props;
         return {title: label, key: value, value};
       }).filter(Boolean),
@@ -38,8 +38,8 @@ const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem}
   );
 
   const getSelectedValueIndex = useCallback(
-    value => {
-      const selectedItem = data.find(item => item.value === value);
+    (value) => {
+      const selectedItem = data.find((item) => item.value === value);
       return selectedItem ? data.indexOf(selectedItem) : -1;
     },
     [data]
@@ -60,10 +60,10 @@ const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem}
 
   // Propagate changed value
   const onPress = useCallback(
-    value => {
+    (value) => {
       latestValue.current = value;
       if (propOnValueChange) {
-        const itemIndex = data.findIndex(item => item.value === value);
+        const itemIndex = data.findIndex((item) => item.value === value);
         propOnValueChange(value, itemIndex);
       }
     },
