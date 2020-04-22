@@ -5,5 +5,15 @@ import ModalDialog, {
   Handle as ModalDialogHandle
 } from './ModalDialog';
 
+import ModalDialogButton, {defaultStyles as modalDialogButtonDefaultStyles} from './components/ModalDialogButton';
+
 export default ModalDialog;
-export {ModalDialog, modalDialogDefaultProps, modalDialogDefaultStyles, ModalDialogProps, ModalDialogHandle};
+export {
+  ModalDialog,
+  ModalDialogButton,
+  modalDialogDefaultProps,
+  modalDialogDefaultStyles,
+  modalDialogButtonDefaultStyles,
+  ModalDialogProps,
+  ModalDialogHandle
+};
