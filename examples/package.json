@@ -6,33 +6,47 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@mgcrea/react-native-action-sheet-provider": "link:../../packages/action-sheet-provider",
-    "@mgcrea/react-native-backdrop-provider": "link:../../packages/backdrop-provider",
-    "@mgcrea/react-native-button": "link:../../packages/button",
-    "@mgcrea/react-native-date-picker": "link:../../packages/date-picker",
-    "@mgcrea/react-native-modal-dialog": "link:../../packages/modal-picker",
-    "react": "^16.12.0",
-    "react-native": "^0.61.5",
-    "styled-components": "^4.4.1"
+    "@mgcrea/react-native-action-sheet-provider": "link:../packages/action-sheet-provider",
+    "@mgcrea/react-native-backdrop-provider": "link:../packages/backdrop-provider",
+    "@mgcrea/react-native-button": "link:../packages/button",
+    "@mgcrea/react-native-date-picker": "link:../packages/date-picker",
+    "@mgcrea/react-native-modal-dialog": "link:../packages/modal-picker",
+    "@react-native-community/async-storage": "^1.9.0",
+    "react": "16.13.1",
+    "react-native": "0.62.2",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.5",
-    "@babel/runtime": "^7.7.6",
-    "@react-native-community/eslint-config": "^0.0.5",
-    "@storybook/react-native": "^5.2.8",
-    "@types/react": "^16.9.16",
-    "@types/react-native": "^0.60.24",
-    "babel-jest": "^24.9.0",
-    "babel-plugin-module-name-mapper": "^1.2.0",
-    "eslint": "^6.7.2",
-    "jest": "^24.9.0",
-    "metro-react-native-babel-preset": "^0.57.0",
-    "react-test-renderer": "^16.12.0"
+    "@babel/core": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "@storybook/react-native": "^5.3.18",
+    "@types/jest": "^25.2.1",
+    "@types/react-native": "^0.62.2",
+    "@types/react-test-renderer": "16.9.2",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "babel-jest": "^25.4.0",
+    "eslint": "^6.8.0",
+    "jest": "^25.4.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "^2.0.5",
+    "react-test-renderer": "16.13.1",
+    "typescript": "^3.8.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

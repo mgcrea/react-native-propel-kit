@@ -3,6 +3,14 @@ import {
   buttonDefaultStyles,
   inputButtonDefaultStyles,
 } from '@mgcrea/react-native-button';
+import {modalDialogButtonDefaultStyles} from '@mgcrea/react-native-modal-dialog';
+
+Object.assign(modalDialogButtonDefaultStyles, {
+  text: {
+    ...modalDialogButtonDefaultStyles.text,
+    color: '#E91E63',
+  },
+});
 
 Object.assign(buttonDefaultStyles, {
   view: {

@@ -15,6 +15,7 @@ import {
   addParameters,
   configure,
 } from '@storybook/react-native';
+import asyncStorage from '@react-native-community/async-storage';
 import './stories/defaults';
 
 import BackdropProvider from '@mgcrea/react-native-backdrop-provider';
@@ -28,21 +29,21 @@ import CenteredView from './stories/components/CenteredView';
 // import './rn-addons';
 
 // Disable noisy warnings
-YellowBox.ignoreWarnings([
-  'Warning: TimePickerAndroid has been merged',
-  'Warning: DatePickerAndroid has been merged',
-  'Warning: DatePickerIOS has been merged',
-  'Warning: componentWillReceiveProps has been renamed',
-  'Warning: componentWillMount has been renamed',
-  'Warning: AsyncStorage has been extracted',
-  'Story with id',
-]);
+// YellowBox.ignoreWarnings([
+//   'Warning: TimePickerAndroid has been merged',
+//   'Warning: DatePickerAndroid has been merged',
+//   'Warning: DatePickerIOS has been merged',
+//   'Warning: componentWillReceiveProps has been renamed',
+//   'Warning: componentWillMount has been renamed',
+//   'Warning: AsyncStorage has been extracted',
+//   'Story with id',
+// ]);
 
 const WITH_MOCKUP = false;
 const {width: DEVICE_WIDTH, height: DEVICE_HEIGHT} = Dimensions.get('screen');
 
 // Layout
-addDecorator(storyFn => (
+addDecorator((storyFn) => (
   <BackdropProvider>
     <ActionSheetProvider native={false}>
       <StatusBar barStyle="light-content" />
@@ -79,7 +80,7 @@ addDecorator(storyFn => (
   </BackdropProvider>
 ));
 // Allow hooks
-addDecorator(Story => <Story />);
+addDecorator((Story) => <Story />);
 
 // addParameters({
 //   // options: {
@@ -97,7 +98,11 @@ configure(() => {
 
 // Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
 // To find allowed options for getStorybookUI
-const StorybookUIRoot = getStorybookUI({isUIHidden: true, tabOpen: -1});
+const StorybookUIRoot = getStorybookUI({
+  asyncStorage,
+  // isUIHidden: true,
+  // tabOpen: -1,
+});
 
 // If you are using React Native vanilla write your app name here.
 // If you use Expo you can safely remove this line.
