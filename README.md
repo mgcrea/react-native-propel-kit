@@ -42,8 +42,8 @@ npm install react-native-propel-kit
 
 ## Communication
 
-- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/angular-strap). (Tag 'angular-strap')
-- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/angular-strap).
+- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/react-native). (Tag 'react-native')
+- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/react-native).
 - If you **found a bug**, open an issue.
 - If you **have a feature request**, open an issue.
 - If you **want to contribute**, submit a pull request.
