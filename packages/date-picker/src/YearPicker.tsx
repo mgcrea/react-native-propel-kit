@@ -1,7 +1,6 @@
-import React, {useMemo, forwardRef, RefForwardingComponent} from 'react';
-import Select, {SelectItem, SelectProps} from '@mgcrea/react-native-select';
 import {InputButton} from '@mgcrea/react-native-button';
-
+import Select, {SelectItem, SelectProps} from '@mgcrea/react-native-select';
+import React, {forwardRef, RefForwardingComponent, useMemo} from 'react';
 import {LabelExtractorOptions} from './utils/defaultLabelExtractor';
 
 const CURRENT_YEAR = new Date().getFullYear();

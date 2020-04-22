@@ -1,5 +1,5 @@
-import React, {useMemo, useRef, useCallback, useEffect, Children, FunctionComponent} from 'react';
-import {FlatList, PickerProps, PickerItemProps, FlatListProperties} from 'react-native';
+import React, {Children, FunctionComponent, useCallback, useEffect, useMemo, useRef} from 'react';
+import {FlatList, PickerProps} from 'react-native';
 import AndroidPickerItem from './AndroidPickerItem';
 
 type ItemT = {
@@ -33,7 +33,7 @@ const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem}
       Children.map(children, (child) => {
         const {value, label} = (child as React.ReactElement).props;
         return {title: label, key: value, value};
-      }).filter(Boolean),
+      })!.filter(Boolean),
     [children]
   );
 
@@ -72,7 +72,7 @@ const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem}
 
   const keyExtractor = useCallback((item, _index: number) => item.value, []);
   const getItemLayout = useCallback(
-    (item, index: number) => ({length: itemHeight, offset: itemHeight * index, index}),
+    (_item, index: number) => ({length: itemHeight, offset: itemHeight * index, index}),
     [itemHeight]
   );
 

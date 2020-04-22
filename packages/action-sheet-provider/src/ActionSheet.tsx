@@ -35,7 +35,7 @@ export const defaultProps = {
   destructiveButtonColor: Platform.select({
     ios: '#ff3b30', // iOS.systemRed (@see https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/)
     android: '#f44336' // android.red500 (@see https://material.io/design/color/the-color-system.html)
-  })
+  })!
 };
 
 const ActionSheet: RefForwardingComponent<ModalDialogHandle, Props> = (
@@ -106,7 +106,7 @@ export const defaultStyles = {
   modal: Platform.select<ViewStyle>({
     ios: {flex: 1, justifyContent: 'flex-end'},
     android: {flex: 1, justifyContent: 'center'}
-  }),
+  })!,
   container: Platform.select<ViewStyle>({
     ios: {margin: 8, maxHeight: WINDOW_HEIGHT - 8 * 2},
     android: {
@@ -117,7 +117,7 @@ export const defaultStyles = {
       maxHeight: WINDOW_HEIGHT - 24 * 2,
       elevation: 4
     }
-  }),
+  })!,
   header: Platform.select<ViewStyle>({
     ios: {
       alignItems: 'center',
@@ -127,7 +127,7 @@ export const defaultStyles = {
       opacity: IOS_OPACITY
     },
     android: {alignItems: 'flex-start', paddingVertical: 24, paddingHorizontal: 32}
-  }),
+  })!,
   body: Platform.select<ViewStyle>({
     ios: {
       flexShrink: 1,
@@ -142,7 +142,7 @@ export const defaultStyles = {
       flexDirection: 'column',
       backgroundColor: 'transparent'
     }
-  }),
+  })!,
   footer: Platform.select<TextStyle>({
     ios: {}, // @NOTE we don't have a footer on iOS
     android: {
@@ -152,7 +152,7 @@ export const defaultStyles = {
       borderBottomRightRadius: 2,
       padding: 8
     }
-  }),
+  })!,
   title: Platform.select<TextStyle>({
     ios: {paddingBottom: 12, fontSize: 14, fontWeight: '500', textAlign: 'center', color: '#888'},
     android: {
@@ -162,19 +162,19 @@ export const defaultStyles = {
       textAlign: 'left',
       color: '#333'
     }
-  }),
+  })!,
   message: Platform.select<TextStyle>({
     ios: {paddingBottom: 12, fontSize: 13, fontWeight: '400', textAlign: 'center', color: '#888'},
     android: {paddingBottom: 12, fontSize: 18, fontWeight: '400', color: '#666'}
-  }),
+  })!,
   cancel: Platform.select<TextStyle>({
     ios: {marginTop: 8, borderRadius: 12, fontWeight: '600'},
     android: {}
-  }),
+  })!,
   confirm: Platform.select<TextStyle>({
     ios: {}, // @NOTE we don't have a confirm on iOS
     android: {}
-  }),
+  })!,
   option: Platform.select<TextStyle>({
     ios: {
       marginTop: StyleSheet.hairlineWidth
@@ -182,7 +182,7 @@ export const defaultStyles = {
     android: {
       marginTop: StyleSheet.hairlineWidth
     }
-  }),
+  })!,
   lastOptionExtra: Platform.select<TextStyle>({
     ios: {
       borderBottomLeftRadius: 12,
@@ -191,5 +191,5 @@ export const defaultStyles = {
     android: {
       marginBottom: StyleSheet.hairlineWidth
     }
-  })
+  })!
 };

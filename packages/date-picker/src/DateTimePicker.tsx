@@ -1,5 +1,5 @@
 import React, {RefForwardingComponent} from 'react';
-import DatePicker, {Props, Handle} from './DatePicker';
+import DatePicker, {Handle, Props} from './DatePicker';
 
 export {Props};
 

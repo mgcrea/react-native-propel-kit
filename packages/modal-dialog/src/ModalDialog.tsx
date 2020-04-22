@@ -61,9 +61,9 @@ const MAX_HEIGHT = Dimensions.get('window').height;
 
 export const defaultProps = {
   backgroundColor: 'white',
-  animationType: Platform.select<ModalProps['animationType']>({android: 'fade', ios: 'slide'}),
+  animationType: Platform.select<ModalProps['animationType']>({android: 'fade', ios: 'slide'})!,
   cancelTitle: 'Cancel',
-  confirmTitle: Platform.select<string>({android: 'OK', ios: 'Confirm'}),
+  confirmTitle: Platform.select<string>({android: 'OK', ios: 'Confirm'})!,
   transparent: true
 };
 
@@ -187,6 +187,7 @@ const ModalDialog: RefForwardingComponent<Handle, Props> = (
       });
     }
     return inheritedStyles;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHeaderVisible, isFooterVisible]);
 
   return (
@@ -241,7 +242,7 @@ export const defaultStyles = {
   modal: Platform.select<ViewStyle>({
     ios: {flex: 1, justifyContent: 'flex-end'},
     android: {flex: 1, justifyContent: 'center'}
-  }),
+  })!,
   container: Platform.select<ViewStyle>({
     ios: {
       flexDirection: 'column',
@@ -259,11 +260,11 @@ export const defaultStyles = {
       elevation: 4,
       maxHeight: MAX_HEIGHT - 8
     }
-  }),
+  })!,
   header: Platform.select<ViewStyle>({
     ios: {alignItems: 'center', padding: 16, borderTopLeftRadius: 12, borderTopRightRadius: 12},
     android: {alignItems: 'flex-start', padding: 16}
-  }),
+  })!,
   body: Platform.select<ViewStyle>({
     ios: {
       flexShrink: 1,
@@ -273,7 +274,7 @@ export const defaultStyles = {
       flexShrink: 1,
       flexDirection: 'column'
     }
-  }),
+  })!,
   footer: Platform.select<TextStyle>({
     ios: {
       borderBottomLeftRadius: 12,
@@ -286,7 +287,7 @@ export const defaultStyles = {
       borderBottomRightRadius: 2,
       padding: 8
     }
-  }),
+  })!,
   title: Platform.select<TextStyle>({
     ios: {paddingBottom: 12, fontSize: 14, fontWeight: '500', textAlign: 'center', color: '#888'},
     android: {
@@ -297,17 +298,17 @@ export const defaultStyles = {
       textAlign: 'left',
       color: '#333'
     }
-  }),
+  })!,
   message: Platform.select<TextStyle>({
     ios: {paddingBottom: 12, fontSize: 13, fontWeight: '400', textAlign: 'center', color: '#888'},
     android: {paddingVertical: 6, paddingHorizontal: 12, fontSize: 18, fontWeight: '400', color: '#666'}
-  }),
+  })!,
   cancel: Platform.select<TextStyle>({
     ios: {marginTop: 24, borderRadius: 12, fontWeight: '600'},
     android: {}
-  }),
+  })!,
   confirm: Platform.select<TextStyle>({
     ios: {borderBottomLeftRadius: 12, borderBottomRightRadius: 12, fontWeight: '400'},
     android: {}
-  })
+  })!
 };

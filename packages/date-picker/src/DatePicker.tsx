@@ -1,32 +1,30 @@
+import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
+import ModalDialog, {ModalDialogHandle, ModalDialogProps} from '@mgcrea/react-native-modal-dialog';
 import React, {
-  useMemo,
-  useRef,
-  useState,
-  useCallback,
-  useImperativeHandle,
-  RefForwardingComponent,
+  ElementType,
   forwardRef,
   ReactNode,
+  RefForwardingComponent,
+  useCallback,
   useEffect,
-  ElementType
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
 import {
-  DatePickerIOS,
-  Platform,
   DatePickerAndroid,
-  DatePickerIOSProps,
   DatePickerAndroidOpenOptions,
-  TimePickerAndroidOpenOptions,
-  TextInputProps
+  DatePickerIOS,
+  DatePickerIOSProps,
+  NativeSyntheticEvent,
+  Platform,
+  TimePickerAndroidOpenOptions
 } from 'react-native';
-
-import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
-import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
-
-import defaultLabelExtractor, {LabelExtractorOptions} from './utils/defaultLabelExtractor';
-import openAndroidDatePicker from './utils/openAndroidDatePicker';
 import asUTCDate from './utils/asUTCDate';
+import defaultLabelExtractor, {LabelExtractorOptions} from './utils/defaultLabelExtractor';
 import isUndefined from './utils/isUndefined';
+import openAndroidDatePicker from './utils/openAndroidDatePicker';
 
 export type Props = Pick<InputButtonProps, 'placeholder' | 'style'> &
   Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> &
@@ -59,7 +57,7 @@ export const defaultProps = {
 };
 
 export type Handle = {
-  focus: () => void;
+  focus: (e: NativeSyntheticEvent<unknown>) => void;
 };
 
 const DatePicker: RefForwardingComponent<Handle, Props> = (
@@ -116,7 +114,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
   const onConfirm = useCallback(
     (value?: Date) => {
       // @NOTE android uses direct calls while ios relies on a modalValue
-      const nextValue = Platform.select({ios: modalValue, android: value});
+      const nextValue = Platform.select({ios: modalValue, android: value})!;
       if (propOnChange) {
         propOnChange(utc ? asUTCDate(nextValue, {mode}) : nextValue);
       }
@@ -140,7 +138,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
   }, [inputValue, propInitialValue]);
 
   // Open the modal when user touches input
-  const focus = Platform.select({
+  const focus = Platform.select<Handle['focus']>({
     android: useCallback(async () => {
       const prevValue = inputValue || propInitialValue;
       const {action, value: nextValue} = await openAndroidDatePicker(mode, {prevValue, androidMode});
@@ -153,7 +151,7 @@ const DatePicker: RefForwardingComponent<Handle, Props> = (
         modalDialogRef.current.show();
       }
     }, [])
-  });
+  })!;
 
   // Expose API via an imperative handle
   useImperativeHandle(ref, () => ({focus}), [focus]);

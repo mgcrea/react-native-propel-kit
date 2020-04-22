@@ -47,17 +47,17 @@ export const defaultStyles: {[s: string]: ViewStyle | TextStyle} = {
   view: Platform.select<ViewStyle>({
     ios: {justifyContent: 'flex-start'},
     android: {justifyContent: 'flex-start', height: 50}
-  }),
+  })!,
   disabledView: Platform.select<ViewStyle>({
     ios: {},
     android: {}
-  }),
+  })!,
   text: Platform.select<TextStyle>({
     ios: {alignSelf: 'flex-start', fontSize: 18, color: '#007aff'},
     android: {alignSelf: 'flex-start', paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
-  }),
+  })!,
   disabledText: Platform.select<TextStyle>({
     ios: {color: '#cdcdcd'},
     android: {color: '#cdcdcd'}
-  })
+  })!
 };

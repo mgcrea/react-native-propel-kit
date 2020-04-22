@@ -1,6 +1,6 @@
 {
   "name": "@mgcrea/react-native-picker",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

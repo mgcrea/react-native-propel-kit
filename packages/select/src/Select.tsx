@@ -124,8 +124,8 @@ const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem |
     () =>
       propInitialValue
         ? children
-        : [<Picker.Item key="undefined" label="" value={undefined} />].concat(
-            Children.toArray<ReactElement>(children as ReactElement)
+        : ([<Picker.Item key="undefined" label="" value={undefined} />] as ReactNode[]).concat(
+            Children.toArray(children)
           ),
     [propInitialValue, children]
   );

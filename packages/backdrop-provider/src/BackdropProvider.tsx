@@ -64,9 +64,9 @@ const BackdropProvider: FunctionComponent<Props> = ({
   }, [show, hide, toggle]);
 
   // Animate backdrop opacity along "isVisible" prop
-  const animatedOpacity = useRef(new Animated.Value(0));
+  const {current: animatedOpacity} = useRef(new Animated.Value(0));
   useEffect(() => {
-    const animation = Animated.timing(animatedOpacity.current, {
+    const animation = Animated.timing(animatedOpacity, {
       duration: isVisible ? duration : 200,
       easing,
       toValue: isVisible ? opacity : 0,
@@ -90,9 +90,8 @@ const BackdropProvider: FunctionComponent<Props> = ({
               position: displayStyle === 'none' ? 'relative' : 'absolute'
             }
           }),
-          {display: displayStyle, zIndex, backgroundColor}
+          {display: displayStyle, zIndex, backgroundColor, opacity: animatedOpacity}
         ]}
-        opacity={animatedOpacity.current}
       />
     </BackdropContext.Provider>
   );

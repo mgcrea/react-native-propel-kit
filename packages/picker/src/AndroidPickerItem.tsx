@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {Image, TouchableHighlight, View, Text, PickerItemProps, StyleProp, ViewStyle, TextStyle} from 'react-native';
+import {PickerItemProps, StyleProp, Text, TextStyle, TouchableHighlight, View, ViewStyle} from 'react-native';
 
 export type Props = {
   item: PickerItemProps;

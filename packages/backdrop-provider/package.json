@@ -1,6 +1,6 @@
 {
   "name": "@mgcrea/react-native-backdrop-provider",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -16,7 +16,7 @@
     "react-native": ">=0.59"
   },
   "devDependencies": {
-    "@mgcrea/react-native-button": "0.8.6",
+    "@mgcrea/react-native-button": "0.8.7",
     "@babel/cli": "^7.8.4",
     "@storybook/react-native": "^5.3.18",
     "@types/jest": "^25.2.1",

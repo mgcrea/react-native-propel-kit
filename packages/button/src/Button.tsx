@@ -109,6 +109,7 @@ const Button: FunctionComponent<Props> = ({
   const viewStyle = useMemo<ViewStyle>(
     () =>
       StyleSheet.flatten([propDefaultStyles.view, propViewStyle, flattenStyle, disabled ? disabledViewStyle : null]),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [propViewStyle, flattenStyle, disabled, disabledViewStyle]
   );
 
@@ -121,6 +122,7 @@ const Button: FunctionComponent<Props> = ({
         color ? {color} : null,
         disabled ? disabledTextStyle : null
       ]),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [propTextStyle, flattenStyle, disabled, color, disabledTextStyle]
   );
 
