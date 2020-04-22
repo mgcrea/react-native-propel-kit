@@ -14,7 +14,7 @@ const presets = ['module:metro-react-native-babel-preset', '@babel/preset-typesc
 const plugins = [['babel-plugin-module-name-mapper', moduleNameMapperOptions], '@babel/plugin-transform-runtime'];
 
 if (NODE_ENV !== 'production') {
-  moduleNameMapperOptions.moduleNameMapper['^@mgcrea/react-native-([^/]+)$'] = '<rootDir>/../../packages/$1/src';
+  moduleNameMapperOptions.moduleNameMapper['^@mgcrea/react-native-([^/]+)$'] = '<rootDir>/packages/$1/src';
 }
 
 module.exports = {

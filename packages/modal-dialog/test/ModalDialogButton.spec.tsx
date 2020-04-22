@@ -2,20 +2,20 @@ import React from 'react';
 import 'react-native';
 import {render, fireEvent} from 'react-native-testing-library';
 
-import ModalInputButton from './../src/ModalInputButton';
+import ModalDialogButton from './../src/components/ModalDialogButton';
 
-describe('<ModalInputButton>', () => {
+describe('<ModalDialogButton>', () => {
   it('renders correctly', () => {
-    const component = render(<ModalInputButton title="My Title" onPress={() => {}} />);
+    const component = render(<ModalDialogButton title="My Title" onPress={() => {}} />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   describe('onPress prop', () => {
     it('should properly call callback', () => {
       const onPressSpy = jest.fn();
-      const {getByType, toJSON} = render(<ModalInputButton title="My Title" onPress={onPressSpy} />);
+      const {getByType, toJSON} = render(<ModalDialogButton title="My Title" onPress={onPressSpy} />);
       expect(toJSON()).toMatchSnapshot();
-      fireEvent.press(getByType(ModalInputButton));
+      fireEvent.press(getByType(ModalDialogButton));
       expect(onPressSpy).toHaveBeenCalledTimes(1);
     });
   });
