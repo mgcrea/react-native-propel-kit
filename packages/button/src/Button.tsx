@@ -1,22 +1,22 @@
 // @see https://github.com/facebook/react-native/blob/master/Libraries/Components/Button.js
 // @see https://github.com/react-native-training/react-native-elements/blob/next/src/buttons/Button.js
 
-import React, {useCallback, FunctionComponent, useMemo, ElementType} from 'react';
+import React, {ElementType, FunctionComponent, useCallback, useMemo} from 'react';
 import {
-  Text,
-  View,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-  StyleSheet,
   ButtonProps,
   GestureResponderEvent,
-  TouchableNativeFeedbackProps,
-  TouchableOpacityProps,
   // ActivityIndicator,
   Platform,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
   TouchableNativeFeedback,
-  TouchableOpacity
+  TouchableNativeFeedbackProps,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewStyle
 } from 'react-native';
 import pickTextStyles from './utils/pickTextStyles';
 

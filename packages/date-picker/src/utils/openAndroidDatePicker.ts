@@ -1,11 +1,11 @@
 import {
-  DatePickerAndroidOpenOptions,
   DatePickerAndroid,
+  DatePickerAndroidOpenOptions,
+  DatePickerAndroidOpenReturn,
+  DatePickerIOSProps,
   TimePickerAndroid,
   TimePickerAndroidOpenOptions,
-  DatePickerIOSProps,
-  TimePickerAndroidOpenReturn,
-  DatePickerAndroidOpenReturn
+  TimePickerAndroidOpenReturn
 } from 'react-native';
 
 type OpenAndroidDatePickerOptions = {

@@ -1,23 +1,22 @@
+import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
+import ModalDialog, {ModalDialogHandle, ModalDialogProps} from '@mgcrea/react-native-modal-dialog';
+import Picker from '@mgcrea/react-native-picker';
 import React, {
-  useMemo,
-  useRef,
-  useState,
-  useCallback,
-  useImperativeHandle,
-  RefForwardingComponent,
+  ElementType,
   forwardRef,
   ReactNode,
+  RefForwardingComponent,
+  useCallback,
   useEffect,
-  ElementType
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
-import Picker from '@mgcrea/react-native-picker';
-import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
-import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
-import {DatePickerIOSProps, View} from 'react-native';
-
+import {DatePickerIOSProps} from 'react-native';
+import asUTCDate from './utils/asUTCDate';
 import defaultLabelExtractor, {LabelExtractorOptions} from './utils/defaultLabelExtractor';
 import isUndefined from './utils/isUndefined';
-import asUTCDate from './utils/asUTCDate';
 import localizedMonths from './utils/localizedMonths';
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -195,6 +194,4 @@ const MonthPicker: RefForwardingComponent<Handle, Props> = (
   );
 };
 
-export default forwardRef(MonthPicker);
-
-export const Item = Picker.Item; // eslint-disable-line prefer-destructuring
+export default Object.assign(forwardRef(MonthPicker), {Item: Picker.Item});

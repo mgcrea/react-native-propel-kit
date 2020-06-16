@@ -1,11 +1,10 @@
+import ModalDialogButton, {defaultStyles as modalDialogButtonDefaultStyles} from './components/ModalDialogButton';
 import ModalDialog, {
   defaultProps as modalDialogDefaultProps,
   defaultStyles as modalDialogDefaultStyles,
-  Props as ModalDialogProps,
-  Handle as ModalDialogHandle
+  Handle as ModalDialogHandle,
+  Props as ModalDialogProps
 } from './ModalDialog';
-
-import ModalDialogButton, {defaultStyles as modalDialogButtonDefaultStyles} from './components/ModalDialogButton';
 
 export default ModalDialog;
 export {

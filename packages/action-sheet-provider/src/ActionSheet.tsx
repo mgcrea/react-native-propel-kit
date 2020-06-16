@@ -1,17 +1,16 @@
+import ModalDialog, {ModalDialogHandle, ModalDialogProps} from '@mgcrea/react-native-modal-dialog';
 import React, {forwardRef, RefForwardingComponent, useMemo} from 'react';
 import {
+  ActionSheetIOSOptions,
   Dimensions,
   Platform,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
-  ActionSheetIOSOptions,
-  TextStyle,
   ScrollView,
-  ScrollViewProps
+  ScrollViewProps,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  ViewStyle
 } from 'react-native';
-import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
-
 import ActionSheetOption from './components/ActionSheetOption';
 import isUndefined from './utils/isUndefined';
 

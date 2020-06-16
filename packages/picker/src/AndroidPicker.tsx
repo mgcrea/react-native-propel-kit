@@ -18,7 +18,7 @@ export const defaultProps = {
 };
 
 // @NOTE uncontrolled usage is not functionnal
-const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem} = ({
+const AndroidPicker: FunctionComponent<Props> = ({
   children,
   onValueChange: propOnValueChange,
   selectedValue,
@@ -94,6 +94,4 @@ const AndroidPicker: FunctionComponent<Props> & {Item: typeof AndroidPickerItem}
   );
 };
 
-AndroidPicker.Item = AndroidPickerItem;
-
-export default AndroidPicker;
+export default Object.assign(AndroidPicker, {Item: AndroidPickerItem});

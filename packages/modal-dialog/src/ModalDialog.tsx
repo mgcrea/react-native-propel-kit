@@ -1,30 +1,30 @@
+import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdrop-provider';
 import React, {
-  useState,
-  useCallback,
-  ReactNode,
-  useImperativeHandle,
   forwardRef,
+  ReactNode,
+  RefForwardingComponent,
+  useCallback,
   useContext,
   useEffect,
-  RefForwardingComponent,
+  useImperativeHandle,
+  useMemo,
   useRef,
-  useMemo
+  useState
 } from 'react';
 import {
-  ModalProps,
-  ViewStyle,
-  Modal,
-  Keyboard,
-  Platform,
-  View,
-  TouchableWithoutFeedback,
-  Text,
-  StyleProp,
-  TextStyle,
   Dimensions,
-  SafeAreaView
+  Keyboard,
+  Modal,
+  ModalProps,
+  Platform,
+  SafeAreaView,
+  StyleProp,
+  Text,
+  TextStyle,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle
 } from 'react-native';
-import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdrop-provider';
 import ModalDialogButton from './components/ModalDialogButton';
 
 export type Props = ModalProps & {

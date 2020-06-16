@@ -1,8 +1,8 @@
 import BackdropProvider, {
   BackdropContext,
+  ContextProps as BackdropContextProps,
   defaultProps as backdropProviderDefaultProps,
-  Props as BackdropProviderProps,
-  ContextProps as BackdropContextProps
+  Props as BackdropProviderProps
 } from './BackdropProvider';
 
 export default BackdropProvider;

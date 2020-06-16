@@ -1,4 +1,4 @@
-import Select, {defaultProps as selectDefaultProps, Props as SelectProps, Item as SelectItem} from './Select';
+import Select, {defaultProps as selectDefaultProps, Item as SelectItem, Props as SelectProps} from './Select';
 
 export default Select;
 export {Select, selectDefaultProps, SelectProps, SelectItem};

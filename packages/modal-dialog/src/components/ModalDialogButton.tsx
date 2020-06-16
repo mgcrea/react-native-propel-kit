@@ -1,6 +1,6 @@
-import React, {FunctionComponent} from 'react';
-import {ViewStyle, TextStyle, Platform} from 'react-native';
 import {Pressable, PressableProps} from '@mgcrea/react-native-button';
+import React, {FunctionComponent} from 'react';
+import {Platform, TextStyle, ViewStyle} from 'react-native';
 
 export type Props = PressableProps;
 

@@ -1,20 +1,18 @@
-import Pressable, {
-  Props as PressableProps,
-  defaultProps as pressableDefaultProps,
-  defaultStyles as pressableDefaultStyles
-} from './Pressable';
-
-import InputButton, {
-  Props as InputButtonProps,
-  defaultProps as inputButtonDefaultProps,
-  defaultStyles as inputButtonDefaultStyles
-} from './InputButton';
-
 import Button, {
-  Props as ButtonProps,
   defaultProps as buttonDefaultProps,
-  defaultStyles as buttonDefaultStyles
+  defaultStyles as buttonDefaultStyles,
+  Props as ButtonProps
 } from './Button';
+import InputButton, {
+  defaultProps as inputButtonDefaultProps,
+  defaultStyles as inputButtonDefaultStyles,
+  Props as InputButtonProps
+} from './InputButton';
+import Pressable, {
+  defaultProps as pressableDefaultProps,
+  defaultStyles as pressableDefaultStyles,
+  Props as PressableProps
+} from './Pressable';
 
 export default Button;
 export {

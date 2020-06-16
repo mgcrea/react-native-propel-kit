@@ -1,4 +1,4 @@
-import {DatePickerIOSProps, Platform} from 'react-native';
+import {DatePickerIOSProps} from 'react-native';
 
 export type LabelExtractorOptions = {
   mode: DatePickerIOSProps['mode'] | 'month' | 'year';

@@ -1,5 +1,5 @@
-import React, {useCallback, useRef, FunctionComponent, useState, ReactNode, useEffect, useMemo} from 'react';
-import {Animated, Easing, StyleSheet, EasingFunction, Platform} from 'react-native';
+import React, {FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {Animated, Easing, EasingFunction, Platform, StyleSheet} from 'react-native';
 
 export type Props = {
   backgroundColor?: string;
@@ -76,7 +76,7 @@ const BackdropProvider: FunctionComponent<Props> = ({
       setDisplayStyle(isVisible ? 'flex' : 'none');
     });
     return () => animation.stop();
-  }, [isVisible, duration, easing, opacity, useNativeDriver]);
+  }, [isVisible, duration, easing, opacity, animatedOpacity, useNativeDriver]);
 
   return (
     <BackdropContext.Provider value={contextValue}>

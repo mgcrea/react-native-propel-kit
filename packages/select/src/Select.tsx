@@ -1,23 +1,21 @@
+import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
+import ModalDialog, {ModalDialogHandle, ModalDialogProps} from '@mgcrea/react-native-modal-dialog';
+import Picker from '@mgcrea/react-native-picker';
 import React, {
-  ReactElement,
-  useMemo,
-  useRef,
-  useState,
-  useCallback,
-  useImperativeHandle,
-  RefForwardingComponent,
-  forwardRef,
-  ReactNode,
-  useEffect,
   Children,
   ElementType,
-  FunctionComponent
+  forwardRef,
+  ReactElement,
+  ReactNode,
+  RefForwardingComponent,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
 import {StyleProp, TextStyle} from 'react-native';
-
-import Picker, {PickerItem} from '@mgcrea/react-native-picker';
-import ModalDialog, {ModalDialogProps, ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
-import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
 
 const isUndefined = (maybeUndefined: any): maybeUndefined is undefined => typeof maybeUndefined === 'undefined';
 
@@ -44,7 +42,7 @@ export const defaultProps = {
   InputButtonComponent: InputButton
 };
 
-const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem | FunctionComponent<any>} = (
+const Select: RefForwardingComponent<Handle, Props> = (
   {
     children,
     // ModalDialog props
@@ -153,8 +151,6 @@ const Select: RefForwardingComponent<Handle, Props> & {Item: typeof PickerItem |
   );
 };
 
-Select.Item = Picker.Item;
-
-export default forwardRef(Select);
+export default Object.assign(forwardRef(Select), {Item: Picker.Item});
 
 export const Item = Picker.Item; // eslint-disable-line prefer-destructuring

@@ -1,7 +1,6 @@
-import React, {useCallback, useRef, FunctionComponent, useState, useMemo} from 'react';
-import {ActionSheetIOS, Platform, ActionSheetIOSOptions} from 'react-native';
 import {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
-
+import React, {FunctionComponent, useCallback, useMemo, useRef, useState} from 'react';
+import {ActionSheetIOS, ActionSheetIOSOptions, Platform} from 'react-native';
 import ActionSheet, {Props as ActionSheetProps} from './ActionSheet';
 
 export type Props = Omit<ActionSheetProps, 'options'> & {
