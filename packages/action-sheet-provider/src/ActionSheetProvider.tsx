@@ -62,9 +62,9 @@ const ActionSheetProvider: FunctionComponent<Props> = ({children, native = true,
       {!native || Platform.OS !== 'ios' ? (
         <ActionSheet
           ref={modalDialogRef}
+          {...otherActionSheetProps}
           onButtonPress={onButtonPress}
           onCancel={onCancel}
-          {...otherActionSheetProps}
           {...globalOptions}
         />
       ) : null}

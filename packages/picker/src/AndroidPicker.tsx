@@ -1,12 +1,7 @@
 import React, {Children, FunctionComponent, useCallback, useEffect, useMemo, useRef} from 'react';
-import {FlatList, PickerProps} from 'react-native';
+import {FlatList, PickerItemProps, PickerProps} from 'react-native';
 import AndroidPickerItem from './AndroidPickerItem';
 
-type ItemT = {
-  title?: string;
-  key?: string;
-  value: any;
-};
 export type Props = PickerProps & {
   itemHeight?: number;
   itemVisibleCount?: number;
@@ -28,11 +23,11 @@ const AndroidPicker: FunctionComponent<Props> = ({
 }) => {
   const flatListRef = useRef<FlatList<any>>(null);
   const latestValue = useRef(selectedValue);
-  const data = useMemo<ReadonlyArray<ItemT>>(
+  const data = useMemo<ReadonlyArray<PickerItemProps>>(
     () =>
       Children.map(children, (child) => {
-        const {value, label} = (child as React.ReactElement).props;
-        return {title: label, key: value, value};
+        const {key, value, label} = (child as React.ReactElement).props;
+        return {label, key: key || value, value};
       })!.filter(Boolean),
     [children]
   );
@@ -89,7 +84,7 @@ const AndroidPicker: FunctionComponent<Props> = ({
       getItemLayout={getItemLayout}
       style={[{maxHeight: itemHeight * itemVisibleCount}, style]}
       overScrollMode="always"
-      renderItem={({item}) => <AndroidPickerItem {...{item, selectedValue, onPress}} />}
+      renderItem={({item}) => <AndroidPickerItem {...item} {...{selectedValue, onPress}} />}
     />
   );
 };

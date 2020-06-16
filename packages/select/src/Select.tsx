@@ -152,5 +152,3 @@ const Select: RefForwardingComponent<Handle, Props> = (
 };
 
 export default Object.assign(forwardRef(Select), {Item: Picker.Item});
-
-export const Item = Picker.Item; // eslint-disable-line prefer-destructuring

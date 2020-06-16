@@ -1,5 +1,5 @@
 import {InputButton} from '@mgcrea/react-native-button';
-import Select, {SelectItem, SelectProps} from '@mgcrea/react-native-select';
+import Select, {SelectProps} from '@mgcrea/react-native-select';
 import React, {forwardRef, RefForwardingComponent, useMemo} from 'react';
 import {LabelExtractorOptions} from './utils/defaultLabelExtractor';
 
@@ -48,7 +48,7 @@ const YearPicker: RefForwardingComponent<Handle, Props> = (
   return (
     <Select InputButtonComponent={InputButtonComponent} initialValue={propInitialValue} ref={ref} {...otherSelectProps}>
       {yearOptions.map(({label, value}) => (
-        <SelectItem key={value} label={label} value={value} />
+        <Select.Item key={value} label={label} value={value} />
       ))}
     </Select>
   );

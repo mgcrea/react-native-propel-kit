@@ -1,6 +1,6 @@
 {
   "name": "@mgcrea/react-native-select",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,9 +12,9 @@
     "test": "CI=true jest --runInBand --colors"
   },
   "dependencies": {
-    "@mgcrea/react-native-modal-dialog": "0.8.8",
-    "@mgcrea/react-native-button": "0.8.8",
-    "@mgcrea/react-native-picker": "0.8.8"
+    "@mgcrea/react-native-modal-dialog": "0.8.9",
+    "@mgcrea/react-native-button": "0.8.9",
+    "@mgcrea/react-native-picker": "0.8.9"
   },
   "peerDependencies": {
     "react": ">=16.8",

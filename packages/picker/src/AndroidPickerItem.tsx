@@ -1,9 +1,8 @@
 import React, {FunctionComponent} from 'react';
 import {PickerItemProps, StyleProp, Text, TextStyle, TouchableHighlight, View, ViewStyle} from 'react-native';
 
-export type Props = {
-  item: PickerItemProps & {title?: string};
-  onPress: (v: PickerItemProps['value']) => void;
+export type Props = PickerItemProps & {
+  onPress?: (value: PickerItemProps['value']) => void;
   selectedValue?: PickerItemProps['value'];
   itemHeight?: number;
   containerStyle?: StyleProp<ViewStyle>;
@@ -15,17 +14,17 @@ export const defaultProps = {
 };
 
 const AndroidPickerItem: FunctionComponent<Props> = React.memo(
-  ({item, itemHeight = defaultProps.itemHeight, containerStyle, titleStyle, onPress, selectedValue}) => {
-    const isSelected = item.value === selectedValue && typeof selectedValue !== 'undefined';
+  ({label, value, itemHeight = defaultProps.itemHeight, containerStyle, titleStyle, onPress, selectedValue}) => {
+    const isSelected = value === selectedValue && typeof selectedValue !== 'undefined';
     return (
       <TouchableHighlight
         delayPressIn={0}
         delayPressOut={0}
-        onPress={() => onPress(item.value)}
+        onPress={() => onPress && onPress(value)}
         style={{zIndex: 99, flex: 1}}>
         <View style={[defaultStyles.container, containerStyle, {height: itemHeight}]}>
           <Text style={[defaultStyles.title, isSelected ? defaultStyles.selectedTitle : null, titleStyle]}>
-            {item.label || item.title}
+            {label}
           </Text>
           {/* {isSelected ? (
             <Image
