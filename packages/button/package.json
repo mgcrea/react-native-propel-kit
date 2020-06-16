@@ -1,6 +1,6 @@
 {
   "name": "@mgcrea/react-native-button",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
