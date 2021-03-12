@@ -1,10 +1,9 @@
-import React, {RefForwardingComponent} from 'react';
-import DatePicker, {Handle, Props} from './DatePicker';
+import React, {forwardRef} from 'react';
+import {DatePicker, DatePickerHandle, DatePickerProps} from './DatePicker';
 
-export {Props};
+export type DateTimePickerProps = DatePickerProps;
+export type DateTimePickerHandle = DatePickerHandle;
 
-const DateTimePicker: RefForwardingComponent<Handle, Props> = ({mode = 'datetime', ...otherProps}) => (
-  <DatePicker mode={mode} {...otherProps} />
+export const DateTimePicker = forwardRef<DateTimePickerHandle, DateTimePickerProps>(
+  ({mode = 'datetime', ...otherProps}, ref) => <DatePicker ref={ref} mode={mode} {...otherProps} />
 );
-
-export default DateTimePicker;

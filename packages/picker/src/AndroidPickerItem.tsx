@@ -13,7 +13,7 @@ export const defaultProps = {
   itemHeight: 50
 };
 
-const AndroidPickerItem: FunctionComponent<Props> = React.memo(
+export const AndroidPickerItem: FunctionComponent<Props> = React.memo(
   ({label, value, itemHeight = defaultProps.itemHeight, containerStyle, titleStyle, onPress, selectedValue}) => {
     const isSelected = value === selectedValue && typeof selectedValue !== 'undefined';
     return (
@@ -42,8 +42,6 @@ const AndroidPickerItem: FunctionComponent<Props> = React.memo(
 );
 
 AndroidPickerItem.displayName = 'AndroidPickerItem';
-
-export default AndroidPickerItem;
 
 export const defaultStyles: {[s: string]: ViewStyle | TextStyle} = {
   container: {

@@ -1,8 +1,8 @@
 import React, {Children, FunctionComponent, useCallback, useEffect, useMemo, useRef} from 'react';
 import {FlatList, PickerItemProps, PickerProps} from 'react-native';
-import AndroidPickerItem from './AndroidPickerItem';
+import {AndroidPickerItem} from './AndroidPickerItem';
 
-export type Props = PickerProps & {
+export type AndroidPickerProps = PickerProps & {
   itemHeight?: number;
   itemVisibleCount?: number;
 };
@@ -13,7 +13,7 @@ export const defaultProps = {
 };
 
 // @NOTE uncontrolled usage is not functionnal
-const AndroidPicker: FunctionComponent<Props> = ({
+export const AndroidPicker: FunctionComponent<AndroidPickerProps> = ({
   children,
   onValueChange: propOnValueChange,
   selectedValue,
@@ -88,5 +88,3 @@ const AndroidPicker: FunctionComponent<Props> = ({
     />
   );
 };
-
-export default Object.assign(AndroidPicker, {Item: AndroidPickerItem});

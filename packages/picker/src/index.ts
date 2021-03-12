@@ -1,4 +1,2 @@
-import Picker, {defaultProps as pickerDefaultProps, Item as PickerItem, Props as PickerProps} from './Picker';
-
-export default Picker;
-export {Picker, pickerDefaultProps, PickerProps, PickerItem};
+export {Picker as default, defaultProps as pickerDefaultProps, Item as PickerItem} from './Picker';
+export type {PickerProps} from './Picker';

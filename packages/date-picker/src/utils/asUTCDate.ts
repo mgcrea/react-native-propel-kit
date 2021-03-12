@@ -2,7 +2,7 @@ import {DatePickerIOSProps} from 'react-native';
 
 export type AsUTCDateOptions = {mode: DatePickerIOSProps['mode'] | 'month'};
 
-const asUTCDate = (value: Date, {mode}: AsUTCDateOptions): Date => {
+export const asUTCDate = (value: Date, {mode}: AsUTCDateOptions): Date => {
   switch (mode) {
     case 'date':
       return new Date(Date.UTC(value.getFullYear(), value.getMonth(), value.getDate()));
@@ -18,5 +18,3 @@ const asUTCDate = (value: Date, {mode}: AsUTCDateOptions): Date => {
       return value;
   }
 };
-
-export default asUTCDate;

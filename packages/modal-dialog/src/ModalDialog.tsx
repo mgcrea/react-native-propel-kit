@@ -1,8 +1,7 @@
-import {BackdropContext, BackdropContextProps} from '@mgcrea/react-native-backdrop-provider';
+import {BackdropContext, BackdropContextValue} from '@mgcrea/react-native-backdrop-provider';
 import React, {
   forwardRef,
   ReactNode,
-  RefForwardingComponent,
   useCallback,
   useContext,
   useEffect,
@@ -25,9 +24,9 @@ import {
   View,
   ViewStyle
 } from 'react-native';
-import ModalDialogButton from './components/ModalDialogButton';
+import {ModalDialogButton} from './components';
 
-export type Props = ModalProps & {
+export type ModalDialogProps = ModalProps & {
   defaultStyles?: typeof defaultStyles;
   backgroundColor?: string;
   cancelTitle?: string;
@@ -51,7 +50,7 @@ export type Props = ModalProps & {
   initialVisible?: boolean;
 };
 
-export type Handle = {
+export type ModalDialogHandle = {
   show: () => void;
   hide: () => void;
   toggle: () => void;
@@ -67,176 +66,178 @@ export const defaultProps = {
   transparent: true
 };
 
-const ModalDialog: RefForwardingComponent<Handle, Props> = (
-  {
-    animationType = defaultProps.animationType,
-    backgroundColor = defaultProps.backgroundColor,
-    cancelTitle = defaultProps.cancelTitle,
-    cancelStyle,
-    confirmTitle = defaultProps.confirmTitle,
-    confirmStyle,
-    bodyStyle,
-    modalStyle,
-    containerStyle,
-    children,
-    delay = 0,
-    disabled = false,
-    onCancel,
-    onConfirm,
-    title,
-    titleStyle,
-    message,
-    messageStyle,
-    headerStyle,
-    footerStyle,
-    transparent = defaultProps.transparent,
-    initialVisible = false,
-    defaultStyles: propDefaultStyles = defaultStyles,
-    ...otherModalProps
-  },
-  ref
-) => {
-  const backdrop = useContext<BackdropContextProps>(BackdropContext);
-  const [isVisible, setIsVisible] = useState(initialVisible);
-  const latestIsVisible = useRef<boolean>(isVisible);
+export const ModalDialog = forwardRef<ModalDialogHandle, ModalDialogProps>(
+  (
+    {
+      animationType = defaultProps.animationType,
+      backgroundColor = defaultProps.backgroundColor,
+      cancelTitle = defaultProps.cancelTitle,
+      cancelStyle,
+      confirmTitle = defaultProps.confirmTitle,
+      confirmStyle,
+      bodyStyle,
+      modalStyle,
+      containerStyle,
+      children,
+      delay = 0,
+      disabled = false,
+      onCancel,
+      onConfirm,
+      title,
+      titleStyle,
+      message,
+      messageStyle,
+      headerStyle,
+      footerStyle,
+      transparent = defaultProps.transparent,
+      initialVisible = false,
+      defaultStyles: propDefaultStyles = defaultStyles,
+      ...otherModalProps
+    },
+    ref
+  ) => {
+    const backdrop = useContext<BackdropContextValue>(BackdropContext);
+    const [isVisible, setIsVisible] = useState(initialVisible);
+    const latestIsVisible = useRef<boolean>(isVisible);
 
-  // Show modal
-  const show = useCallback(() => {
-    if (disabled) {
-      return;
-    }
-    setIsVisible(true);
-  }, [disabled]);
+    // Show modal
+    const show = useCallback(() => {
+      if (disabled) {
+        return;
+      }
+      setIsVisible(true);
+    }, [disabled]);
 
-  // Hide modal
-  const hide = useCallback(() => {
-    if (disabled) {
-      return;
-    }
-    setIsVisible(false);
-  }, [disabled]);
+    // Hide modal
+    const hide = useCallback(() => {
+      if (disabled) {
+        return;
+      }
+      setIsVisible(false);
+    }, [disabled]);
 
-  // Track isVisible latest value with a ref
-  useEffect(() => {
-    latestIsVisible.current = isVisible;
-  }, [isVisible]);
+    // Track isVisible latest value with a ref
+    useEffect(() => {
+      latestIsVisible.current = isVisible;
+    }, [isVisible]);
 
-  // Toggle modal
-  // @NOTE a ref is used to provide a stable context accross renders
-  const toggle = useCallback(() => {
-    !latestIsVisible.current ? show() : hide();
-  }, [latestIsVisible, hide, show]);
+    // Toggle modal
+    // @NOTE a ref is used to provide a stable context accross renders
+    const toggle = useCallback(() => {
+      !latestIsVisible.current ? show() : hide();
+    }, [latestIsVisible, hide, show]);
 
-  // Expose API via an imperative handle
-  useImperativeHandle(ref, () => ({show, hide, toggle}), [show, hide, toggle]);
+    // Expose API via an imperative handle
+    useImperativeHandle(ref, () => ({show, hide, toggle}), [show, hide, toggle]);
 
-  // Animate backdrop along "isVisible" prop
-  useEffect(() => {
-    if (backdrop) {
-      isVisible ? backdrop.show() : backdrop.hide();
-    }
-  }, [backdrop, isVisible]);
+    // Animate backdrop along "isVisible" prop
+    useEffect(() => {
+      if (backdrop) {
+        isVisible ? backdrop.show() : backdrop.hide();
+      }
+    }, [backdrop, isVisible]);
 
-  // Toggle keyboard along "isVisible" prop
-  useEffect(() => {
-    // Force blur on other inputs
-    if (isVisible) {
-      Keyboard.dismiss();
-    }
-  }, [isVisible]);
+    // Toggle keyboard along "isVisible" prop
+    useEffect(() => {
+      // Force blur on other inputs
+      if (isVisible) {
+        Keyboard.dismiss();
+      }
+    }, [isVisible]);
 
-  // Always hide on unmount
-  useEffect(() => {
-    return () => {
+    // Always hide on unmount
+    useEffect(() => {
+      return () => {
+        hide();
+      };
+    }, [hide]);
+
+    // Close the modal and propagate cancel action
+    const handleModalCancel = useCallback(() => {
+      if (onCancel) {
+        onCancel();
+      }
       hide();
-    };
-  }, [hide]);
+    }, [onCancel, hide]);
 
-  // Close the modal and propagate cancel action
-  const handleModalCancel = useCallback(() => {
-    if (onCancel) {
-      onCancel();
-    }
-    hide();
-  }, [onCancel, hide]);
+    // Close the modal and propagate confirm action
+    const handleModalConfirm = useCallback(() => {
+      if (onConfirm) {
+        setTimeout(() => {
+          onConfirm();
+        }, delay);
+      }
+      hide();
+    }, [onConfirm, hide, delay]);
 
-  // Close the modal and propagate confirm action
-  const handleModalConfirm = useCallback(() => {
-    if (onConfirm) {
-      setTimeout(() => {
-        onConfirm();
-      }, delay);
-    }
-    hide();
-  }, [onConfirm, hide, delay]);
+    const isHeaderVisible = title || message;
+    const isFooterVisible = (Platform.OS === 'android' && onCancel) || onConfirm;
+    const inheritedBodyStyle = useMemo<ViewStyle>(() => {
+      const inheritedStyles = {};
+      if (!isHeaderVisible) {
+        Object.assign(inheritedStyles, {
+          borderTopLeftRadius: propDefaultStyles.header.borderTopLeftRadius,
+          borderTopRightRadius: propDefaultStyles.header.borderTopRightRadius
+        });
+      }
+      if (!isFooterVisible) {
+        Object.assign(inheritedStyles, {
+          borderBottomLeftRadius: propDefaultStyles.footer.borderBottomLeftRadius,
+          borderBottomRightRadius: propDefaultStyles.footer.borderBottomRightRadius
+        });
+      }
+      return inheritedStyles;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isHeaderVisible, isFooterVisible]);
 
-  const isHeaderVisible = title || message;
-  const isFooterVisible = (Platform.OS === 'android' && onCancel) || onConfirm;
-  const inheritedBodyStyle = useMemo<ViewStyle>(() => {
-    const inheritedStyles = {};
-    if (!isHeaderVisible) {
-      Object.assign(inheritedStyles, {
-        borderTopLeftRadius: propDefaultStyles.header.borderTopLeftRadius,
-        borderTopRightRadius: propDefaultStyles.header.borderTopRightRadius
-      });
-    }
-    if (!isFooterVisible) {
-      Object.assign(inheritedStyles, {
-        borderBottomLeftRadius: propDefaultStyles.footer.borderBottomLeftRadius,
-        borderBottomRightRadius: propDefaultStyles.footer.borderBottomRightRadius
-      });
-    }
-    return inheritedStyles;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isHeaderVisible, isFooterVisible]);
-
-  return (
-    <Modal visible={isVisible} animationType={animationType} transparent={transparent} {...otherModalProps}>
-      <TouchableWithoutFeedback style={{flex: 1}} onPress={handleModalCancel}>
-        <View style={[propDefaultStyles.modal, modalStyle]}>
-          <TouchableWithoutFeedback style={{flex: 1}}>
-            <SafeAreaView style={[propDefaultStyles.container, containerStyle]}>
-              {isHeaderVisible ? (
-                <View style={[propDefaultStyles.header, {backgroundColor}, headerStyle]}>
-                  {title ? <Text style={[propDefaultStyles.title, titleStyle]}>{title}</Text> : null}
-                  {message ? <Text style={[propDefaultStyles.message, messageStyle]}>{message}</Text> : null}
+    return (
+      <Modal visible={isVisible} animationType={animationType} transparent={transparent} {...otherModalProps}>
+        <TouchableWithoutFeedback style={{flex: 1}} onPress={handleModalCancel}>
+          <View style={[propDefaultStyles.modal, modalStyle]}>
+            <TouchableWithoutFeedback style={{flex: 1}}>
+              <SafeAreaView style={[propDefaultStyles.container, containerStyle]}>
+                {isHeaderVisible ? (
+                  <View style={[propDefaultStyles.header, {backgroundColor}, headerStyle]}>
+                    {title ? <Text style={[propDefaultStyles.title, titleStyle]}>{title}</Text> : null}
+                    {message ? <Text style={[propDefaultStyles.message, messageStyle]}>{message}</Text> : null}
+                  </View>
+                ) : null}
+                <View style={[propDefaultStyles.body, inheritedBodyStyle, {backgroundColor}, bodyStyle]}>
+                  {children}
                 </View>
-              ) : null}
-              <View style={[propDefaultStyles.body, inheritedBodyStyle, {backgroundColor}, bodyStyle]}>{children}</View>
-              {isFooterVisible ? (
-                <View style={[propDefaultStyles.footer, {backgroundColor}, footerStyle]}>
-                  {Platform.OS === 'android' && onCancel ? (
-                    <ModalDialogButton
-                      style={[propDefaultStyles.cancel, cancelStyle]}
-                      onPress={handleModalCancel}
-                      title={cancelTitle}
-                    />
-                  ) : null}
-                  {onConfirm ? (
-                    <ModalDialogButton
-                      style={[propDefaultStyles.confirm, confirmStyle]}
-                      onPress={handleModalConfirm}
-                      title={confirmTitle}
-                    />
-                  ) : null}
-                </View>
-              ) : null}
-              {Platform.OS === 'ios' && onCancel ? (
-                <ModalDialogButton
-                  style={[propDefaultStyles.cancel, {backgroundColor}, cancelStyle]}
-                  onPress={handleModalCancel}
-                  title={cancelTitle}
-                />
-              ) : null}
-            </SafeAreaView>
-          </TouchableWithoutFeedback>
-        </View>
-      </TouchableWithoutFeedback>
-    </Modal>
-  );
-};
-
-export default forwardRef(ModalDialog);
+                {isFooterVisible ? (
+                  <View style={[propDefaultStyles.footer, {backgroundColor}, footerStyle]}>
+                    {Platform.OS === 'android' && onCancel ? (
+                      <ModalDialogButton
+                        style={[propDefaultStyles.cancel, cancelStyle]}
+                        onPress={handleModalCancel}
+                        title={cancelTitle}
+                      />
+                    ) : null}
+                    {onConfirm ? (
+                      <ModalDialogButton
+                        style={[propDefaultStyles.confirm, confirmStyle]}
+                        onPress={handleModalConfirm}
+                        title={confirmTitle}
+                      />
+                    ) : null}
+                  </View>
+                ) : null}
+                {Platform.OS === 'ios' && onCancel ? (
+                  <ModalDialogButton
+                    style={[propDefaultStyles.cancel, {backgroundColor}, cancelStyle]}
+                    onPress={handleModalCancel}
+                    title={cancelTitle}
+                  />
+                ) : null}
+              </SafeAreaView>
+            </TouchableWithoutFeedback>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+    );
+  }
+);
 
 export const defaultStyles = {
   modal: Platform.select<ViewStyle>({

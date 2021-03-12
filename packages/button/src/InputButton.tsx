@@ -1,8 +1,8 @@
 import React, {FunctionComponent} from 'react';
 import {Platform, StyleProp, TextInputProps, TextStyle, ViewStyle} from 'react-native';
-import Pressable, {Props as PressableProps} from './Pressable';
+import {Pressable, PressableProps} from './Pressable';
 
-export type Props = Omit<TextInputProps, 'onPress'> & {
+export type InputButtonProps = Omit<TextInputProps, 'onPress'> & {
   onFocus: PressableProps['onPress'];
   viewStyle?: StyleProp<ViewStyle>;
   disabledViewStyle?: StyleProp<ViewStyle>;
@@ -14,7 +14,7 @@ export const defaultProps = {
   placeholderTextColor: Platform.select({ios: '#c7c7cc', android: '#9e9e9e'})
 };
 
-const InputButton: FunctionComponent<Props> = ({
+export const InputButton: FunctionComponent<InputButtonProps> = ({
   editable = true,
   onFocus,
   placeholder,
@@ -40,8 +40,6 @@ const InputButton: FunctionComponent<Props> = ({
     />
   );
 };
-
-export default InputButton;
 
 export const defaultStyles: {[s: string]: ViewStyle | TextStyle} = {
   view: Platform.select<ViewStyle>({

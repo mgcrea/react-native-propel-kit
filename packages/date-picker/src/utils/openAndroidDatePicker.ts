@@ -8,12 +8,12 @@ import {
   TimePickerAndroidOpenReturn
 } from 'react-native';
 
-type OpenAndroidDatePickerOptions = {
+export type OpenAndroidDatePickerOptions = {
   prevValue: Date;
   androidMode: DatePickerAndroidOpenOptions['mode'] | TimePickerAndroidOpenOptions['mode'];
 };
 
-const openDatePicker = async ({androidMode, prevValue}: OpenAndroidDatePickerOptions) => {
+export const openDatePicker = async ({androidMode, prevValue}: OpenAndroidDatePickerOptions) => {
   const {action, year, month, day} = (await DatePickerAndroid.open({
     mode: androidMode as DatePickerAndroidOpenOptions['mode'],
     date: prevValue
@@ -30,7 +30,7 @@ const openDatePicker = async ({androidMode, prevValue}: OpenAndroidDatePickerOpt
   return {action, value: nextValue};
 };
 
-const openTimePicker = async ({androidMode, prevValue}: OpenAndroidDatePickerOptions) => {
+export const openTimePicker = async ({androidMode, prevValue}: OpenAndroidDatePickerOptions) => {
   const {action, minute, hour} = (await TimePickerAndroid.open({
     mode: androidMode as TimePickerAndroidOpenOptions['mode'],
     hour: prevValue.getHours(),
@@ -47,7 +47,7 @@ const openTimePicker = async ({androidMode, prevValue}: OpenAndroidDatePickerOpt
   return {action, value: nextValue};
 };
 
-const openAndroidDatePicker = async (
+export const openAndroidDatePicker = async (
   mode: DatePickerIOSProps['mode'],
   {androidMode, prevValue}: OpenAndroidDatePickerOptions
 ) => {
@@ -73,5 +73,3 @@ const openAndroidDatePicker = async (
       throw new Error(`Unsupported prop <DatePicker mode="${mode}" />`);
   }
 };
-
-export default openAndroidDatePicker;

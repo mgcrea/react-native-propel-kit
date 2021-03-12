@@ -1,13 +1,16 @@
 // @see https://github.com/lawnstarter/react-native-picker-select/blob/master/src/index.js
 
-import {Picker, Platform} from 'react-native';
-import AndroidPicker, {defaultProps, Props} from './AndroidPicker';
-import AndroidPickerItem from './AndroidPickerItem';
+import {Picker as BasePicker, Platform} from 'react-native';
+import {AndroidPicker, defaultProps, AndroidPickerProps as PickerProps} from './AndroidPicker';
+import {AndroidPickerItem} from './AndroidPickerItem';
 
 const IS_IOS = Platform.OS === 'ios';
 
-export default IS_IOS ? Picker : AndroidPicker;
+export const Picker = IS_IOS ? BasePicker : Object.assign(AndroidPicker, {Item: AndroidPickerItem});
 
-export const Item: typeof Picker.Item = IS_IOS ? Picker.Item : ((AndroidPickerItem as unknown) as typeof Picker.Item);
+export const Item: typeof BasePicker.Item = IS_IOS
+  ? BasePicker.Item
+  : ((AndroidPickerItem as unknown) as typeof BasePicker.Item);
 
-export {defaultProps, Props};
+export {defaultProps};
+export type {PickerProps};

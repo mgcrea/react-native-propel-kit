@@ -1,4 +1,10 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
-  "lib": ["es2017"]
+  "lib": ["es2017", "dom"],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "skipLibCheck": true
+  }
 }

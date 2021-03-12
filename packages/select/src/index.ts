@@ -1,4 +1,6 @@
-import Select, {defaultProps as selectDefaultProps, Props as SelectProps} from './Select';
+import Picker from '@mgcrea/react-native-picker';
+import {Select, defaultProps as selectDefaultProps, SelectProps} from './Select';
 
-export default Select;
-export {Select, selectDefaultProps, SelectProps};
+export {selectDefaultProps};
+export type {SelectProps};
+export default Object.assign(Select, {Item: Picker.Item});

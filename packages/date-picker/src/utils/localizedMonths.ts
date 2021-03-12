@@ -1,4 +1,4 @@
-const localizedMonths: {[s: string]: Array<string>} = {
+export const localizedMonths: {[s: string]: Array<string>} = {
   fr: [
     'Janvier',
     'Février',
@@ -28,5 +28,3 @@ const localizedMonths: {[s: string]: Array<string>} = {
     'December'
   ]
 };
-
-export default localizedMonths;

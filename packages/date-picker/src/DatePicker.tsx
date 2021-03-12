@@ -4,7 +4,6 @@ import React, {
   ElementType,
   forwardRef,
   ReactNode,
-  RefForwardingComponent,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -21,12 +20,23 @@ import {
   Platform,
   TimePickerAndroidOpenOptions
 } from 'react-native';
-import asUTCDate from './utils/asUTCDate';
-import defaultLabelExtractor, {LabelExtractorOptions} from './utils/defaultLabelExtractor';
-import isUndefined from './utils/isUndefined';
-import openAndroidDatePicker from './utils/openAndroidDatePicker';
+import {
+  asUTCDate,
+  defaultLabelExtractor,
+  getNavigatorLocale,
+  isUndefined,
+  LabelExtractorOptions,
+  openAndroidDatePicker
+} from './utils';
 
-export type Props = Pick<InputButtonProps, 'placeholder' | 'style'> &
+const CURRENT_YEAR = new Date().getFullYear();
+const FIRST_DAY_OF_YEAR = new Date(Date.UTC(CURRENT_YEAR, 0, 1));
+
+export type DatePickerHandle = {
+  focus: (e: NativeSyntheticEvent<unknown>) => void;
+};
+
+export type DatePickerProps = Pick<InputButtonProps, 'placeholder' | 'style'> &
   Pick<ModalDialogProps, 'title' | 'confirmTitle' | 'cancelTitle'> &
   Pick<DatePickerIOSProps, 'mode' | 'locale'> & {
     children?: ReactNode;
@@ -43,141 +53,134 @@ export type Props = Pick<InputButtonProps, 'placeholder' | 'style'> &
     [s: string]: any; // otherInputButtonProps
   };
 
-const CURRENT_YEAR = new Date().getFullYear();
-const FIRST_DAY_OF_YEAR = new Date(Date.UTC(CURRENT_YEAR, 0, 1));
-
 export const defaultProps = {
   androidMode: 'spinner' as DatePickerAndroidOpenOptions['mode'] | TimePickerAndroidOpenOptions['mode'],
   initialValue: FIRST_DAY_OF_YEAR,
   InputButtonComponent: InputButton,
   labelExtractor: defaultLabelExtractor,
-  locale: navigator.language,
+  locale: getNavigatorLocale(),
   mode: 'date' as DatePickerIOSProps['mode'],
   utc: false
 };
 
-export type Handle = {
-  focus: (e: NativeSyntheticEvent<unknown>) => void;
-};
-
-const DatePicker: RefForwardingComponent<Handle, Props> = (
-  {
-    children,
-    // ModalDialog props
-    cancelTitle,
-    confirmTitle,
-    title,
-    // DatePicker props
-    androidMode = defaultProps.androidMode,
-    initialValue: propInitialValue = defaultProps.initialValue,
-    InputButtonComponent = defaultProps.InputButtonComponent,
-    labelExtractor = defaultProps.labelExtractor,
-    locale = defaultProps.locale,
-    mode = defaultProps.mode,
-    utc = defaultProps.utc,
-    onChange: propOnChange,
-    onSubmitEditing,
-    placeholder,
-    value: propValue,
-    ...otherInputButtonProps
-  },
-  ref
-) => {
-  const modalDialogRef = useRef<ModalDialogHandle>(null);
-  const [modalValue, setModalValue] = useState<Date>(propInitialValue);
-  const [localValue, setLocalValue] = useState<Date>();
-
-  // Support both controlled/uncontrolled usage
-  const inputValue = useMemo(() => (!isUndefined(propValue) ? propValue : localValue), [propValue, localValue]);
-
-  // Track parent propValue controlled updates
-  useEffect(() => {
-    if (!propValue) {
-      setModalValue(propInitialValue);
-      return;
-    }
-    setModalValue(propValue);
-  }, [propValue, propInitialValue]);
-
-  // Lazily compute displayed label
-  const labelValue = useMemo<string>(() => {
-    if (isUndefined(inputValue)) {
-      return '';
-    }
-    if (labelExtractor) {
-      return labelExtractor(inputValue, {mode, locale});
-    }
-    return `${inputValue}`;
-  }, [labelExtractor, inputValue, mode, locale]);
-
-  // Propagate changed value
-  const onConfirm = useCallback(
-    (value?: Date) => {
-      // @NOTE android uses direct calls while ios relies on a modalValue
-      const nextValue = Platform.select({ios: modalValue, android: value})!;
-      if (propOnChange) {
-        propOnChange(utc ? asUTCDate(nextValue, {mode}) : nextValue);
-      }
-      if (onSubmitEditing) {
-        // @NOTE Add a timeout to prevent swallowing siblings focus events
-        setTimeout(() => {
-          onSubmitEditing(nextValue);
-        });
-      }
-      // Support uncontrolled usage
-      if (isUndefined(propValue)) {
-        setLocalValue(nextValue);
-      }
+export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
+  (
+    {
+      children,
+      // ModalDialog props
+      cancelTitle,
+      confirmTitle,
+      title,
+      // DatePicker props
+      androidMode = defaultProps.androidMode,
+      initialValue: propInitialValue = defaultProps.initialValue,
+      InputButtonComponent = defaultProps.InputButtonComponent,
+      labelExtractor = defaultProps.labelExtractor,
+      locale = defaultProps.locale,
+      mode = defaultProps.mode,
+      utc = defaultProps.utc,
+      onChange: propOnChange,
+      onSubmitEditing,
+      placeholder,
+      value: propValue,
+      ...otherInputButtonProps
     },
-    [mode, utc, propValue, modalValue, propOnChange, onSubmitEditing]
-  );
+    ref
+  ) => {
+    const modalDialogRef = useRef<ModalDialogHandle>(null);
+    const [modalValue, setModalValue] = useState<Date>(propInitialValue);
+    const [localValue, setLocalValue] = useState<Date>();
 
-  // Reset modalValue to the proper value
-  const onCancel = useCallback(() => {
-    setModalValue(inputValue || propInitialValue);
-  }, [inputValue, propInitialValue]);
+    // Support both controlled/uncontrolled usage
+    const inputValue = useMemo(() => (!isUndefined(propValue) ? propValue : localValue), [propValue, localValue]);
 
-  // Open the modal when user touches input
-  const focus = Platform.select<Handle['focus']>({
-    android: useCallback(async () => {
-      const prevValue = inputValue || propInitialValue;
-      const {action, value: nextValue} = await openAndroidDatePicker(mode, {prevValue, androidMode});
-      if (action !== DatePickerAndroid.dismissedAction) {
-        onConfirm(nextValue);
+    // Track parent propValue controlled updates
+    useEffect(() => {
+      if (!propValue) {
+        setModalValue(propInitialValue);
+        return;
       }
-    }, [inputValue, propInitialValue, mode, androidMode, onConfirm]),
-    ios: useCallback(() => {
-      if (modalDialogRef.current) {
-        modalDialogRef.current.show();
+      setModalValue(propValue);
+    }, [propValue, propInitialValue]);
+
+    // Lazily compute displayed label
+    const labelValue = useMemo<string>(() => {
+      if (isUndefined(inputValue)) {
+        return '';
       }
-    }, [])
-  })!;
+      if (labelExtractor) {
+        return labelExtractor(inputValue, {mode, locale});
+      }
+      return `${inputValue}`;
+    }, [labelExtractor, inputValue, mode, locale]);
 
-  // Expose API via an imperative handle
-  useImperativeHandle(ref, () => ({focus}), [focus]);
+    // Propagate changed value
+    const onConfirm = useCallback(
+      (value?: Date) => {
+        // @NOTE android uses direct calls while ios relies on a modalValue
+        const nextValue = Platform.select({ios: modalValue, android: value})!;
+        if (propOnChange) {
+          propOnChange(utc ? asUTCDate(nextValue, {mode}) : nextValue);
+        }
+        if (onSubmitEditing) {
+          // @NOTE Add a timeout to prevent swallowing siblings focus events
+          setTimeout(() => {
+            onSubmitEditing(nextValue);
+          });
+        }
+        // Support uncontrolled usage
+        if (isUndefined(propValue)) {
+          setLocalValue(nextValue);
+        }
+      },
+      [mode, utc, propValue, modalValue, propOnChange, onSubmitEditing]
+    );
 
-  return (
-    <>
-      <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
-      {Platform.OS === 'ios' ? (
-        <ModalDialog
-          ref={modalDialogRef}
-          title={title || placeholder}
-          onConfirm={onConfirm}
-          onCancel={onCancel}
-          confirmTitle={confirmTitle}
-          cancelTitle={cancelTitle}>
-          <DatePickerIOS
-            mode={mode}
-            date={modalValue}
-            onDateChange={setModalValue}
-            style={{flexGrow: 1}}
-            locale={locale}
-          />
-        </ModalDialog>
-      ) : null}
-    </>
-  );
-};
+    // Reset modalValue to the proper value
+    const onCancel = useCallback(() => {
+      setModalValue(inputValue || propInitialValue);
+    }, [inputValue, propInitialValue]);
 
-export default forwardRef(DatePicker);
+    // Open the modal when user touches input
+    const focus = Platform.select<DatePickerHandle['focus']>({
+      android: useCallback(async () => {
+        const prevValue = inputValue || propInitialValue;
+        const {action, value: nextValue} = await openAndroidDatePicker(mode, {prevValue, androidMode});
+        if (action !== DatePickerAndroid.dismissedAction) {
+          onConfirm(nextValue);
+        }
+      }, [inputValue, propInitialValue, mode, androidMode, onConfirm]),
+      ios: useCallback(() => {
+        if (modalDialogRef.current) {
+          modalDialogRef.current.show();
+        }
+      }, [])
+    })!;
+
+    // Expose API via an imperative handle
+    useImperativeHandle<DatePickerHandle, DatePickerHandle>(ref, () => ({focus}), [focus]);
+
+    return (
+      <>
+        <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
+        {Platform.OS === 'ios' ? (
+          <ModalDialog
+            ref={modalDialogRef}
+            title={title || placeholder}
+            onConfirm={onConfirm}
+            onCancel={onCancel}
+            confirmTitle={confirmTitle}
+            cancelTitle={cancelTitle}>
+            <DatePickerIOS
+              mode={mode}
+              date={modalValue}
+              onDateChange={setModalValue}
+              style={{flexGrow: 1}}
+              locale={locale}
+            />
+          </ModalDialog>
+        ) : null}
+      </>
+    );
+  }
+);

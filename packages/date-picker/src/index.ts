@@ -1,27 +1,14 @@
-import DatePicker, {
-  defaultProps as datePickerDefaultProps,
-  Handle as DatePickerHandle,
-  Props as DatePickerProps
-} from './DatePicker';
-import DateTimePicker, {Props as DateTimePickerProps} from './DateTimePicker';
-import MonthPicker, {defaultProps as monthPickerDefaultProps, Props as MonthPickerProps} from './MonthPicker';
-import TimePicker, {Props as TimePickerProps} from './TimePicker';
-import YearPicker, {defaultProps as yearPickerDefaultProps, Props as YearPickerProps} from './YearPicker';
+export {DatePicker as default, defaultProps as datePickerDefaultProps} from './DatePicker';
+export type {DatePickerProps, DatePickerHandle} from './DatePicker';
 
-export default DatePicker;
-export {
-  DatePicker,
-  DatePickerProps,
-  DatePickerHandle,
-  datePickerDefaultProps,
-  TimePicker,
-  TimePickerProps,
-  DateTimePicker,
-  DateTimePickerProps,
-  MonthPicker,
-  MonthPickerProps,
-  monthPickerDefaultProps,
-  YearPicker,
-  YearPickerProps,
-  yearPickerDefaultProps
-};
+export {DateTimePicker} from './DateTimePicker';
+export type {DateTimePickerProps, DateTimePickerHandle} from './DateTimePicker';
+
+export {TimePicker} from './TimePicker';
+export type {TimePickerProps, TimePickerHandle} from './TimePicker';
+
+export {MonthPicker, defaultProps as monthPickerDefaultProps} from './MonthPicker';
+export type {MonthPickerProps, MonthPickerHandle} from './MonthPicker';
+
+export {YearPicker, defaultProps as yearPickerDefaultProps} from './YearPicker';
+export type {YearPickerProps, YearPickerHandle} from './YearPicker';

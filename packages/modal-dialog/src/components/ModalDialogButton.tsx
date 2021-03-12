@@ -2,7 +2,11 @@ import {Pressable, PressableProps} from '@mgcrea/react-native-button';
 import React, {FunctionComponent} from 'react';
 import {Platform, TextStyle, ViewStyle} from 'react-native';
 
-export type Props = PressableProps;
+export type ModalDialogButtonProps = PressableProps;
+
+export const ModalDialogButton: FunctionComponent<ModalDialogButtonProps> = ({...otherPressableProps}) => {
+  return <Pressable defaultStyles={defaultStyles} activeOpacity={0.5} {...otherPressableProps} />;
+};
 
 export const defaultStyles = {
   view: Platform.select<ViewStyle>({
@@ -49,9 +53,3 @@ export const defaultStyles = {
     android: {color: '#cdcdcd'}
   })
 };
-
-const ModalDialogButton: FunctionComponent<Props> = ({...otherPressableProps}) => {
-  return <Pressable defaultStyles={defaultStyles} activeOpacity={0.5} {...otherPressableProps} />;
-};
-
-export default ModalDialogButton;

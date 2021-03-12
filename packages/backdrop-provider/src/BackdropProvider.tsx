@@ -66,7 +66,7 @@ export const BackdropProvider: FunctionComponent<BackdropProviderProps> = ({
   }, [latestIsVisible, show, hide]);
 
   // Expose API via context
-  const contextValue = useMemo(() => {
+  const contextValue = useMemo<BackdropContextValue>(() => {
     return {show, hide, toggle};
   }, [show, hide, toggle]);
 

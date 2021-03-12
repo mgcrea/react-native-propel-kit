@@ -3,9 +3,8 @@
 
 import React, {ElementType, FunctionComponent, useCallback, useMemo} from 'react';
 import {
-  ButtonProps,
+  ButtonProps as BaseButtonProps,
   GestureResponderEvent,
-  // ActivityIndicator,
   Platform,
   StyleProp,
   StyleSheet,
@@ -18,20 +17,7 @@ import {
   View,
   ViewStyle
 } from 'react-native';
-import pickTextStyles from './utils/pickTextStyles';
-
-export type Props = ButtonProps & {
-  // loading?: boolean;
-  // loadingStyle?: StyleProp<ViewStyle>;
-  style?: StyleProp<TextStyle>;
-  viewStyle?: StyleProp<ViewStyle>;
-  disabledViewStyle?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<TextStyle>;
-  disabledTextStyle?: StyleProp<TextStyle>;
-  TouchableComponent?: ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>;
-  activeOpacity?: TouchableOpacityProps['activeOpacity'];
-  defaultStyles?: typeof defaultStyles;
-};
+import {pickTextStyles} from './utils';
 
 export const defaultStyles = {
   view: Platform.select<ViewStyle>({
@@ -65,6 +51,19 @@ export const defaultStyles = {
   // })
 };
 
+export type ButtonProps = BaseButtonProps & {
+  // loading?: boolean;
+  // loadingStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
+  viewStyle?: StyleProp<ViewStyle>;
+  disabledViewStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  disabledTextStyle?: StyleProp<TextStyle>;
+  TouchableComponent?: ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>;
+  activeOpacity?: TouchableOpacityProps['activeOpacity'];
+  defaultStyles?: typeof defaultStyles;
+};
+
 export const defaultProps = {
   TouchableComponent: Platform.select<ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>>({
     android: TouchableNativeFeedback,
@@ -73,7 +72,7 @@ export const defaultProps = {
   defaultStyles: typeof defaultStyles
 };
 
-const Button: FunctionComponent<Props> = ({
+export const Button: FunctionComponent<ButtonProps> = ({
   title,
   disabled,
   // loading: propLoading,
@@ -144,5 +143,3 @@ const Button: FunctionComponent<Props> = ({
     </TouchableComponent>
   );
 };
-
-export default Button;

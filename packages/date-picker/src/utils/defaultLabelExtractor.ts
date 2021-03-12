@@ -5,9 +5,9 @@ export type LabelExtractorOptions = {
   locale: DatePickerIOSProps['locale'];
 };
 
-const withoutSeconds = (localeString: string): string => localeString.replace(/(.*):\d+(.*)/, '$1$2');
+export const withoutSeconds = (localeString: string): string => localeString.replace(/(.*):\d+(.*)/, '$1$2');
 
-const defaultLabelExtractor = (value: Date, {mode, locale}: LabelExtractorOptions): string => {
+export const defaultLabelExtractor = (value: Date, {mode, locale}: LabelExtractorOptions): string => {
   switch (mode) {
     case 'date':
       return value.toLocaleDateString(locale);
@@ -24,5 +24,3 @@ const defaultLabelExtractor = (value: Date, {mode, locale}: LabelExtractorOption
       return '';
   }
 };
-
-export default defaultLabelExtractor;

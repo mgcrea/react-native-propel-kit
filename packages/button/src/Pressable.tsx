@@ -17,9 +17,9 @@ import {
   View,
   ViewStyle
 } from 'react-native';
-import pickTextStyles from './utils/pickTextStyles';
+import {pickTextStyles} from './utils';
 
-export type Props = ButtonProps & {
+export type PressableProps = ButtonProps & {
   children?: ReactNode;
   style?: StyleProp<TextStyle>;
   viewStyle?: StyleProp<ViewStyle>;
@@ -38,7 +38,7 @@ export const defaultProps = {
   })
 };
 
-const Button: FunctionComponent<Props> = ({
+export const Pressable: FunctionComponent<PressableProps> = ({
   children,
   title,
   disabled,
@@ -100,8 +100,6 @@ const Button: FunctionComponent<Props> = ({
     </TouchableComponent>
   );
 };
-
-export default Button;
 
 export const defaultStyles = {
   view: Platform.select<ViewStyle>({

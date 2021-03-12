@@ -1,31 +1,10 @@
-import Button, {
-  defaultProps as buttonDefaultProps,
-  defaultStyles as buttonDefaultStyles,
-  Props as ButtonProps
-} from './Button';
-import InputButton, {
+export {Button as default, defaultProps as buttonDefaultProps, defaultStyles as buttonDefaultStyles} from './Button';
+export type {ButtonProps} from './Button';
+export {
   defaultProps as inputButtonDefaultProps,
   defaultStyles as inputButtonDefaultStyles,
-  Props as InputButtonProps
+  InputButton
 } from './InputButton';
-import Pressable, {
-  defaultProps as pressableDefaultProps,
-  defaultStyles as pressableDefaultStyles,
-  Props as PressableProps
-} from './Pressable';
-
-export default Button;
-export {
-  Pressable,
-  PressableProps,
-  pressableDefaultProps,
-  pressableDefaultStyles,
-  Button,
-  ButtonProps,
-  buttonDefaultProps,
-  buttonDefaultStyles,
-  InputButton,
-  InputButtonProps,
-  inputButtonDefaultProps,
-  inputButtonDefaultStyles
-};
+export type {InputButtonProps} from './InputButton';
+export {defaultProps as pressableDefaultProps, defaultStyles as pressableDefaultStyles, Pressable} from './Pressable';
+export type {PressableProps} from './Pressable';
