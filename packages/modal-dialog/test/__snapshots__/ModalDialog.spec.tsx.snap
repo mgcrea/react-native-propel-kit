@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalDialog> renders correctly 1`] = `
+<Modal
+  animationType="slide"
+  hardwareAccelerated={false}
+  transparent={true}
+  visible={false}
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "flex": 1,
+          "justifyContent": "flex-end",
+        },
+        undefined,
+      ]
+    }
+  >
+    <RCTSafeAreaView
+      accessible={true}
+      emulateUnlessSupported={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "stretch",
+            "flexDirection": "column",
+            "marginBottom": 24,
+            "marginHorizontal": 24,
+            "maxHeight": 1326,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "column",
+              "flexShrink": 1,
+            },
+            Object {
+              "borderBottomLeftRadius": 12,
+              "borderBottomRightRadius": 12,
+              "borderTopLeftRadius": 12,
+              "borderTopRightRadius": 12,
+            },
+            Object {
+              "backgroundColor": "white",
+            },
+            undefined,
+          ]
+        }
+      />
+    </RCTSafeAreaView>
+  </View>
+</Modal>
+`;

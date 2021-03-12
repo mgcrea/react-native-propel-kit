@@ -1,0 +1,10 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier", "prettier/@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
+  "env": {
+    "es6": true
+  },
+  "rules": {},
+  "ignorePatterns": ["examples/", "lib/", "node_modules/"]
+}
