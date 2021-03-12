@@ -1,9 +1,6 @@
-import BackdropProvider, {
+export {
   BackdropContext,
-  ContextProps as BackdropContextProps,
-  defaultProps as backdropProviderDefaultProps,
-  Props as BackdropProviderProps
+  BackdropProvider as default,
+  defaultProps as backdropProviderDefaultProps
 } from './BackdropProvider';
-
-export default BackdropProvider;
-export {BackdropProvider, backdropProviderDefaultProps, BackdropProviderProps, BackdropContext, BackdropContextProps};
+export type {BackdropContextValue, BackdropProvider, BackdropProviderProps} from './BackdropProvider';

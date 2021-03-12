@@ -1,9 +1,18 @@
-import React, {FunctionComponent, ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {FunctionComponent, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Animated, Easing, EasingFunction, Platform, StyleSheet} from 'react-native';
+const IOS_OPACITY = 0.4; // @NOTE from native ActionSheet backdrop
 
-export type Props = {
+export type BackdropContextValue = {
+  show: () => void;
+  hide: () => void;
+  toggle: () => void;
+};
+
+// @ts-expect-error allow initial null
+export const BackdropContext = React.createContext<BackdropContextValue>(null);
+
+export type BackdropProviderProps = {
   backgroundColor?: string;
-  children?: ReactNode;
   duration?: number;
   easing?: EasingFunction;
   opacity?: number;
@@ -11,9 +20,7 @@ export type Props = {
   zIndex?: number;
 };
 
-const IOS_OPACITY = 0.4; // @NOTE from native ActionSheet backdrop
-
-export const defaultProps = {
+export const defaultProps: Required<BackdropProviderProps> = {
   backgroundColor: 'black',
   duration: 300,
   easing: Easing.inOut(Easing.ease),
@@ -22,7 +29,7 @@ export const defaultProps = {
   zIndex: 99
 };
 
-const BackdropProvider: FunctionComponent<Props> = ({
+export const BackdropProvider: FunctionComponent<BackdropProviderProps> = ({
   backgroundColor = 'black',
   children,
   duration = defaultProps.duration,
@@ -98,11 +105,3 @@ const BackdropProvider: FunctionComponent<Props> = ({
 };
 
 export default BackdropProvider;
-
-export type ContextProps = null | {
-  show: () => void;
-  hide: () => void;
-  toggle: () => void;
-};
-
-export const BackdropContext = React.createContext<ContextProps>(null);

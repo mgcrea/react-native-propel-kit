@@ -1,6 +1,6 @@
 import {InputButton} from '@mgcrea/react-native-button';
 import Select, {SelectProps} from '@mgcrea/react-native-select';
-import React, {forwardRef, RefForwardingComponent, useMemo} from 'react';
+import React, {forwardRef, ForwardRefRenderFunction, useMemo} from 'react';
 import {LabelExtractorOptions} from './utils/defaultLabelExtractor';
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -26,7 +26,7 @@ export const defaultProps = {
   maxValue: CURRENT_YEAR + 20
 };
 
-const YearPicker: RefForwardingComponent<Handle, Props> = (
+const YearPicker: ForwardRefRenderFunction<Handle, Props> = (
   {
     initialValue: propInitialValue = defaultProps.initialValue,
     InputButtonComponent = defaultProps.InputButtonComponent,

@@ -1,5 +1,5 @@
 import ModalDialog, {ModalDialogHandle, ModalDialogProps} from '@mgcrea/react-native-modal-dialog';
-import React, {forwardRef, RefForwardingComponent, useMemo} from 'react';
+import React, {forwardRef, ForwardRefRenderFunction, useMemo} from 'react';
 import {
   ActionSheetIOSOptions,
   Dimensions,
@@ -17,7 +17,7 @@ import isUndefined from './utils/isUndefined';
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 const IOS_OPACITY = 0.85; // @NOTE from native ActionSheet (though it uses blur)
 
-export type Props = Pick<ScrollViewProps, 'scrollEnabled'> &
+export type ActionSheetProps = Pick<ScrollViewProps, 'scrollEnabled'> &
   Omit<ModalDialogProps, 'onConfirm' | 'confirmTitle' | 'confirmStyle'> &
   ActionSheetIOSOptions & {
     defaultStyles?: typeof defaultStyles;
@@ -37,7 +37,7 @@ export const defaultProps = {
   })!
 };
 
-const ActionSheet: RefForwardingComponent<ModalDialogHandle, Props> = (
+const ActionSheetRenderFunction: ForwardRefRenderFunction<ModalDialogHandle, ActionSheetProps> = (
   {
     options,
     backgroundColor = defaultProps.backgroundColor,
@@ -99,7 +99,7 @@ const ActionSheet: RefForwardingComponent<ModalDialogHandle, Props> = (
   );
 };
 
-export default forwardRef(ActionSheet);
+export const ActionSheet = forwardRef(ActionSheetRenderFunction);
 
 export const defaultStyles = {
   modal: Platform.select<ViewStyle>({

@@ -1,13 +1,29 @@
 import {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
 import React, {FunctionComponent, useCallback, useMemo, useRef, useState} from 'react';
 import {ActionSheetIOS, ActionSheetIOSOptions, Platform} from 'react-native';
-import ActionSheet, {Props as ActionSheetProps} from './ActionSheet';
+import {ActionSheet, ActionSheetProps} from './ActionSheet';
 
-export type Props = Omit<ActionSheetProps, 'options'> & {
+export type ActionSheetContextValue = {
+  showWithOptions: (options: ActionSheetIOSOptions, callback: (buttonIndex: number) => void) => void;
+  hide: () => void;
+};
+
+// @ts-expect-error allow initial null
+export const ActionSheetContext = React.createContext<ActionSheetContextValue>(null);
+
+export type ActionSheetProviderProps = Omit<ActionSheetProps, 'options'> & {
   native?: boolean;
 };
 
-const ActionSheetProvider: FunctionComponent<Props> = ({children, native = true, ...otherActionSheetProps}) => {
+export const defaultProps: Partial<ActionSheetProviderProps> = {
+  native: true
+};
+
+export const ActionSheetProvider: FunctionComponent<ActionSheetProviderProps> = ({
+  children,
+  native = defaultProps.native,
+  ...otherActionSheetProps
+}) => {
   const modalDialogRef = useRef<ModalDialogHandle>(null);
   const [globalOptions, setGlobalOptions] = useState<ActionSheetIOSOptions>({options: []});
   const latestCallback = useRef<((buttonIndex: number) => void) | null>(null);
@@ -39,7 +55,7 @@ const ActionSheetProvider: FunctionComponent<Props> = ({children, native = true,
   }, [native]);
 
   // Expose API via context
-  const contextValue = useMemo(() => {
+  const contextValue = useMemo<ActionSheetContextValue>(() => {
     return {showWithOptions, hide};
   }, [showWithOptions, hide]);
 
@@ -71,12 +87,3 @@ const ActionSheetProvider: FunctionComponent<Props> = ({children, native = true,
     </ActionSheetContext.Provider>
   );
 };
-
-export default ActionSheetProvider;
-
-export type ContextProps = null | {
-  showWithOptions: (options: ActionSheetIOSOptions, callback: (buttonIndex: number) => void) => void;
-  hide: () => void;
-};
-
-export const ActionSheetContext = React.createContext<ContextProps>(null);

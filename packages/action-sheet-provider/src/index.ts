@@ -1,22 +1,12 @@
-import ActionSheet, {
-  defaultProps as actionSheetDefaultProps,
-  defaultStyles as actionSheetDefaultStyles,
-  Props as ActionSheetProps
-} from './ActionSheet';
-import ActionSheetProvider, {
-  ActionSheetContext,
-  ContextProps as ActionSheetContextProps,
-  Props as ActionSheetProviderProps
-} from './ActionSheetProvider';
-
-export default ActionSheetProvider;
 export {
-  ActionSheetProvider,
-  ActionSheetProviderProps,
-  ActionSheetContext,
-  ActionSheetContextProps,
   ActionSheet,
-  actionSheetDefaultProps,
-  actionSheetDefaultStyles,
-  ActionSheetProps
-};
+  defaultProps as actionSheetDefaultProps,
+  defaultStyles as actionSheetDefaultStyles
+} from './ActionSheet';
+export type {ActionSheetProps} from './ActionSheet';
+export {
+  ActionSheetContext,
+  ActionSheetProvider as default,
+  defaultProps as ActionSheetProviderDefaultProps
+} from './ActionSheetProvider';
+export type {ActionSheetContextValue, ActionSheetProvider, ActionSheetProviderProps} from './ActionSheetProvider';
