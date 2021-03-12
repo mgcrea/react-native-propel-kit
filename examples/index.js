@@ -1,46 +1,16 @@
-import React from 'react';
-import {
-  AppRegistry,
-  View,
-  YellowBox,
-  Platform,
-  StyleSheet,
-  StatusBar,
-  Image,
-  Dimensions,
-} from 'react-native';
-import {
-  getStorybookUI,
-  addDecorator,
-  addParameters,
-  configure,
-} from '@storybook/react-native';
-import asyncStorage from '@react-native-community/async-storage';
-import './stories/defaults';
-
-import BackdropProvider from '@mgcrea/react-native-backdrop-provider';
 import ActionSheetProvider from '@mgcrea/react-native-action-sheet-provider';
-
+import BackdropProvider from '@mgcrea/react-native-backdrop-provider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {withKnobs} from '@storybook/addon-knobs';
+import '@storybook/addon-ondevice-actions/register';
+import '@storybook/addon-ondevice-knobs/register';
+import {addDecorator, configure, getStorybookUI} from '@storybook/react-native';
+import React from 'react';
+import {AppRegistry, StatusBar, View} from 'react-native';
 import {name as appName} from './app.json';
-import Logo from './stories/components/Logo';
 import CenteredView from './stories/components/CenteredView';
-// import androidNativeTimePicker from './stories/fixtures/androidNativeTimePicker.png';
-// import iosNativeActionSheet from './stories/fixtures/iosNativeActionSheet.png';
-// import './rn-addons';
-
-// Disable noisy warnings
-// YellowBox.ignoreWarnings([
-//   'Warning: TimePickerAndroid has been merged',
-//   'Warning: DatePickerAndroid has been merged',
-//   'Warning: DatePickerIOS has been merged',
-//   'Warning: componentWillReceiveProps has been renamed',
-//   'Warning: componentWillMount has been renamed',
-//   'Warning: AsyncStorage has been extracted',
-//   'Story with id',
-// ]);
-
+import Logo from './stories/components/Logo';
 const WITH_MOCKUP = false;
-const {width: DEVICE_WIDTH, height: DEVICE_HEIGHT} = Dimensions.get('screen');
 
 // Layout
 addDecorator((storyFn) => (
@@ -79,17 +49,12 @@ addDecorator((storyFn) => (
     </ActionSheetProvider>
   </BackdropProvider>
 ));
+
 // Allow hooks
 addDecorator((Story) => <Story />);
 
-// addParameters({
-//   // options: {
-//   isToolshown: false,
-//   showNav: false,
-//   showPanel: false,
-//   isFullscreen: true,
-//   // },
-// });
+// enables knobs for all stories
+addDecorator(withKnobs);
 
 // import stories
 configure(() => {
@@ -99,11 +64,8 @@ configure(() => {
 // Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
 // To find allowed options for getStorybookUI
 const StorybookUIRoot = getStorybookUI({
-  asyncStorage,
-  // isUIHidden: true,
-  // tabOpen: -1,
+  asyncStorage: AsyncStorage,
 });
 
-// If you are using React Native vanilla write your app name here.
-// If you use Expo you can safely remove this line.
+// If you are using React Native vanilla and after installation you don't see your app name here, write it manually.
 AppRegistry.registerComponent(appName, () => StorybookUIRoot);
