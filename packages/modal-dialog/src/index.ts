@@ -1,5 +1,6 @@
 export {
   ModalDialog as default,
+  ModalDialog,
   defaultProps as modalDialogDefaultProps,
   defaultStyles as modalDialogDefaultStyles
 } from './ModalDialog';

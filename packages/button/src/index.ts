@@ -1,4 +1,9 @@
-export {Button as default, defaultProps as buttonDefaultProps, defaultStyles as buttonDefaultStyles} from './Button';
+export {
+  Button as default,
+  Button,
+  defaultProps as buttonDefaultProps,
+  defaultStyles as buttonDefaultStyles
+} from './Button';
 export type {ButtonProps} from './Button';
 export {
   defaultProps as inputButtonDefaultProps,
