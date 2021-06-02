@@ -13,6 +13,14 @@ export const localizedMonths: {[s: string]: Array<string>} = {
     'Novembre',
     'Décembre'
   ],
+  ja: [
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test'
+  ],
   en: [
     'January',
     'February',
