@@ -28,7 +28,7 @@ export const localizedMonths: {[s: string]: Array<string>} = {
     'December'
   ],
    vi: [
-    'Tháng 1,
+    'Tháng 1',
     'Tháng 2',
     'Tháng 3',
     'Tháng 4',
