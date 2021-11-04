@@ -11,7 +11,7 @@ export type ActionSheetContextValue = {
 // @ts-expect-error allow initial null
 export const ActionSheetContext = React.createContext<ActionSheetContextValue>(null);
 
-export type ActionSheetProviderProps = Omit<ActionSheetProps, 'options'> & {
+export type ActionSheetProviderProps = Partial<Omit<ActionSheetProps, 'options'>> & {
   native?: boolean;
 };
 
@@ -22,6 +22,8 @@ export const defaultProps: Partial<ActionSheetProviderProps> = {
 export const ActionSheetProvider: FunctionComponent<ActionSheetProviderProps> = ({
   children,
   native = defaultProps.native,
+  onButtonPress: propOnButtonPress,
+  onCancel: propOnCancel,
   ...otherActionSheetProps
 }) => {
   const modalDialogRef = useRef<ModalDialogHandle>(null);
@@ -64,13 +66,19 @@ export const ActionSheetProvider: FunctionComponent<ActionSheetProviderProps> = 
       if (latestCallback.current) {
         latestCallback.current(buttonIndex);
       }
+      if (propOnButtonPress) {
+        propOnButtonPress(buttonIndex);
+      }
       hide();
     },
-    [hide]
+    [hide, propOnButtonPress]
   );
   const onCancel = useCallback(() => {
+    if (propOnCancel) {
+      propOnCancel();
+    }
     hide();
-  }, [hide]);
+  }, [hide, propOnCancel]);
 
   return (
     <ActionSheetContext.Provider value={contextValue}>
