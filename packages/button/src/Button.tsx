@@ -29,7 +29,7 @@ export const defaultStyles = {
     android: {}
   }),
   text: Platform.select<TextStyle>({
-    ios: {alignSelf: 'center', fontSize: 18, color: '#007aff'},
+    ios: {textAlign: 'center', margin: 8, color: '#007aff', fontSize: 18},
     android: {paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
   }),
   disabledText: Platform.select<TextStyle>({
@@ -107,7 +107,12 @@ export const Button: FunctionComponent<ButtonProps> = ({
 
   const viewStyle = useMemo<ViewStyle>(
     () =>
-      StyleSheet.flatten([propDefaultStyles.view, propViewStyle, flattenStyle, disabled ? disabledViewStyle : null]),
+      StyleSheet.flatten([
+        propDefaultStyles.view,
+        propViewStyle,
+        flattenStyle,
+        disabled ? [propDefaultStyles.disabledView, disabledViewStyle] : null
+      ]),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [propViewStyle, flattenStyle, disabled, disabledViewStyle]
   );
@@ -119,7 +124,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
         propTextStyle,
         pickTextStyles(flattenStyle),
         color ? {color} : null,
-        disabled ? disabledTextStyle : null
+        disabled ? [propDefaultStyles.disabledText, disabledTextStyle] : null
       ]),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [propTextStyle, flattenStyle, disabled, color, disabledTextStyle]

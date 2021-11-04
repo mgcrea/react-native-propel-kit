@@ -36,6 +36,7 @@ export const InputButton: FunctionComponent<InputButtonProps> = ({
       textStyle={[defaultStyles.text, textStyle]}
       disabledTextStyle={[defaultStyles.disabledText, disabledTextStyle]}
       color={!value ? placeholderTextColor : undefined}
+      numberOfLines={1}
       {...otherPressableProps}
     />
   );
@@ -43,7 +44,7 @@ export const InputButton: FunctionComponent<InputButtonProps> = ({
 
 export const defaultStyles: {[s: string]: ViewStyle | TextStyle} = {
   view: Platform.select<ViewStyle>({
-    ios: {justifyContent: 'flex-start'},
+    ios: {justifyContent: 'flex-start', alignItems: 'center'},
     android: {justifyContent: 'flex-start', height: 50}
   })!,
   disabledView: Platform.select<ViewStyle>({
@@ -51,7 +52,7 @@ export const defaultStyles: {[s: string]: ViewStyle | TextStyle} = {
     android: {}
   })!,
   text: Platform.select<TextStyle>({
-    ios: {alignSelf: 'flex-start', fontSize: 18, color: '#007aff'},
+    ios: {fontSize: 14, color: 'black'},
     android: {alignSelf: 'flex-start', paddingHorizontal: 3, paddingBottom: 2, color: '#212121'}
   })!,
   disabledText: Platform.select<TextStyle>({

@@ -9,6 +9,7 @@ import {
   StyleProp,
   StyleSheet,
   Text,
+  TextProps,
   TextStyle,
   TouchableNativeFeedback,
   TouchableNativeFeedbackProps,
@@ -19,17 +20,18 @@ import {
 } from 'react-native';
 import {pickTextStyles} from './utils';
 
-export type PressableProps = ButtonProps & {
-  children?: ReactNode;
-  style?: StyleProp<TextStyle>;
-  viewStyle?: StyleProp<ViewStyle>;
-  disabledViewStyle?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<TextStyle>;
-  disabledTextStyle?: StyleProp<TextStyle>;
-  TouchableComponent?: ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>;
-  activeOpacity?: TouchableOpacityProps['activeOpacity'];
-  defaultStyles?: typeof defaultStyles;
-};
+export type PressableProps = ButtonProps &
+  Pick<TextProps, 'ellipsizeMode' | 'numberOfLines'> & {
+    children?: ReactNode;
+    style?: StyleProp<TextStyle>;
+    viewStyle?: StyleProp<ViewStyle>;
+    disabledViewStyle?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
+    disabledTextStyle?: StyleProp<TextStyle>;
+    TouchableComponent?: ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>;
+    activeOpacity?: TouchableOpacityProps['activeOpacity'];
+    defaultStyles?: typeof defaultStyles;
+  };
 
 export const defaultProps = {
   TouchableComponent: Platform.select<ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>>({
@@ -47,6 +49,8 @@ export const Pressable: FunctionComponent<PressableProps> = ({
   viewStyle: propViewStyle,
   disabledViewStyle,
   textStyle: propTextStyle,
+  ellipsizeMode,
+  numberOfLines,
   disabledTextStyle,
   defaultStyles: propDefaultStyles = defaultStyles,
   style: propStyle,
@@ -95,7 +99,9 @@ export const Pressable: FunctionComponent<PressableProps> = ({
       {...otherTouchableProps}>
       <View style={viewStyle}>
         {children}
-        <Text style={textStyle}>{title}</Text>
+        <Text ellipsizeMode={ellipsizeMode} numberOfLines={numberOfLines} style={textStyle}>
+          {title}
+        </Text>
       </View>
     </TouchableComponent>
   );
