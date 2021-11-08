@@ -5,14 +5,22 @@
  * @format
  */
 const path = require('path');
-const blacklist = require('metro-config/src/defaults/blacklist');
+// const exclusionList = require('metro-config/src/defaults/exclusionList');
+
+const resolveModulePath = module => path.resolve(__dirname, `../packages/${module}/`);
+
+const extraNodeModules = {
+  '@mgcrea/react-native-action-sheet-provider': resolveModulePath('action-sheet-provider'),
+  '@mgcrea/react-native-backdrop-provider': resolveModulePath('backdrop-provider'),
+  '@mgcrea/react-native-button': resolveModulePath('button'),
+  '@mgcrea/react-native-date-picker': resolveModulePath('date-picker'),
+  '@mgcrea/react-native-modal-dialog': resolveModulePath('modal-dialog'),
+  '@mgcrea/react-native-select': resolveModulePath('select'),
+};
 
 module.exports = {
   projectRoot: path.resolve(__dirname),
-  watchFolders: [
-    path.resolve(__dirname, '../node_modules'),
-    path.resolve(__dirname, '../packages'),
-  ],
+  watchFolders: Object.values(extraNodeModules),
   transformer: {
     getTransformOptions: async () => ({
       transform: {
@@ -22,9 +30,11 @@ module.exports = {
     }),
   },
   resolver: {
-    blacklistRE: blacklist([
-      /node_modules\/.*\/node_modules\/react-native\/.*/,
-      /packages\/.*\/node_modules\/react-native\/.*/,
-    ]),
+    extraNodeModules,
+    resolverMainFields: ['sbmodern', 'browser', 'main'],
+    // blacklistRE: exclusionList([
+    //   // /node_modules\/.*\/node_modules\/react-native\/.*/,
+    //   /packages\/.*\/node_modules\/react-native\/.*/,
+    // ]),
   },
 };

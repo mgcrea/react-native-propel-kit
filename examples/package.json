@@ -7,57 +7,41 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "storybook": "start-storybook -p 7007",
-    "build-storybook": "build-storybook"
+    "lint": "eslint .",
+    "prestart": "sb-rn-get-stories",
+    "storybook-watcher": "sb-rn-watcher"
   },
   "dependencies": {
-    "@mgcrea/react-native-action-sheet-provider": "link:../packages/action-sheet-provider",
-    "@mgcrea/react-native-backdrop-provider": "link:../packages/backdrop-provider",
-    "@mgcrea/react-native-button": "link:../packages/button",
-    "@mgcrea/react-native-date-picker": "link:../packages/date-picker",
-    "@mgcrea/react-native-modal-dialog": "link:../packages/modal-picker",
-    "@react-native-async-storage/async-storage": "^1.14.1",
-    "react": "16.13.1",
-    "react-native": "0.63.4"
+    "@babel/runtime": "^7.16.0",
+    "@react-native-async-storage/async-storage": "^1.15.11",
+    "@react-native-community/datetimepicker": "^3.5.2",
+    "@react-native-community/slider": "^4.1.11",
+    "@react-native-picker/picker": "^2.2.0",
+    "react": "17.0.2",
+    "react-native": "0.67.0-rc.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/runtime": "^7.8.4",
-    "@react-native-community/eslint-config": "^1.1.0",
-    "@storybook/addon-actions": "^5.3",
-    "@storybook/addon-knobs": "^5.3",
-    "@storybook/addon-links": "^5.3",
-    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@babel/core": "^7.16.0",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "@react-native-community/eslint-plugin": "^1.1.0",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-controls": "^6.3.12",
+    "@storybook/addon-ondevice-actions": "^6.0.1-alpha.6",
+    "@storybook/addon-ondevice-backgrounds": "^6.0.1-alpha.6",
+    "@storybook/addon-ondevice-controls": "^6.0.1-alpha.6",
     "@storybook/addon-ondevice-knobs": "^5.3.25",
-    "@storybook/react-native": "^5.3.25",
+    "@storybook/addon-ondevice-notes": "^6.0.1-alpha.6",
+    "@storybook/react-native": "^6.0.1-alpha.6",
     "@storybook/react-native-server": "^5.3.23",
-    "@types/jest": "^25.2.3",
-    "@types/react-native": "^0.63.2",
-    "@types/react-test-renderer": "^16.9.2",
-    "babel-jest": "^25.1.0",
-    "babel-loader": "^8.2.2",
+    "babel-jest": "^27.3.1",
     "babel-plugin-module-name-mapper": "^1.2.0",
-    "babel-plugin-styled-components": "^1.12.0",
-    "eslint": "^6.5.1",
-    "jest": "^25.1.0",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react-dom": "16.13.1",
-    "react-test-renderer": "16.13.1",
-    "typescript": "^3.8.3"
-  },
-  "resolutions": {
-    "@types/react": "^16"
+    "eslint": "8.2.0",
+    "jest": "^27.3.1",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "17.0.2",
+    "typescript": "^4.4.4"
   },
   "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "preset": "react-native"
   }
 }
