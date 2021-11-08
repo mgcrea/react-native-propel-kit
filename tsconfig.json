@@ -3,7 +3,7 @@
   "lib": ["es2017", "dom"],
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": true,
+    // "emitDeclarationOnly": true,
     "noEmit": false,
     "skipLibCheck": true
   }

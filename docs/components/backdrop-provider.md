@@ -75,7 +75,7 @@ import {BackdropContext} from 'react-native-propel-kit';
 const MyComponent: FunctionComponent = () => {
   return (
     <BackdropContext.Consumer>
-      {backdrop => (
+      {(backdrop) => (
         <Button
           onPress={() => {
             backdrop.show();

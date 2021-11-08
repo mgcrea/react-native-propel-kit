@@ -1,10 +1,10 @@
 {
+  "root": true,
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
-  "extends": ["plugin:@typescript-eslint/recommended", "prettier", "prettier/@typescript-eslint"],
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
-  "env": {
-    "es6": true
-  },
-  "rules": {},
-  "ignorePatterns": ["examples/", "lib/", "node_modules/"]
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "react-native", "@react-native-community", "jest"],
+  "ignorePatterns": ["examples/", "**/*.js"],
+  "rules": {
+    // "@typescript-eslint/no-unused-vars": ["warn", {"ignorePatterns": ["^_"]}]
+  }
 }

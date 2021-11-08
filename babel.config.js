@@ -10,7 +10,7 @@ const moduleNameMapperOptions = {
   }
 };
 
-const presets = ['module:metro-react-native-babel-preset', '@babel/preset-typescript'];
+const presets = ['module:metro-react-native-babel-preset'];
 const plugins = [['babel-plugin-module-name-mapper', moduleNameMapperOptions], '@babel/plugin-transform-runtime'];
 
 if (NODE_ENV !== 'production') {

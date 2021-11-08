@@ -1,7 +1,7 @@
 {
   "name": "@mgcrea/react-native-propel-kit",
   "repository": "github:mgcrea/react-native-propel-kit",
-  "version": "0.9.2",
+  "version": "0.9.1",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -15,31 +15,21 @@
     "website": "cd website; GIT_USER=mgcrea CURRENT_BRANCH=master USE_SSH=true npm run deploy; cd -",
     "version": "scripts/setVersion.sh"
   },
-  "dependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.4",
-    "ts-jest": "^26.5.3"
-  },
   "devDependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/preset-typescript": "^7.13.0",
-    "@babel/runtime": "^7.13.10",
-    "@tsconfig/react-native": "^1.0.2",
-    "@typescript-eslint/eslint-plugin": "^4.17.0",
-    "@typescript-eslint/parser": "^4.17.0",
+    "@babel/core": "^7.16.0",
+    "@tsconfig/react-native": "^1.0.4",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
     "babel-plugin-module-name-mapper": "^1.2.0",
-    "eslint": "^7.21.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.22.0",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^25.2.4",
+    "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.65.2",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.3"
+    "eslint-plugin-react-native": "^3.11.0",
+    "jest": "^27.3.1",
+    "prettier": "^2.4.1",
+    "typescript": "^4.5.1-rc"
   },
   "workspaces": {
     "packages": [
