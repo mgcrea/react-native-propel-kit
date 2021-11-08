@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Animated, Easing, EasingFunction, Platform, StyleSheet} from 'react-native';
-const IOS_OPACITY = 0.4; // @NOTE from native ActionSheet backdrop
+const IOS_OPACITY = 0.25; // @NOTE from native ActionSheet backdrop
 
 export type BackdropContextValue = {
   show: () => void;
