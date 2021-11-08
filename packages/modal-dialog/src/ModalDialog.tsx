@@ -56,7 +56,7 @@ export type ModalDialogHandle = {
   toggle: () => void;
 };
 
-const MAX_HEIGHT = Dimensions.get('window').height;
+const {height: WINDOW_HEIGHT} = Dimensions.get('window');
 
 export const defaultProps = {
   backgroundColor: 'white',
@@ -248,10 +248,9 @@ export const defaultStyles = {
     ios: {
       flexDirection: 'column',
       alignItems: 'stretch',
-      // marginHorizontal: 8, // actionsheet
-      marginHorizontal: 24,
-      marginBottom: 24,
-      maxHeight: MAX_HEIGHT - 8
+      marginHorizontal: 8,
+      marginBottom: 8,
+      maxHeight: WINDOW_HEIGHT - 8
     },
     android: {
       flexDirection: 'column',
@@ -259,7 +258,7 @@ export const defaultStyles = {
       // marginHorizontal: 82, // timepicker/spinner
       marginHorizontal: 24,
       elevation: 4,
-      maxHeight: MAX_HEIGHT - 8
+      maxHeight: WINDOW_HEIGHT - 8
     }
   })!,
   header: Platform.select<ViewStyle>({
