@@ -14,7 +14,7 @@ import {
 import ActionSheetOption from './components/ActionSheetOption';
 import isUndefined from './utils/isUndefined';
 
-const WINDOW_HEIGHT = Dimensions.get('window').height;
+const {height: WINDOW_HEIGHT} = Dimensions.get('window');
 const IOS_OPACITY = 0.85; // @NOTE from native ActionSheet (though it uses blur)
 
 export type ActionSheetProps = Pick<ScrollViewProps, 'scrollEnabled'> &
@@ -107,7 +107,13 @@ export const defaultStyles = {
     android: {flex: 1, justifyContent: 'center'}
   })!,
   container: Platform.select<ViewStyle>({
-    ios: {margin: 8, maxHeight: WINDOW_HEIGHT - 8 * 2},
+    ios: {
+      flexDirection: 'column',
+      alignItems: 'stretch',
+      marginHorizontal: 8,
+      marginBottom: 8,
+      maxHeight: WINDOW_HEIGHT - 8
+    },
     android: {
       flexDirection: 'column',
       alignItems: 'stretch',
