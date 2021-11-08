@@ -1,7 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react-native';
 import React from 'react';
 import {Button as NativeButton} from 'react-native';
-import Button from '../src';
+import {Button} from '../src';
 import {CenteredView, InnerStory} from './components';
 
 const meta: ComponentMeta<typeof Button> = {
