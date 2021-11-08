@@ -1,13 +1,17 @@
-import {DatePickerIOSProps} from 'react-native';
+import {IOSNativeProps} from '@react-native-community/datetimepicker';
+import {asLocaleDate} from './date';
+// import {DatePickerIOSProps} from 'react-native';
 
 export type LabelExtractorOptions = {
-  mode: DatePickerIOSProps['mode'] | 'month' | 'year';
-  locale: DatePickerIOSProps['locale'];
+  mode: IOSNativeProps['mode'] | 'month' | 'year';
+  locale: IOSNativeProps['locale'];
+  utc?: boolean;
 };
 
 export const withoutSeconds = (localeString: string): string => localeString.replace(/(.*):\d+(.*)/, '$1$2');
 
-export const defaultLabelExtractor = (value: Date, {mode, locale}: LabelExtractorOptions): string => {
+export const defaultLabelExtractor = (date: Date, {mode, locale, utc}: LabelExtractorOptions): string => {
+  const value = utc ? asLocaleDate(date) : date;
   switch (mode) {
     case 'date':
       return value.toLocaleDateString(locale);

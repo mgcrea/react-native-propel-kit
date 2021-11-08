@@ -1,6 +1,6 @@
 import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
 import ModalDialog, {ModalDialogHandle, ModalDialogProps} from '@mgcrea/react-native-modal-dialog';
-import Picker from '@mgcrea/react-native-picker';
+import {Picker} from '@react-native-picker/picker';
 import React, {
   ElementType,
   forwardRef,
