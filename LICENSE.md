@@ -1,6 +1,6 @@
-The MIT License
+# The MIT License
 
-Copyright (c) 2019 Olivier Louvignes https://mgcrea.io
+Copyright (c) 2019 Olivier Louvignes <https://mgcrea.io>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

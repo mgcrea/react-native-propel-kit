@@ -2,6 +2,11 @@
 
 exports[`<InputButton> renders correctly without props 1`] = `
 <View
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -24,22 +29,25 @@ exports[`<InputButton> renders correctly without props 1`] = `
   <View
     style={
       Object {
+        "alignItems": "center",
         "flexDirection": "row",
         "height": 50,
-        "justifyContent": "center",
+        "justifyContent": "flex-start",
       }
     }
   >
     <Text
+      numberOfLines={1}
       style={
         Object {
-          "color": "#007aff",
-          "fontSize": 18,
-          "margin": 8,
-          "textAlign": "center",
+          "alignSelf": "center",
+          "color": "#c7c7cc",
+          "fontSize": 14,
         }
       }
-    />
+    >
+      
+    </Text>
   </View>
 </View>
 `;

@@ -5,12 +5,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "jest",
-    "typecheck": "tsc --noEmit",
-    "prettycheck": "prettier --check 'packages/*/{src,test}/*.{ts,tsx}'",
+    "test": "npm run ts:check && npm run pretty:check && npm run jest",
+    "jest": "jest --runInBand",
+    "ts:check": "tsc --noEmit",
+    "pretty:check": "prettier --check 'packages/*/{src,test}/*.{ts,tsx}'",
+    "pretty:write": "prettier --write 'packages/*/{src,test}/*.{ts,tsx}'",
     "lint": "eslint --ext .ts,.tsx packages/*/src",
     "clean": "rm -rf node_modules; scripts/runPackages.sh --eval \"rm -rf node_modules\"",
-    "build": "scripts/runPackages.sh \"yarn build\"",
+    "build": "scripts/runPackages.sh \"npm run build\"",
     "publish": "scripts/runPackages.sh \"npm publish --non-interactive --access public\"",
     "website": "cd website; GIT_USER=mgcrea CURRENT_BRANCH=master USE_SSH=true npm run deploy; cd -",
     "version": "scripts/setVersion.sh"

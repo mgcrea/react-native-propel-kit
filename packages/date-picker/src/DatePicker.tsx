@@ -195,7 +195,8 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
             onConfirm={onConfirm}
             onCancel={onCancel}
             confirmTitle={confirmTitle}
-            cancelTitle={cancelTitle}>
+            cancelTitle={cancelTitle}
+          >
             <View style={{height: mode === 'datetime' ? 417.5 : 368, width: '100%'}}>
               <DateTimePicker
                 value={modalValue}

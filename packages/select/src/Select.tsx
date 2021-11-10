@@ -145,7 +145,8 @@ export const Select = Object.assign(
             onConfirm={onConfirm}
             onCancel={onCancel}
             confirmTitle={confirmTitle}
-            cancelTitle={cancelTitle}>
+            cancelTitle={cancelTitle}
+          >
             <Picker style={{flexGrow: 1}} onValueChange={onValueChange} selectedValue={modalValue}>
               {pickerChildren}
             </Picker>

@@ -6,5 +6,6 @@
     // "emitDeclarationOnly": true,
     "noEmit": false,
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["node_modules", "website", "test"]
 }

@@ -135,7 +135,8 @@ export const Button: FunctionComponent<ButtonProps> = ({
       style={{flex: doesFlex ? 1 : 0, flexDirection: 'row'}}
       disabled={disabled}
       onPress={handlePress}
-      {...otherTouchableProps}>
+      {...otherTouchableProps}
+    >
       <View style={viewStyle}>
         {/* {propLoading ? (
           <ActivityIndicator

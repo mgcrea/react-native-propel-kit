@@ -96,7 +96,8 @@ export const Pressable: FunctionComponent<PressableProps> = ({
       style={{flex: doesFlex ? 1 : 0, flexDirection: 'row'}}
       disabled={disabled}
       onPress={handlePress}
-      {...otherTouchableProps}>
+      {...otherTouchableProps}
+    >
       <View style={viewStyle}>
         {children}
         <Text ellipsizeMode={ellipsizeMode} numberOfLines={numberOfLines} style={textStyle}>

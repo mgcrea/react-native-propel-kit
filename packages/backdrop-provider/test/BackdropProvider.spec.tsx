@@ -1,15 +1,11 @@
 import React from 'react';
-import 'react-native';
-import {act, create} from 'react-test-renderer';
+import {render} from 'react-native-testing-library';
 
 import {BackdropProvider} from './../src';
 
 describe('<BackdropProvider>', () => {
-  afterAll(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-  });
   it('renders correctly', () => {
-    const component = create(<BackdropProvider />);
+    const component = render(<BackdropProvider />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 });

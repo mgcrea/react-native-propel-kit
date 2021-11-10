@@ -3,7 +3,7 @@ import {Platform, StyleProp, TextInputProps, TextStyle, ViewStyle} from 'react-n
 import {Pressable, PressableProps} from './Pressable';
 
 export type InputButtonProps = Omit<TextInputProps, 'onPress'> & {
-  onFocus: PressableProps['onPress'];
+  onFocus?: PressableProps['onPress'];
   viewStyle?: StyleProp<ViewStyle>;
   disabledViewStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;

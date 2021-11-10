@@ -72,7 +72,8 @@ const ActionSheetRenderFunction: ForwardRefRenderFunction<ModalDialogHandle, Act
       backgroundColor={backgroundColor}
       cancelTitle={cancelTitle}
       bodyStyle={{backgroundColor: 'transparent'}}
-      {...otherModalDialogProps}>
+      {...otherModalDialogProps}
+    >
       <ScrollView scrollEnabled={scrollEnabled}>
         {options.map((buttonTitle, buttonIndex) => {
           // Skip cancel button

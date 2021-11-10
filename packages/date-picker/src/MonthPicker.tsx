@@ -195,11 +195,13 @@ export const MonthPicker = forwardRef<MonthPickerHandle, MonthPickerProps>(
           onCancel={onCancel}
           confirmTitle={confirmTitle}
           cancelTitle={cancelTitle}
-          bodyStyle={{flexDirection: 'row'}}>
+          bodyStyle={{flexDirection: 'row'}}
+        >
           <Picker
             style={{flexBasis: '50%', flexGrow: 0, flexShrink: 0}}
             onValueChange={onMonthValueChange}
-            selectedValue={modalMonthValue}>
+            selectedValue={modalMonthValue}
+          >
             {pickerValues.map(({label, value}) => (
               <Picker.Item key={value} label={label} value={value} />
             ))}
@@ -207,7 +209,8 @@ export const MonthPicker = forwardRef<MonthPickerHandle, MonthPickerProps>(
           <Picker
             style={{flexBasis: '50%', flexGrow: 0, flexShrink: 0}}
             onValueChange={onYearValueChange}
-            selectedValue={modalYearValue}>
+            selectedValue={modalYearValue}
+          >
             {yearOptions.map(({label, value}) => (
               <Picker.Item key={value} label={label} value={value} />
             ))}

@@ -2,6 +2,10 @@
 
 exports[`propel-kit export a proper interface 1`] = `
 Object {
+  "ActionSheet": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "ActionSheetContext": Object {
     "$$typeof": Symbol(react.context),
     "Consumer": Object {
@@ -20,9 +24,10 @@ Object {
     "_currentValue2": null,
     "_threadCount": 0,
   },
-  "ActionSheetContextProps": undefined,
   "ActionSheetProvider": [Function],
-  "ActionSheetProviderProps": undefined,
+  "ActionSheetProviderDefaultProps": Object {
+    "native": true,
+  },
   "BackdropContext": Object {
     "$$typeof": Symbol(react.context),
     "Consumer": Object {
@@ -41,60 +46,115 @@ Object {
     "_currentValue2": null,
     "_threadCount": 0,
   },
-  "BackdropContextProps": undefined,
   "BackdropProvider": [Function],
-  "BackdropProviderProps": undefined,
   "Button": [Function],
-  "ButtonProps": undefined,
   "DatePicker": Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
-  "DatePickerHandle": undefined,
-  "DatePickerProps": undefined,
-  "DateTimePicker": [Function],
-  "DateTimePickerProps": undefined,
+  "DateTimePicker": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "InputButton": [Function],
-  "InputButtonProps": undefined,
   "ModalDialog": Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
-  "ModalDialogHandle": undefined,
-  "ModalDialogProps": undefined,
+  "ModalDialogButton": [Function],
   "MonthPicker": Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
-  "MonthPickerProps": undefined,
-  "Picker": [Function],
-  "PickerItem": [Function],
-  "PickerProps": undefined,
   "Pressable": [Function],
-  "PressableProps": undefined,
   "Select": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "Item": [Function],
     "render": [Function],
   },
   "SelectItem": [Function],
-  "SelectProps": undefined,
-  "TimePicker": [Function],
-  "TimePickerProps": undefined,
+  "TimePicker": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "YearPicker": Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
-  "YearPickerProps": undefined,
+  "actionSheetDefaultProps": Object {
+    "backgroundColor": "white",
+    "cancelTitle": "Cancel",
+    "destructiveButtonColor": "#ff3b30",
+  },
+  "actionSheetDefaultStyles": Object {
+    "body": Object {
+      "backgroundColor": "transparent",
+      "borderBottomEndRadius": 12,
+      "borderBottomStartRadius": 12,
+      "flexDirection": "column",
+      "flexShrink": 1,
+      "opacity": 0.85,
+    },
+    "cancel": Object {
+      "borderRadius": 12,
+      "fontWeight": "600",
+      "marginTop": 8,
+    },
+    "confirm": Object {},
+    "container": Object {
+      "alignItems": "stretch",
+      "flexDirection": "column",
+      "marginBottom": 8,
+      "marginHorizontal": 8,
+      "maxHeight": 1326,
+    },
+    "footer": Object {},
+    "header": Object {
+      "alignItems": "center",
+      "borderTopLeftRadius": 12,
+      "borderTopRightRadius": 12,
+      "opacity": 0.85,
+      "padding": 16,
+    },
+    "lastOptionExtra": Object {
+      "borderBottomLeftRadius": 12,
+      "borderBottomRightRadius": 12,
+    },
+    "message": Object {
+      "color": "#888",
+      "fontSize": 13,
+      "fontWeight": "400",
+      "paddingBottom": 12,
+      "textAlign": "center",
+    },
+    "modal": Object {
+      "flex": 1,
+      "justifyContent": "flex-end",
+    },
+    "option": Object {
+      "marginTop": 0.5,
+    },
+    "title": Object {
+      "color": "#888",
+      "fontSize": 14,
+      "fontWeight": "500",
+      "paddingBottom": 12,
+      "textAlign": "center",
+    },
+  },
   "backdropProviderDefaultProps": Object {
     "backgroundColor": "black",
     "duration": 300,
     "easing": [Function],
-    "opacity": 0.4,
+    "opacity": 0.25,
     "useNativeDriver": true,
     "zIndex": 99,
   },
   "buttonDefaultProps": Object {
-    "TouchableComponent": [Function],
+    "TouchableComponent": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
     "defaultStyles": "object",
   },
   "buttonDefaultStyles": Object {
@@ -103,13 +163,42 @@ Object {
     },
     "disabledView": Object {},
     "text": Object {
-      "alignSelf": "center",
       "color": "#007aff",
       "fontSize": 18,
+      "margin": 8,
+      "textAlign": "center",
     },
     "view": Object {
       "flexDirection": "row",
       "height": 50,
+      "justifyContent": "center",
+    },
+  },
+  "datePickerDefaultProps": Object {
+    "InputButtonComponent": [Function],
+    "androidDisplay": "default",
+    "display": "inline",
+    "initialValue": 2021-11-09T23:00:00.000Z,
+    "labelExtractor": [Function],
+    "locale": undefined,
+    "mode": "date",
+    "trim": false,
+    "utc": false,
+  },
+  "defaultStyles": Object {
+    "disabledText": Object {
+      "color": "#cdcdcd",
+    },
+    "disabledView": Object {},
+    "text": Object {
+      "color": "#007aff",
+      "fontSize": 20,
+    },
+    "view": Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "flexGrow": 1,
+      "height": 56,
       "justifyContent": "center",
     },
   },
@@ -122,16 +211,85 @@ Object {
     },
     "disabledView": Object {},
     "text": Object {
-      "alignSelf": "flex-start",
-      "color": "#007aff",
-      "fontSize": 18,
+      "color": "black",
+      "fontSize": 14,
     },
     "view": Object {
+      "alignItems": "center",
       "justifyContent": "flex-start",
     },
   },
+  "modalDialogDefaultProps": Object {
+    "animationType": "slide",
+    "backgroundColor": "white",
+    "cancelTitle": "Cancel",
+    "confirmTitle": "Confirm",
+    "transparent": true,
+  },
+  "modalDialogDefaultStyles": Object {
+    "body": Object {
+      "flexDirection": "column",
+      "flexShrink": 1,
+    },
+    "cancel": Object {
+      "borderRadius": 12,
+      "fontWeight": "600",
+      "marginTop": 24,
+    },
+    "confirm": Object {
+      "borderBottomLeftRadius": 12,
+      "borderBottomRightRadius": 12,
+      "fontWeight": "400",
+    },
+    "container": Object {
+      "alignItems": "stretch",
+      "flexDirection": "column",
+      "marginBottom": 8,
+      "marginHorizontal": 8,
+      "maxHeight": 1326,
+    },
+    "footer": Object {
+      "borderBottomLeftRadius": 12,
+      "borderBottomRightRadius": 12,
+    },
+    "header": Object {
+      "alignItems": "center",
+      "borderTopLeftRadius": 12,
+      "borderTopRightRadius": 12,
+      "padding": 16,
+    },
+    "message": Object {
+      "color": "#888",
+      "fontSize": 13,
+      "fontWeight": "400",
+      "paddingBottom": 12,
+      "textAlign": "center",
+    },
+    "modal": Object {
+      "flex": 1,
+      "justifyContent": "flex-end",
+    },
+    "title": Object {
+      "color": "#888",
+      "fontSize": 14,
+      "fontWeight": "500",
+      "paddingBottom": 12,
+      "textAlign": "center",
+    },
+  },
+  "monthPickerDefaultProps": Object {
+    "InputButtonComponent": [Function],
+    "initialValue": 2021-11-01T00:00:00.000Z,
+    "labelExtractor": [Function],
+    "locale": undefined,
+    "trim": false,
+    "utc": false,
+  },
   "pressableDefaultProps": Object {
-    "TouchableComponent": [Function],
+    "TouchableComponent": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
   },
   "pressableDefaultStyles": Object {
     "disabledText": Object {
@@ -148,6 +306,17 @@ Object {
       "height": 50,
       "justifyContent": "center",
     },
+  },
+  "selectDefaultProps": Object {
+    "InputButtonComponent": [Function],
+  },
+  "yearPickerDefaultProps": Object {
+    "InputButtonComponent": [Function],
+    "initialValue": 2021,
+    "labelExtractor": [Function],
+    "locale": undefined,
+    "maxValue": 2041,
+    "minValue": 1971,
   },
 }
 `;

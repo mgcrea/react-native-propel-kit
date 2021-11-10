@@ -51,7 +51,8 @@ export const YearPicker = forwardRef<YearPickerHandle, YearPickerProps>(
         InputButtonComponent={InputButtonComponent}
         initialValue={propInitialValue}
         ref={ref}
-        {...otherSelectProps}>
+        {...otherSelectProps}
+      >
         {yearOptions.map(({label, value}) => (
           <Select.Item key={value} label={label} value={value} />
         ))}

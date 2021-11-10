@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-native';
 
 import * as exportedInterface from '../src';
 

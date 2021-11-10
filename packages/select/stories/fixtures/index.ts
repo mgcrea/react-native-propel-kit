@@ -1,4 +1,4 @@
-import {PickerItemProps} from 'react-native';
+import type {PickerItemProps} from '@react-native-picker/picker';
 import countries from './countries.json';
 
 type LabelsMap = Readonly<{

@@ -1,16 +1,11 @@
-// import React from 'react';
-// import {StyleSheet} from 'react-native';
-// import {shallow} from 'enzyme';
-
 import React from 'react';
-import 'react-native';
-import {create} from 'react-test-renderer';
+import {render} from 'react-native-testing-library';
 
-import ActionSheetProvider from './..';
+import {ActionSheetProvider} from './../src';
 
 describe('<ActionSheetProvider>', () => {
   it('renders correctly', () => {
-    const component = create(<ActionSheetProvider />);
+    const component = render(<ActionSheetProvider />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 });

@@ -1,9 +1,7 @@
 import React from 'react';
-import 'react-native';
-// import renderer from 'react-test-renderer';
-import {render, act, fireEvent} from 'react-native-testing-library';
+import {fireEvent, render} from 'react-native-testing-library';
 
-import InputButton from '../src';
+import {InputButton} from '../src';
 
 describe('<InputButton>', () => {
   it('renders correctly without props', () => {
