@@ -1,5 +1,3 @@
-import React from 'react';
-
 import * as exportedInterface from '../src';
 
 describe('propel-kit', () => {

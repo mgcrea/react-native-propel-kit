@@ -9,9 +9,7 @@ Array [
       }
     }
     accessible={true}
-    collapsable={false}
     focusable={true}
-    nativeID="animatedComponent"
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -47,7 +45,7 @@ Array [
           }
         }
       >
-        11/10/2021
+        11/9/2021
       </Text>
     </View>
   </View>,
@@ -128,7 +126,7 @@ Array [
             }
           >
             <RNDateTimePicker
-              date={1636498800000}
+              date={1636495200000}
               disabled={false}
               displayIOS="inline"
               mode="date"
@@ -164,9 +162,7 @@ Array [
         >
           <View
             accessible={true}
-            collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -212,9 +208,7 @@ Array [
         </View>
         <View
           accessible={true}
-          collapsable={false}
           focusable={true}
-          nativeID="animatedComponent"
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}

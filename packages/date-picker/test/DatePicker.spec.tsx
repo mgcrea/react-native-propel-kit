@@ -7,7 +7,7 @@ const DATE_2 = new Date('2021-02-04T08:30:00.000Z');
 
 describe('<DatePicker>', () => {
   it('renders correctly without props', () => {
-    const component = render(<DatePicker />);
+    const component = render(<DatePicker utc />);
     expect(component.toJSON()).toMatchSnapshot();
   });
   describe('should support a `value` prop', () => {
