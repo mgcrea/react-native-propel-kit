@@ -43,8 +43,8 @@ exports[`<ModalDialog> renders correctly 1`] = `
           Object {
             "alignItems": "stretch",
             "flexDirection": "column",
-            "marginBottom": 24,
-            "marginHorizontal": 24,
+            "marginBottom": 8,
+            "marginHorizontal": 8,
             "maxHeight": 1326,
           },
           undefined,

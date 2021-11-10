@@ -12,7 +12,7 @@
     "test": "CI=true jest --runInBand --colors"
   },
   "dependencies": {
-    "@mgcrea/react-native-backdrop-provider": "0.9.2"
+    "@mgcrea/react-native-modal-dialog": "0.9.2"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7",

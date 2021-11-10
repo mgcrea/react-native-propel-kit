@@ -13,9 +13,9 @@ const moduleNameMapperOptions = {
 const presets = ['module:metro-react-native-babel-preset'];
 const plugins = [['babel-plugin-module-name-mapper', moduleNameMapperOptions], '@babel/plugin-transform-runtime'];
 
-if (NODE_ENV !== 'production') {
-  moduleNameMapperOptions.moduleNameMapper['^@mgcrea/react-native-([^/]+)$'] = '<rootDir>/packages/$1/src';
-}
+// if (NODE_ENV !== 'production') {
+//   moduleNameMapperOptions.moduleNameMapper['^@mgcrea/react-native-([^/]+)$'] = '<rootDir>/packages/$1/src';
+// }
 
 module.exports = {
   presets,

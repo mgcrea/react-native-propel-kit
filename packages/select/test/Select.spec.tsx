@@ -3,7 +3,7 @@ import 'react-native';
 // import renderer from 'react-test-renderer';
 import {render, act, fireEvent} from 'react-native-testing-library';
 
-import Select from '../src';
+import {Select} from '../src';
 
 describe('<Select>', () => {
   it('renders correctly', () => {

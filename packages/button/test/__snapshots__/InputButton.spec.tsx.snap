@@ -3,8 +3,9 @@
 exports[`<InputButton> renders correctly without props 1`] = `
 <View
   accessible={true}
-  clickable={true}
-  isTVSelectable={true}
+  collapsable={false}
+  focusable={true}
+  nativeID="animatedComponent"
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -14,29 +15,29 @@ exports[`<InputButton> renders correctly without props 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
+      "flex": 0,
+      "flexDirection": "row",
       "opacity": 1,
     }
   }
 >
   <View
     style={
-      Array [
-        Object {
-          "justifyContent": "center",
-        },
-        undefined,
-      ]
+      Object {
+        "flexDirection": "row",
+        "height": 50,
+        "justifyContent": "center",
+      }
     }
   >
     <Text
       style={
-        Array [
-          Object {},
-          Object {},
-          Object {
-            "color": "#c7c7cc",
-          },
-        ]
+        Object {
+          "color": "#007aff",
+          "fontSize": 18,
+          "margin": 8,
+          "textAlign": "center",
+        }
       }
     />
   </View>

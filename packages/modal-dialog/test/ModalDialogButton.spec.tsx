@@ -2,7 +2,7 @@ import React from 'react';
 import 'react-native';
 import {render, fireEvent} from 'react-native-testing-library';
 
-import ModalDialogButton from './../src/components/ModalDialogButton';
+import {ModalDialogButton} from './../src';
 
 describe('<ModalDialogButton>', () => {
   it('renders correctly', () => {
