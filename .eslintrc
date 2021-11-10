@@ -2,7 +2,7 @@
   "root": true,
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "react-native", "@react-native-community", "jest"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "react-native", "jest"],
   "ignorePatterns": ["examples/", "**/*.js"],
   "rules": {
     // "@typescript-eslint/no-unused-vars": ["warn", {"ignorePatterns": ["^_"]}]

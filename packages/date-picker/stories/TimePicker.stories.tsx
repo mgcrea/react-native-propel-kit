@@ -1,8 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react-native';
-import React, {FunctionComponent, useState} from 'react';
-import {Text} from 'react-native';
+import React, {useState} from 'react';
 import {TimePicker} from '../src';
-import {CenteredView, InnerStory} from './components';
+import {CenteredView, DebugDateValue, InnerStory} from './components';
 
 const meta: ComponentMeta<typeof TimePicker> = {
   title: 'DatePicker/TimePicker',
@@ -21,7 +20,7 @@ export const Basic: ComponentStory<typeof TimePicker> = (args) => {
   const [time, setTime] = useState<Date>(new Date());
   return (
     <CenteredView>
-      <DebugValue value={time} />
+      <DebugDateValue value={time} />
       <InnerStory legend="default">
         <TimePicker value={time} onChange={setTime} {...args} />
       </InnerStory>
@@ -38,17 +37,5 @@ export const Basic: ComponentStory<typeof TimePicker> = (args) => {
         <TimePicker {...args} />
       </InnerStory>
     </CenteredView>
-  );
-};
-
-const DebugValue: FunctionComponent<{value: Date}> = ({value}) => {
-  return (
-    <>
-      <Text style={{color: 'black', textAlign: 'center', fontSize: 12, paddingVertical: 24}}>
-        {value.toISOString()}
-        {'\n'}
-        {value.toLocaleString()}
-      </Text>
-    </>
   );
 };

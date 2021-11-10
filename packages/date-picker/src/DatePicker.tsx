@@ -1,6 +1,6 @@
 import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
 import ModalDialog, {ModalDialogHandle, ModalDialogProps} from '@mgcrea/react-native-modal-dialog';
-import DateTimePicker, {AndroidNativeProps, IOSNativeProps} from '@react-native-community/datetimepicker';
+import {AndroidNativeProps, IOSNativeProps} from '@react-native-community/datetimepicker';
 import React, {
   ElementType,
   forwardRef,
@@ -124,11 +124,14 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
 
     const computeDate = (date: Date = initialValue) => {
       let nextValue = date;
+      console.warn({nextValue});
       if (trim) {
         nextValue = trimDate(nextValue, mode);
+        console.warn({trim: nextValue});
       }
       if (utc) {
         nextValue = asUTCDate(nextValue);
+        console.warn({utc: nextValue});
       }
       return nextValue;
     };
@@ -166,7 +169,8 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
       android: useCallback(async () => {
         const {action, value: nextValue} = await openAndroidDatePicker(mode, {
           value: inputValue,
-          display: androidDisplay
+          display: androidDisplay,
+          utc
         });
         if (action !== DatePickerAndroid.dismissedAction) {
           onConfirm(computeDate(nextValue));
@@ -192,8 +196,8 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
             onCancel={onCancel}
             confirmTitle={confirmTitle}
             cancelTitle={cancelTitle}>
-            <View style={{height: 300, width: '100%'}}>
-              <DateTimePicker
+            <View style={{height: mode === 'datetime' ? 417.5 : 368, width: '100%'}}>
+              {/* <DateTimePicker
                 value={modalValue}
                 mode={mode}
                 style={{flex: 1}}
@@ -203,7 +207,7 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
                     setModalValue(date);
                   }
                 }}
-              />
+              /> */}
             </View>
           </ModalDialog>
         ) : null}
@@ -211,3 +215,6 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
     );
   }
 );
+
+// 368
+//417.5

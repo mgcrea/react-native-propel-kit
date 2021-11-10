@@ -1,41 +1,40 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react-native';
 import React, {useState} from 'react';
-import {Text} from 'react-native';
-import {DatePicker} from '../src';
+import {DateTimePicker} from '../src';
 import {CenteredView, DebugDateValue, InnerStory} from './components';
 
-const meta: ComponentMeta<typeof DatePicker> = {
-  title: 'DatePicker',
-  component: Text,
+const meta: ComponentMeta<typeof DateTimePicker> = {
+  title: 'DatePicker/DateTimePicker',
+  component: DateTimePicker,
   argTypes: {
-    // onPress: {action: 'pressed the button'}
+    // onChange: {action: 'value changed'}
   },
   args: {
-    title: 'Pick a date'
+    title: 'Pick a datetime'
   }
 };
 
 export default meta;
 
-export const Basic: ComponentStory<typeof DatePicker> = (args) => {
+export const Basic: ComponentStory<typeof DateTimePicker> = (args) => {
   const [date, setDate] = useState<Date>(new Date());
   return (
     <CenteredView>
       <DebugDateValue value={date} />
       <InnerStory legend="default">
-        <DatePicker value={date} onChange={setDate} {...args} />
+        <DateTimePicker value={date} onChange={setDate} {...args} />
       </InnerStory>
       <InnerStory legend="utc">
-        <DatePicker value={date} onChange={setDate} utc {...args} />
+        <DateTimePicker value={date} onChange={setDate} utc {...args} />
       </InnerStory>
       <InnerStory legend="trim">
-        <DatePicker value={date} onChange={setDate} trim {...args} />
+        <DateTimePicker value={date} onChange={setDate} trim {...args} />
       </InnerStory>
       <InnerStory legend="utc + trim">
-        <DatePicker value={date} onChange={setDate} utc trim {...args} />
+        <DateTimePicker value={date} onChange={setDate} utc trim {...args} />
       </InnerStory>
       <InnerStory legend="uncontrolled">
-        <DatePicker {...args} />
+        <DateTimePicker {...args} />
       </InnerStory>
     </CenteredView>
   );
