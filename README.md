@@ -3,9 +3,6 @@
 [![npm version](https://img.shields.io/npm/v/react-native-propel-kit.svg)](https://github.com/mgcrea/react-native-propel-kit/releases)
 [![license](https://img.shields.io/github/license/mgcrea/react-native-propel-kit.svg?style=flat)](https://tldrlegal.com/license/mit-license)
 [![build status](https://travis-ci.com/mgcrea/react-native-propel-kit.svg?branch=master)](https://travis-ci.com/mgcrea/react-native-propel-kit)
-[![dependencies status](https://david-dm.org/mgcrea/react-native-propel-kit/status.svg)](https://david-dm.org/mgcrea/react-native-propel-kit)
-[![devDependencies status](https://david-dm.org/mgcrea/react-native-propel-kit/dev-status.svg)](https://david-dm.org/mgcrea/react-native-propel-kit?type=dev)
-[![coverage](https://codecov.io/gh/mgcrea/react-native-propel-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/mgcrea/react-native-propel-kit)
 
 [![Banner](https://mgcrea.github.io/react-native-propel-kit/img/logo_social_white_lite.png)](https://mgcrea.github.io/react-native-propel-kit/)
 
@@ -13,7 +10,7 @@
 
 **React Native Propel Kit** is a [React Native](https://facebook.github.io/react-native/) library providing basic **building blocks** for your next mobile application! This library is written in [TypeScript](https://www.typescriptlang.org/) using exclusively functional components leveraging [React hooks](https://reactjs.org/docs/hooks-intro.html).
 
-This library **does not have any external dependencies** beside react/react-native, and **does not use any native code** to work. It is light and safe to use! This library is also **structured as a monorepo** that enables you to require only specific sub-packages if you ever want to build upon it.
+This library is **structured as a monorepo** that enables you to require only specific sub-packages if you ever want to build upon it.
 
 ## Documentation and examples
 
@@ -30,7 +27,6 @@ This library **does not have any external dependencies** beside react/react-nati
 - [DateTimePicker](https://mgcrea.github.io/react-native-propel-kit/components/date-time-picker)
 - [MonthPicker](https://mgcrea.github.io/react-native-propel-kit/components/month-picker)
 - [YearPicker](https://mgcrea.github.io/react-native-propel-kit/components/year-picker)
-- [Picker](https://mgcrea.github.io/react-native-propel-kit/components/picker)
 
 ### Installation
 
@@ -71,7 +67,7 @@ npm install react-native-propel-kit
 
 ## License
 
-```
+```txt
 The MIT License
 
 Copyright (c) 2019 Olivier Louvignes <olivier@mgcrea.io>
