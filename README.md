@@ -31,9 +31,19 @@ This library is **structured as a monorepo** that enables you to require only sp
 ### Installation
 
 ```bash
-yarn add react-native-propel-kit
-# or
 npm install react-native-propel-kit
+```
+
+- Pickers rely on [@react-native-picker/picker](https://github.com/react-native-picker/picker) peer dependency:
+
+```sh
+npm i --save @react-native-picker/picker
+```
+
+- DatePicker/TimePicker rely on [@react-native-community/datetimepicker](https://github.com/react-native-datetimepicker/datetimepicker) peer dependency:
+
+```sh
+npm i --save @react-native-community/datetimepicker
 ```
 
 ## Communication
