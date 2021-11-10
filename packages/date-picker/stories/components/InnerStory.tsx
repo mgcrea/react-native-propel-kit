@@ -7,7 +7,7 @@ export const InnerStory: FunctionComponent<InnerStoryProps> = ({children, style,
   return (
     <View style={[styles.view, style]} {...viewProps}>
       {legend ? <Text style={styles.legend}>{legend}</Text> : null}
-      {children}
+      <View style={[styles.content, style]}>{children}</View>
     </View>
   );
 };
@@ -17,14 +17,21 @@ export default InnerStory;
 const styles = StyleSheet.create({
   view: {
     backgroundColor: 'white',
-    borderColor: '#999',
+    borderColor: '#bbb',
     borderWidth: StyleSheet.hairlineWidth,
     flexDirection: 'column',
-    marginBottom: 24
+    padding: 12,
+    marginBottom: 12,
+    width: '100%'
+  },
+  content: {
+    borderColor: '#bbb',
+    borderWidth: StyleSheet.hairlineWidth
   },
   legend: {
-    color: '#999',
-    position: 'absolute',
-    top: -18
+    fontFamily: 'Menlo',
+    color: '#333',
+    textAlign: 'center',
+    fontSize: 11
   }
 });

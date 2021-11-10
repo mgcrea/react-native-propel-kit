@@ -45,9 +45,23 @@ export type DatePickerProps = Pick<ModalDialogProps, 'title' | 'confirmTitle' | 
     value?: Date;
     utc?: boolean;
     trim?: boolean;
+    [s: string]: unknown; // otherInputButtonProps
   };
 
-export const defaultProps: Partial<DatePickerProps> = {
+export const defaultProps: Required<
+  Pick<
+    DatePickerProps,
+    | 'androidDisplay'
+    | 'initialValue'
+    | 'InputButtonComponent'
+    | 'labelExtractor'
+    | 'locale'
+    | 'mode'
+    | 'display'
+    | 'utc'
+    | 'trim'
+  >
+> = {
   androidDisplay: 'default',
   initialValue: START_OF_TODAY,
   InputButtonComponent: InputButton,
@@ -66,10 +80,12 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
       cancelTitle,
       confirmTitle,
       title,
-      mode = defaultProps.mode!,
+      // InputButton props
       placeholder,
+      // DatePicker props
+      mode = defaultProps.mode,
       androidDisplay = defaultProps.androidDisplay,
-      initialValue = defaultProps.initialValue!,
+      initialValue = defaultProps.initialValue,
       labelExtractor = defaultProps.labelExtractor,
       locale = defaultProps.locale,
       onChange: propOnChange,
@@ -82,14 +98,14 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
     },
     ref
   ) => {
-    const modalDialogRef = useRef<ModalDialogHandle>(null);
     const value = propValue || initialValue;
     const [modalValue, setModalValue] = useState<Date>(value);
 
-    // Track propValue for changes
+    // Track parent propValue controlled updates
     useEffect(() => {
-      setModalValue(utc ? asLocaleDate(value) : value);
-    }, [propValue, utc]);
+      const nextValue = utc ? asLocaleDate(value) : value;
+      setModalValue(nextValue);
+    }, [value, utc]);
 
     // Support both controlled/uncontrolled usage
     const [localValue, setLocalValue] = useState<Date>(initialValue);
@@ -121,7 +137,7 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
     const onConfirm = useCallback(
       (value?: Date) => {
         // @NOTE android uses direct calls while ios relies on a modalValue
-        const nextValue = computeDate(Platform.select({ios: modalValue, android: value})!);
+        const nextValue = computeDate(Platform.select({ios: modalValue, android: value}));
         if (propOnChange) {
           propOnChange(nextValue);
         }
@@ -145,6 +161,7 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
     }, [inputValue]);
 
     // Open the modal when user touches input
+    const modalDialogRef = useRef<ModalDialogHandle>(null);
     const focus = Platform.select<InputButtonProps['onFocus']>({
       android: useCallback(async () => {
         const {action, value: nextValue} = await openAndroidDatePicker(mode, {
@@ -160,14 +177,13 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
           modalDialogRef.current.show();
         }
       }, [])
-    })!;
-
+    });
     // Expose API via an imperative handle
     useImperativeHandle<DatePickerHandle, DatePickerHandle>(ref, () => ({focus}), [focus]);
 
     return (
       <>
-        <InputButton onFocus={focus} placeholder={placeholder} value={labelValue} />
+        <InputButton onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
         {Platform.OS === 'ios' ? (
           <ModalDialog
             ref={modalDialogRef}
@@ -183,7 +199,9 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
                 style={{flex: 1}}
                 display={display}
                 onChange={(_event, date) => {
-                  setModalValue(date!);
+                  if (date) {
+                    setModalValue(date);
+                  }
                 }}
               />
             </View>

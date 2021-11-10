@@ -14,16 +14,19 @@ import React, {
 } from 'react';
 import {DatePickerIOSProps} from 'react-native';
 import {
+  asLocaleDate,
   asUTCDate,
   defaultLabelExtractor,
   getNavigatorLocale,
   isUndefined,
   LabelExtractorOptions,
-  localizedMonths
+  localizedMonths,
+  trimDate
 } from './utils';
 
 const CURRENT_YEAR = new Date().getFullYear();
-const CURRENT_MONTH = new Date(Date.UTC(CURRENT_YEAR, 0, 1));
+const CURRENT_MONTH = new Date().getMonth();
+const START_OF_MONTH = new Date(Date.UTC(CURRENT_YEAR, CURRENT_MONTH, 1));
 
 type MonthPickerValue = Date;
 
@@ -44,65 +47,60 @@ export type MonthPickerProps = Pick<ModalDialogProps, 'title' | 'confirmTitle' |
     maxYear?: number;
     value?: MonthPickerValue;
     utc?: boolean;
-    [s: string]: any; // otherInputButtonProps
+    trim?: boolean;
+    [s: string]: unknown; // otherInputButtonProps
   };
 
-export const defaultProps = {
-  initialValue: CURRENT_MONTH,
+export const defaultProps: Required<
+  Pick<MonthPickerProps, 'initialValue' | 'InputButtonComponent' | 'labelExtractor' | 'locale' | 'utc' | 'trim'>
+> = {
+  initialValue: START_OF_MONTH,
   InputButtonComponent: InputButton,
   labelExtractor: defaultLabelExtractor,
   locale: getNavigatorLocale(),
-  utc: true
+  utc: false,
+  trim: false
 };
 
 export const MonthPicker = forwardRef<MonthPickerHandle, MonthPickerProps>(
   (
     {
-      children,
       // ModalDialog props
       cancelTitle,
       confirmTitle,
       title,
+      // InputButton props
+      placeholder,
       // MonthPicker props
-      initialValue: propInitialValue = defaultProps.initialValue,
+      initialValue = defaultProps.initialValue,
       InputButtonComponent = defaultProps.InputButtonComponent,
       labelExtractor = defaultProps.labelExtractor,
       locale = defaultProps.locale,
       utc = defaultProps.utc,
       onChange: propOnChange,
       onSubmitEditing,
-      placeholder,
       value: propValue,
+      trim,
       minYear = CURRENT_YEAR - 100,
       maxYear = CURRENT_YEAR + 10,
       ...otherInputButtonProps
     },
     ref
   ) => {
-    const modalInputRef = useRef<ModalDialogHandle>(null);
-    const [localValue, setLocalValue] = useState<MonthPickerValue>();
-    const [modalMonthValue, setModalMonthValue] = useState<number>(propInitialValue.getMonth());
-    const latestModalMonthValue = useRef(modalMonthValue);
-    const [modalYearValue, setModalYearValue] = useState<number>(propInitialValue.getFullYear());
-    const latestModalYearValue = useRef(modalYearValue);
-
-    // Support both controlled/uncontrolled usage
-    const inputValue = useMemo(() => (!isUndefined(propValue) ? propValue : localValue), [propValue, localValue]);
+    const value = propValue || initialValue;
+    const [modalMonthValue, setModalMonthValue] = useState<number>(initialValue.getMonth());
+    const [modalYearValue, setModalYearValue] = useState<number>(initialValue.getFullYear());
 
     // Track parent propValue controlled updates
     useEffect(() => {
-      if (!propValue) {
-        setModalMonthValue(propInitialValue.getMonth());
-        setModalYearValue(propInitialValue.getFullYear());
-        return;
-      }
-      if (latestModalMonthValue.current !== propValue.getMonth()) {
-        setModalMonthValue(propValue.getMonth());
-      }
-      if (latestModalYearValue.current !== propValue.getFullYear()) {
-        setModalYearValue(propValue.getFullYear());
-      }
-    }, [propValue, propInitialValue]);
+      const nextValue = utc ? asLocaleDate(value) : value;
+      setModalMonthValue(nextValue.getMonth());
+      setModalYearValue(nextValue.getFullYear());
+    }, [value]);
+
+    // Support both controlled/uncontrolled usage
+    const [localValue, setLocalValue] = useState<MonthPickerValue>(initialValue);
+    const inputValue = useMemo(() => (!isUndefined(propValue) ? propValue : localValue), [propValue, localValue]);
 
     // Lazily compute displayed label
     const labelValue = useMemo<string>(() => {
@@ -110,16 +108,36 @@ export const MonthPicker = forwardRef<MonthPickerHandle, MonthPickerProps>(
         return '';
       }
       if (labelExtractor) {
-        return labelExtractor(inputValue, {mode: 'month', locale});
+        return labelExtractor(inputValue, {mode: 'month', locale, utc});
       }
       return `${inputValue}`;
     }, [labelExtractor, inputValue, locale]);
 
+    const computeDate = (modalYearValue: number, modalMonthValue: number) => {
+      let nextValue = new Date(
+        modalYearValue,
+        modalMonthValue,
+        value.getDate(),
+        value.getHours(),
+        value.getMinutes(),
+        value.getSeconds(),
+        value.getMilliseconds()
+      );
+      console.warn({nextValue});
+      if (trim) {
+        nextValue = trimDate(nextValue, 'month');
+      }
+      if (utc) {
+        nextValue = asUTCDate(nextValue);
+      }
+      return nextValue;
+    };
+
     // Propagate changed value
     const onConfirm = useCallback(() => {
-      const nextValue = new Date(modalYearValue, modalMonthValue);
+      const nextValue = computeDate(modalYearValue, modalMonthValue);
       if (propOnChange) {
-        propOnChange(utc ? asUTCDate(nextValue, {mode: 'month'}) : nextValue);
+        propOnChange(nextValue);
       }
       if (onSubmitEditing) {
         // @NOTE Add a timeout to prevent swallowing siblings focus events
@@ -133,9 +151,9 @@ export const MonthPicker = forwardRef<MonthPickerHandle, MonthPickerProps>(
 
     // Reset modalValue to the proper value
     const onCancel = useCallback(() => {
-      setModalMonthValue((inputValue || propInitialValue).getMonth());
-      setModalYearValue((inputValue || propInitialValue).getFullYear());
-    }, [inputValue, propInitialValue]);
+      setModalMonthValue((inputValue || initialValue).getMonth());
+      setModalYearValue((inputValue || initialValue).getFullYear());
+    }, [inputValue, initialValue]);
 
     // Lazily compute year options
     const yearOptions = useMemo(() => {
@@ -147,12 +165,12 @@ export const MonthPicker = forwardRef<MonthPickerHandle, MonthPickerProps>(
     }, [minYear, maxYear]);
 
     // Open the modal when user touches input
+    const modalDialogRef = useRef<ModalDialogHandle>(null);
     const focus = useCallback(() => {
-      if (modalInputRef.current) {
-        modalInputRef.current.show();
+      if (modalDialogRef.current) {
+        modalDialogRef.current.show();
       }
     }, []);
-
     // Expose API via an imperative handle
     useImperativeHandle(ref, () => ({focus}), [focus]);
 
@@ -171,7 +189,7 @@ export const MonthPicker = forwardRef<MonthPickerHandle, MonthPickerProps>(
       <>
         <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
         <ModalDialog
-          ref={modalInputRef}
+          ref={modalDialogRef}
           title={title || placeholder}
           onConfirm={onConfirm}
           onCancel={onCancel}

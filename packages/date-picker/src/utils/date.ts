@@ -46,11 +46,9 @@ export const trimDate = (date: Date, mode: DateMode): Date => {
     case 'time':
       return new Date(1970, 0, 1, date.getHours(), date.getMinutes());
     case 'datetime':
-      return new Date(
-        Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes())
-      );
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
     case 'month':
-      return new Date(Date.UTC(date.getFullYear(), date.getMonth()));
+      return new Date(date.getFullYear(), date.getMonth());
     default:
       return date;
   }
