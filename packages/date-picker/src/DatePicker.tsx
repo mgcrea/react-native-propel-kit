@@ -1,6 +1,6 @@
 import {InputButton, InputButtonProps} from '@mgcrea/react-native-button';
 import ModalDialog, {ModalDialogHandle, ModalDialogProps} from '@mgcrea/react-native-modal-dialog';
-import {AndroidNativeProps, IOSNativeProps} from '@react-native-community/datetimepicker';
+import DateTimePicker, {AndroidNativeProps, IOSNativeProps} from '@react-native-community/datetimepicker';
 import React, {
   ElementType,
   forwardRef,
@@ -197,7 +197,7 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
             confirmTitle={confirmTitle}
             cancelTitle={cancelTitle}>
             <View style={{height: mode === 'datetime' ? 417.5 : 368, width: '100%'}}>
-              {/* <DateTimePicker
+              <DateTimePicker
                 value={modalValue}
                 mode={mode}
                 style={{flex: 1}}
@@ -207,7 +207,7 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
                     setModalValue(date);
                   }
                 }}
-              /> */}
+              />
             </View>
           </ModalDialog>
         ) : null}

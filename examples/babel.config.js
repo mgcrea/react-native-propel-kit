@@ -9,9 +9,11 @@ module.exports = {
           '^react-dom$': '<rootDir>/node_modules/react-dom',
           '^react-native$': '<rootDir>/node_modules/react-native',
           '^styled-components/native$': '<rootDir>/node_modules/styled-components/native',
+          '^@babel/runtime(.+)$': '<rootDir>/node_modules/@babel/runtime/$1',
           '^@storybook/react-native$': '<rootDir>/node_modules/@storybook/react-native',
           '^@react-native-picker/picker$': '<rootDir>/node_modules/@react-native-picker/picker',
-          '^@react-native-community/datetimepicker$': '<rootDir>/node_modules/@react-native-community/datetimepicker',
+          '^@react-native-community/datetimepicker(.*)':
+            '<rootDir>/node_modules/@react-native-community/datetimepicker$1',
           '^@mgcrea/react-native-([^/]+)/stories$': '<rootDir>/../packages/$1/stories',
           '^@mgcrea/react-native-([^/]+)$': '<rootDir>/../packages/$1/src',
         },

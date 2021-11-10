@@ -33,6 +33,8 @@ const getStories = () => {
     require("../../packages/button/stories/InputButton.stories.tsx"),
     require("../../packages/button/stories/Pressable.stories.tsx"),
     require("../../packages/date-picker/stories/DatePicker.stories.tsx"),
+    require("../../packages/date-picker/stories/DateTimePicker.stories.tsx"),
+    require("../../packages/date-picker/stories/MonthPicker.stories.tsx"),
     require("../../packages/date-picker/stories/TimePicker.stories.tsx"),
     require("../../packages/date-picker/stories/YearPicker.stories.tsx"),
     require("../../packages/modal-dialog/stories/ModalDialog.stories.tsx"),
