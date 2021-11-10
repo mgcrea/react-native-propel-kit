@@ -2,16 +2,14 @@ const {NODE_ENV = 'development'} = process.env;
 
 const moduleNameMapperOptions = {
   moduleNameMapper: {
-    '^src/(.*)': '<pkgDir>/src/$1',
-    // '^react$': '<rootDir>/node_modules/react',
-    // '^react-native$': '<rootDir>/node_modules/react-native'
-    // '^@storybook/react-native$': '<rootDir>/node_modules/@storybook/react-native',
-    '^@mgcrea/react-native-([^/]+)/stories$': '<rootDir>/../packages/$1/stories'
+    '^src/(.*)': '<pkgDir>/src/$1'
   }
 };
 
-const presets = ['module:metro-react-native-babel-preset'];
-const plugins = [['babel-plugin-module-name-mapper', moduleNameMapperOptions], '@babel/plugin-transform-runtime'];
+const presets = [
+  ['module:metro-react-native-babel-preset', {enableBabelRuntime: true, useTransformReactJSXExperimental: false}]
+];
+const plugins = [['babel-plugin-module-name-mapper', moduleNameMapperOptions]];
 
 // if (NODE_ENV !== 'production') {
 //   moduleNameMapperOptions.moduleNameMapper['^@mgcrea/react-native-([^/]+)$'] = '<rootDir>/packages/$1/src';

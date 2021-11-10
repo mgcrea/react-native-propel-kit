@@ -1,6 +1,6 @@
 {
   "name": "@mgcrea/react-native-modal-dialog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,8 +12,8 @@
     "test": "CI=true jest --runInBand --colors"
   },
   "dependencies": {
-    "@mgcrea/react-native-backdrop-provider": "1.0.0",
-    "@mgcrea/react-native-button": "1.0.0"
+    "@mgcrea/react-native-backdrop-provider": "1.0.1",
+    "@mgcrea/react-native-button": "1.0.1"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7",

@@ -1,7 +1,7 @@
 {
   "name": "@mgcrea/react-native-propel-kit",
   "repository": "github:mgcrea/react-native-propel-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -19,6 +19,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
     "@react-native-community/eslint-config": "^3.0.1",
     "@react-native-community/eslint-plugin": "^1.1.0",
     "@tsconfig/react-native": "^1.0.4",
@@ -33,6 +35,8 @@
     "eslint-plugin-react-native": "^3.11.0",
     "jest": "^27.3.1",
     "prettier": "^2.4.1",
+    "react": "^17.0.2",
+    "react-native": "^0.66.3",
     "typescript": "^4.5.1-rc"
   },
   "workspaces": {
