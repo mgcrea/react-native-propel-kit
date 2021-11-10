@@ -1,6 +1,6 @@
 {
   "name": "react-native-propel-kit",
-  "version": "0.9.2",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,12 +12,12 @@
     "test": "CI=true jest --runInBand --colors"
   },
   "dependencies": {
-    "@mgcrea/react-native-action-sheet-provider": "0.9.2",
-    "@mgcrea/react-native-backdrop-provider": "0.9.2",
-    "@mgcrea/react-native-button": "0.9.2",
-    "@mgcrea/react-native-date-picker": "0.9.2",
-    "@mgcrea/react-native-modal-dialog": "0.9.2",
-    "@mgcrea/react-native-select": "0.9.2"
+    "@mgcrea/react-native-action-sheet-provider": "1.0.0",
+    "@mgcrea/react-native-backdrop-provider": "1.0.0",
+    "@mgcrea/react-native-button": "1.0.0",
+    "@mgcrea/react-native-date-picker": "1.0.0",
+    "@mgcrea/react-native-modal-dialog": "1.0.0",
+    "@mgcrea/react-native-select": "1.0.0"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7",
