@@ -90,8 +90,6 @@ export const Button: FunctionComponent<ButtonProps> = ({
 }) => {
   // @NOTE we use flatten to properly split text/view related styles
   const flattenStyle = useMemo<TextStyle>(() => (propStyle ? StyleSheet.flatten(propStyle) : {}), [propStyle]);
-  const doesFlex = flattenStyle.flex === 1;
-  // const disabled = propDisabled || propLoading;
 
   const handlePress = useCallback(
     (ev: GestureResponderEvent) => {
@@ -132,7 +130,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 
   return (
     <TouchableComponent
-      style={{flex: doesFlex ? 1 : 0, flexDirection: 'row'}}
+      style={{flex: viewStyle.flex ? 1 : 0, flexDirection: 'row'}}
       disabled={disabled}
       onPress={handlePress}
       {...otherTouchableProps}

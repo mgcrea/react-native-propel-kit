@@ -4,6 +4,7 @@
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
+    "noEmit": false,
     "skipLibCheck": true
   },
   "exclude": ["node_modules", "website", "test"]
