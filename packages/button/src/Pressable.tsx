@@ -15,7 +15,6 @@ import {
   TouchableNativeFeedbackProps,
   TouchableOpacity,
   TouchableOpacityProps,
-  View,
   ViewStyle
 } from 'react-native';
 import {pickTextStyles} from './utils';
@@ -59,7 +58,6 @@ export const Pressable: FunctionComponent<PressableProps> = ({
 }) => {
   // @NOTE we use flatten to properly split text/view related styles
   const flattenStyle = useMemo<TextStyle>(() => (propStyle ? StyleSheet.flatten(propStyle) : {}), [propStyle]);
-  const doesFlex = flattenStyle.flex === 1;
 
   const handlePress = useCallback(
     (ev: GestureResponderEvent) => {
@@ -92,18 +90,11 @@ export const Pressable: FunctionComponent<PressableProps> = ({
   );
 
   return (
-    <TouchableComponent
-      style={{flex: doesFlex ? 1 : 0, flexDirection: 'row'}}
-      disabled={disabled}
-      onPress={handlePress}
-      {...otherTouchableProps}
-    >
-      <View style={viewStyle}>
-        {children}
-        <Text ellipsizeMode={ellipsizeMode} numberOfLines={numberOfLines} style={textStyle}>
-          {title}
-        </Text>
-      </View>
+    <TouchableComponent style={viewStyle} disabled={disabled} onPress={handlePress} {...otherTouchableProps}>
+      {children}
+      <Text ellipsizeMode={ellipsizeMode} numberOfLines={numberOfLines} style={textStyle}>
+        {title}
+      </Text>
     </TouchableComponent>
   );
 };

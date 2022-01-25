@@ -22,7 +22,9 @@
   "peerDependencies": {
     "@babel/runtime": ">=7",
     "react": ">=16.8",
-    "react-native": ">=0.59"
+    "react-native": ">=0.59",
+    "@react-native-community/datetimepicker": ">=3",
+    "@react-native-picker/picker": ">=2"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",

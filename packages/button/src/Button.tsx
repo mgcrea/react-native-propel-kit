@@ -14,7 +14,6 @@ import {
   TouchableNativeFeedbackProps,
   TouchableOpacity,
   TouchableOpacityProps,
-  View,
   ViewStyle
 } from 'react-native';
 import {pickTextStyles} from './utils';
@@ -129,21 +128,14 @@ export const Button: FunctionComponent<ButtonProps> = ({
   );
 
   return (
-    <TouchableComponent
-      style={{flex: viewStyle.flex ? 1 : 0, flexDirection: 'row'}}
-      disabled={disabled}
-      onPress={handlePress}
-      {...otherTouchableProps}
-    >
-      <View style={viewStyle}>
-        {/* {propLoading ? (
+    <TouchableComponent style={viewStyle} disabled={disabled} onPress={handlePress} {...otherTouchableProps}>
+      {/* {propLoading ? (
           <ActivityIndicator
             style={[propDefaultStyles.loading, propLoadingStyle]}
             color={textStyle && textStyle.color ? textStyle.color : propDefaultStyles.text.color}
           />
         ) : null} */}
-        <Text style={textStyle}>{title}</Text>
-      </View>
+      <Text style={textStyle}>{title}</Text>
     </TouchableComponent>
   );
 };
