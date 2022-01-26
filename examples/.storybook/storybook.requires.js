@@ -8,10 +8,8 @@ import {
 } from "@storybook/react-native";
 
 import "@storybook/addon-ondevice-notes/register";
+import "@storybook/addon-ondevice-controls/register";
 import "@storybook/addon-ondevice-backgrounds/register";
-import "@storybook/addon-ondevice-actions/register";
-
-import { argsEnhancers } from "@storybook/addon-actions/dist/modern/preset/addArgs";
 
 import { decorators, parameters } from "./preview";
 
@@ -23,10 +21,9 @@ if (parameters) {
   addParameters(parameters);
 }
 
-argsEnhancers.forEach((enhancer) => addArgsEnhancer(enhancer));
-
 const getStories = () => {
   return [
+    require("../components/Button/Button.stories.tsx"),
     require("../../packages/action-sheet-provider/stories/ActionSheetProvider.stories.tsx"),
     require("../../packages/backdrop-provider/stories/BackdropProvider.stories.tsx"),
     require("../../packages/button/stories/Button.stories.tsx"),
