@@ -14,7 +14,7 @@ export const defaultStyles = {
       alignItems: 'center'
     },
     android: {
-      flexGrow: 1,
+      // flexGrow: 1,
       justifyContent: 'center',
       flexDirection: 'row',
       height: 56,
@@ -32,6 +32,7 @@ export const defaultStyles = {
     },
     android: {
       fontSize: 16,
+      padding: 12,
       textTransform: 'uppercase',
       fontWeight: 'bold',
       color: '#009688' // android.teal500 (@see https://material.io/design/color/the-color-system.html)

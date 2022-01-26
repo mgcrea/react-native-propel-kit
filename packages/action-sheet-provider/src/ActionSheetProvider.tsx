@@ -79,7 +79,7 @@ export const ActionSheetProvider: FunctionComponent<ActionSheetProviderProps> = 
     }
     hide();
   }, [hide, propOnCancel]);
-
+  console.warn({otherActionSheetProps});
   return (
     <ActionSheetContext.Provider value={contextValue}>
       {children}
