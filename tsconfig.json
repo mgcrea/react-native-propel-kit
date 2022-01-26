@@ -1,11 +1,10 @@
 {
   "extends": "@tsconfig/react-native",
-  "lib": ["es2017", "dom"],
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
     "noEmit": false,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "website", "test"]
+  "exclude": ["node_modules"]
 }
