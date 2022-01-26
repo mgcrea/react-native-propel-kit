@@ -15,6 +15,7 @@ import {
   TouchableNativeFeedbackProps,
   TouchableOpacity,
   TouchableOpacityProps,
+  View,
   ViewStyle
 } from 'react-native';
 import {pickTextStyles} from './utils';
@@ -32,9 +33,17 @@ export type PressableProps = ButtonProps &
     defaultStyles?: typeof defaultStyles;
   };
 
+const AndroidTouchable: FunctionComponent<TouchableNativeFeedbackProps> = ({children, style, ...otherProps}) => {
+  return (
+    <TouchableNativeFeedback {...otherProps}>
+      <View style={style}>{children}</View>
+    </TouchableNativeFeedback>
+  );
+};
+
 export const defaultProps = {
   TouchableComponent: Platform.select<ElementType<TouchableNativeFeedbackProps | TouchableOpacityProps>>({
-    android: TouchableNativeFeedback,
+    android: AndroidTouchable,
     default: TouchableOpacity
   })
 };
@@ -91,12 +100,10 @@ export const Pressable: FunctionComponent<PressableProps> = ({
 
   return (
     <TouchableComponent style={viewStyle} disabled={disabled} onPress={handlePress} {...otherTouchableProps}>
-      <>
-        {children}
-        <Text ellipsizeMode={ellipsizeMode} numberOfLines={numberOfLines} style={textStyle}>
-          {title}
-        </Text>
-      </>
+      {children}
+      <Text ellipsizeMode={ellipsizeMode} numberOfLines={numberOfLines} style={textStyle}>
+        {title}
+      </Text>
     </TouchableComponent>
   );
 };
