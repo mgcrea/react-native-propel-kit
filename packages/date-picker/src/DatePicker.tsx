@@ -84,6 +84,7 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
       placeholder,
       // DatePicker props
       mode = defaultProps.mode,
+      InputButtonComponent = defaultProps.InputButtonComponent,
       androidDisplay = defaultProps.androidDisplay,
       initialValue = defaultProps.initialValue,
       labelExtractor = defaultProps.labelExtractor,
@@ -187,7 +188,7 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
 
     return (
       <>
-        <InputButton onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
+        <InputButtonComponent onFocus={focus} placeholder={placeholder} value={labelValue} {...otherInputButtonProps} />
         {Platform.OS === 'ios' ? (
           <ModalDialog
             ref={modalDialogRef}
