@@ -91,10 +91,12 @@ export const Pressable: FunctionComponent<PressableProps> = ({
 
   return (
     <TouchableComponent style={viewStyle} disabled={disabled} onPress={handlePress} {...otherTouchableProps}>
-      {children}
-      <Text ellipsizeMode={ellipsizeMode} numberOfLines={numberOfLines} style={textStyle}>
-        {title}
-      </Text>
+      <>
+        {children}
+        <Text ellipsizeMode={ellipsizeMode} numberOfLines={numberOfLines} style={textStyle}>
+          {title}
+        </Text>
+      </>
     </TouchableComponent>
   );
 };
