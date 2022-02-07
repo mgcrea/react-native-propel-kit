@@ -123,7 +123,7 @@ export const MonthPicker = forwardRef<MonthPickerHandle, MonthPickerProps>(
         value.getSeconds(),
         value.getMilliseconds()
       );
-      console.warn({nextValue});
+      // console.warn({nextValue});
       if (trim) {
         nextValue = trimDate(nextValue, 'month');
       }

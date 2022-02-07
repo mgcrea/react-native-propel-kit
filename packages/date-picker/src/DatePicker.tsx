@@ -125,14 +125,14 @@ export const DatePicker = forwardRef<DatePickerHandle, DatePickerProps>(
 
     const computeDate = (date: Date = initialValue) => {
       let nextValue = date;
-      console.warn({nextValue});
+      // console.warn({nextValue});
       if (trim) {
         nextValue = trimDate(nextValue, mode);
-        console.warn({trim: nextValue});
+        // console.warn({trim: nextValue});
       }
       if (utc) {
         nextValue = asUTCDate(nextValue);
-        console.warn({utc: nextValue});
+        // console.warn({utc: nextValue});
       }
       return nextValue;
     };
