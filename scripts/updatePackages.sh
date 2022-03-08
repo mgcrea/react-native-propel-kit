@@ -3,7 +3,7 @@
 set -e # terminate on first failure
 
 command=${1:-""}
-rejects="--reject react,react-native"
+rejects="--reject 'react,react-native,@types/react,@types/react-native'"
 
 packages=$(
   find packages -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0
@@ -14,6 +14,6 @@ for module in ${packages[@]}; do
   echo -e "\n🏛 $(basename $(pwd))"
   echo "$ ncu ${rejects} ${command}"
   ncu --dep prod ${rejects} ${command}
-  ncu --dep dev ${command}
+  ncu --dep dev ${rejects} ${command}
   cd - > /dev/null
 done
