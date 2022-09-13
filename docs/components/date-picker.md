@@ -22,6 +22,8 @@ The `<DatePicker />`component gives your a easy-to-use cross platform date picke
 
 ### Setup dependencies
 
+Install @react-native-community/datetimepicker dependency : `npm i @react-native-community/datetimepicker`.
+
 Since this components uses a backdrop, you need to wrap your application with a `<BackdropProvider />` component. You usually want to wrap it as high as possible in your tree so that the backdrop properly covers the whole screen.
 
 ```tsx
