@@ -1,5 +1,5 @@
 import {ModalDialogHandle} from '@mgcrea/react-native-modal-dialog';
-import React, {FunctionComponent, useCallback, useMemo, useRef, useState} from 'react';
+import React, {FunctionComponent, PropsWithChildren, useCallback, useMemo, useRef, useState} from 'react';
 import {ActionSheetIOS, ActionSheetIOSOptions, Platform} from 'react-native';
 import {ActionSheet, ActionSheetProps} from './ActionSheet';
 
@@ -19,7 +19,7 @@ export const defaultProps: Partial<ActionSheetProviderProps> = {
   native: true
 };
 
-export const ActionSheetProvider: FunctionComponent<ActionSheetProviderProps> = ({
+export const ActionSheetProvider: FunctionComponent<PropsWithChildren<ActionSheetProviderProps>> = ({
   children,
   native = defaultProps.native,
   onButtonPress: propOnButtonPress,

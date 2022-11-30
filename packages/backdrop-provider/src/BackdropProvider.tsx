@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {FunctionComponent, PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Animated, Easing, EasingFunction, Platform, StyleSheet} from 'react-native';
 const IOS_OPACITY = 0.25; // @NOTE from native ActionSheet backdrop
 
@@ -29,7 +29,7 @@ export const defaultProps: Required<BackdropProviderProps> = {
   zIndex: 99
 };
 
-export const BackdropProvider: FunctionComponent<BackdropProviderProps> = ({
+export const BackdropProvider: FunctionComponent<PropsWithChildren<BackdropProviderProps>> = ({
   backgroundColor = 'black',
   children,
   duration = defaultProps.duration,
