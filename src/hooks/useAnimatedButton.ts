@@ -1,5 +1,5 @@
 import { type ColorValue } from "react-native";
-import { interpolateColor, useDerivedValue } from "react-native-reanimated";
+import { interpolateColor, useDerivedValue, useSharedValue } from "react-native-reanimated";
 import { isValidColorRange, type ColorRange } from "./useAnimatedColor";
 import { useAnimatedTransition } from "./useAnimatedTransition";
 
@@ -22,11 +22,15 @@ export const useAnimatedButton = ({
   disabledBackgroundColor,
   disabledBorderColor,
   disabledTextColor,
-  disabled,
+  disabled = false,
   inputRange = [0, 1],
   duration = [100, 300],
 }: AnimatedButtonConfig) => {
   const isValid = isValidColorRange(background) || isValidColorRange(border) || isValidColorRange(text);
+
+  // Use shared value so worklets can access current disabled state
+  const isDisabled = useSharedValue(disabled);
+  isDisabled.value = disabled;
 
   const { animatedValue, animateIn, animateOut } = useAnimatedTransition({
     duration,
@@ -34,7 +38,7 @@ export const useAnimatedButton = ({
   });
 
   const backgroundColor = useDerivedValue(() => {
-    if (disabled) {
+    if (isDisabled.value) {
       return disabledBackgroundColor;
     }
     if (!isValidColorRange(background)) {
@@ -44,7 +48,7 @@ export const useAnimatedButton = ({
   });
 
   const borderColor = useDerivedValue(() => {
-    if (disabled) {
+    if (isDisabled.value) {
       return disabledBorderColor;
     }
     if (!isValidColorRange(border)) {
@@ -54,7 +58,7 @@ export const useAnimatedButton = ({
   });
 
   const textColor = useDerivedValue(() => {
-    if (disabled) {
+    if (isDisabled.value) {
       return disabledTextColor;
     }
     if (!isValidColorRange(text)) {
