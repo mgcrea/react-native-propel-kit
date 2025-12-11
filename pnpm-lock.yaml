@@ -23,6 +23,9 @@ importers:
       '@react-native/typescript-config':
         specifier: 0.83.0
         version: 0.83.0
+      '@types/react':
+        specifier: ^19.2.7
+        version: 19.2.7
       babel-plugin-module-resolver:
         specifier: ^5.0.2
         version: 5.0.2
@@ -34,10 +37,10 @@ importers:
         version: 19.2.1
       react-native:
         specifier: ^0.83.0
-        version: 0.83.0(@babel/core@7.28.5)(react@19.2.1)
+        version: 0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1)
       react-native-reanimated:
         specifier: ^4.2.0
-        version: 4.2.0(react-native-worklets@0.7.1(@babel/core@7.28.5)(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1))(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1)
+        version: 4.2.0(react-native-worklets@0.7.1(@babel/core@7.28.5)(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1))(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1)
       tsc-alias:
         specifier: ^1.8.16
         version: 1.8.16
@@ -689,6 +692,9 @@ packages:
   '@types/node@25.0.0':
     resolution: {integrity: sha512-rl78HwuZlaDIUSeUKkmogkhebA+8K1Hy7tddZuJ3D0xV8pZSfsYGTsliGUol1JPzu9EKnTxPC4L1fiWouStRew==}
 
+  '@types/react@19.2.7':
+    resolution: {integrity: sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==}
+
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
 
@@ -904,6 +910,9 @@ packages:
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
+
+  csstype@3.2.3:
+    resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
   debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -2655,12 +2664,14 @@ snapshots:
 
   '@react-native/typescript-config@0.83.0': {}
 
-  '@react-native/virtualized-lists@0.83.0(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1)':
+  '@react-native/virtualized-lists@0.83.0(@types/react@19.2.7)(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1)':
     dependencies:
       invariant: 2.2.4
       nullthrows: 1.1.1
       react: 19.2.1
-      react-native: 0.83.0(@babel/core@7.28.5)(react@19.2.1)
+      react-native: 0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1)
+    optionalDependencies:
+      '@types/react': 19.2.7
 
   '@sinclair/typebox@0.27.8': {}
 
@@ -2710,6 +2721,10 @@ snapshots:
   '@types/node@25.0.0':
     dependencies:
       undici-types: 7.16.0
+
+  '@types/react@19.2.7':
+    dependencies:
+      csstype: 3.2.3
 
   '@types/stack-utils@2.0.3': {}
 
@@ -2976,6 +2991,8 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  csstype@3.2.3: {}
 
   debug@2.6.9:
     dependencies:
@@ -3671,20 +3688,20 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-native-is-edge-to-edge@1.2.1(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1):
+  react-native-is-edge-to-edge@1.2.1(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1):
     dependencies:
       react: 19.2.1
-      react-native: 0.83.0(@babel/core@7.28.5)(react@19.2.1)
+      react-native: 0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1)
 
-  react-native-reanimated@4.2.0(react-native-worklets@0.7.1(@babel/core@7.28.5)(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1))(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1):
+  react-native-reanimated@4.2.0(react-native-worklets@0.7.1(@babel/core@7.28.5)(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1))(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1):
     dependencies:
       react: 19.2.1
-      react-native: 0.83.0(@babel/core@7.28.5)(react@19.2.1)
-      react-native-is-edge-to-edge: 1.2.1(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1)
-      react-native-worklets: 0.7.1(@babel/core@7.28.5)(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1)
+      react-native: 0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1)
+      react-native-is-edge-to-edge: 1.2.1(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1)
+      react-native-worklets: 0.7.1(@babel/core@7.28.5)(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1)
       semver: 7.7.3
 
-  react-native-worklets@0.7.1(@babel/core@7.28.5)(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1):
+  react-native-worklets@0.7.1(@babel/core@7.28.5)(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1):
     dependencies:
       '@babel/core': 7.28.5
       '@babel/plugin-transform-arrow-functions': 7.27.1(@babel/core@7.28.5)
@@ -3698,12 +3715,12 @@ snapshots:
       '@babel/preset-typescript': 7.27.1(@babel/core@7.28.5)
       convert-source-map: 2.0.0
       react: 19.2.1
-      react-native: 0.83.0(@babel/core@7.28.5)(react@19.2.1)
+      react-native: 0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1)
       semver: 7.7.3
     transitivePeerDependencies:
       - supports-color
 
-  react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1):
+  react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1):
     dependencies:
       '@jest/create-cache-key-function': 29.7.0
       '@react-native/assets-registry': 0.83.0
@@ -3712,7 +3729,7 @@ snapshots:
       '@react-native/gradle-plugin': 0.83.0
       '@react-native/js-polyfills': 0.83.0
       '@react-native/normalize-colors': 0.83.0
-      '@react-native/virtualized-lists': 0.83.0(react-native@0.83.0(@babel/core@7.28.5)(react@19.2.1))(react@19.2.1)
+      '@react-native/virtualized-lists': 0.83.0(@types/react@19.2.7)(react-native@0.83.0(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.1))(react@19.2.1)
       abort-controller: 3.0.0
       anser: 1.4.10
       ansi-regex: 5.0.1
@@ -3741,6 +3758,8 @@ snapshots:
       whatwg-fetch: 3.6.20
       ws: 7.5.10
       yargs: 17.7.2
+    optionalDependencies:
+      '@types/react': 19.2.7
     transitivePeerDependencies:
       - '@babel/core'
       - '@react-native-community/cli'
