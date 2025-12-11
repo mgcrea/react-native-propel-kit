@@ -1,13 +1,8 @@
-import { createMMKV } from "react-native-mmkv";
+import type { MMKV } from "react-native-mmkv";
 import superjson from "superjson";
 import { type PersistStorage, type StorageValue } from "zustand/middleware";
 
-export const storage = createMMKV({
-  id: "mmkv.default",
-  mode: "multi-process",
-});
-
-export const createZustandStorage = <S>(): PersistStorage<S> => ({
+export const createZustandStorage = <S>(storage: MMKV): PersistStorage<S> => ({
   setItem: (name: string, value) => {
     storage.set(name, superjson.stringify(value));
   },
