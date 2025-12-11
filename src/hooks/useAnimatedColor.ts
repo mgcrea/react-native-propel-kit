@@ -40,7 +40,7 @@ export const useAnimatedColor = ({
       return outputRange[0];
     }
     return interpolateColor(animatedValue.value, inputRange, outputRange);
-  });
+  }, [disabled, inputRange, outputRange]);
 
   return {
     color,

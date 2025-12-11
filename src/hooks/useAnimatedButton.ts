@@ -45,7 +45,7 @@ export const useAnimatedButton = ({
       return background ? background[0] : undefined;
     }
     return interpolateColor(animatedValue.value, inputRange, background);
-  });
+  }, [background, disabledBackgroundColor, inputRange]);
 
   const borderColor = useDerivedValue(() => {
     if (isDisabled.value) {
@@ -55,7 +55,7 @@ export const useAnimatedButton = ({
       return border ? border[0] : undefined;
     }
     return interpolateColor(animatedValue.value, inputRange, border);
-  });
+  }, [border, disabledBorderColor, inputRange]);
 
   const textColor = useDerivedValue(() => {
     if (isDisabled.value) {
@@ -65,7 +65,7 @@ export const useAnimatedButton = ({
       return text ? text[0] : undefined;
     }
     return interpolateColor(animatedValue.value, inputRange, text);
-  });
+  }, [text, disabledTextColor, inputRange]);
 
   return {
     backgroundColor,
