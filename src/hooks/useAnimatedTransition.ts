@@ -1,3 +1,4 @@
+import { useCallback, useRef } from "react";
 import {
   type EasingFunction,
   type EasingFunctionFactory,
@@ -20,26 +21,33 @@ export const useAnimatedTransition = ({
 }: AnimatedTransitionConfig) => {
   const animatedValue = useSharedValue(initialValue);
 
-  const animateIn = () => {
-    if (disabled) {
+  // Use ref to avoid stale closure issues with disabled
+  const disabledRef = useRef(disabled);
+  disabledRef.current = disabled;
+
+  const animateIn = useCallback(() => {
+    if (disabledRef.current) {
       return;
     }
     animatedValue.value = withTiming(1, { duration: duration[0], ...(easing ? { easing } : {}) });
-  };
+  }, [animatedValue, duration, easing]);
 
-  const animateOut = () => {
-    if (disabled) {
+  const animateOut = useCallback(() => {
+    if (disabledRef.current) {
       return;
     }
     animatedValue.value = withTiming(0, { duration: duration[1], ...(easing ? { easing } : {}) });
-  };
+  }, [animatedValue, duration, easing]);
 
-  const animateTo = (toValue: number, duration: number) => {
-    if (disabled) {
-      return;
-    }
-    animatedValue.value = withTiming(toValue, { duration });
-  };
+  const animateTo = useCallback(
+    (toValue: number, animateDuration: number) => {
+      if (disabledRef.current) {
+        return;
+      }
+      animatedValue.value = withTiming(toValue, { duration: animateDuration });
+    },
+    [animatedValue]
+  );
 
   return {
     animatedValue,
