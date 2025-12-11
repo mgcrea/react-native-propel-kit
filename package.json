@@ -7,6 +7,11 @@
   "homepage": "https://github.com/mgcrea/react-native-propel-kit#readme",
   "repository": "github:mgcrea/react-native-propel-kit",
   "license": "MIT",
+  "files": [
+    "src",
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "npm run build:babel && npm run build:types",
     "build:babel": "babel src --out-dir dist --extensions '.ts,.tsx' --copy-files",
