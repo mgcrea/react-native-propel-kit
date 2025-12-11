@@ -32,6 +32,7 @@ export const useAnimatedColor = ({
   const { animatedValue, animateIn, animateOut } = useAnimatedTransition({
     initialValue,
     duration,
+    disabled,
   });
 
   const color = useDerivedValue(() => {
