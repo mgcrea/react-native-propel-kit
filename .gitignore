@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+npm-debug.log
+yarn-error.log
+ios/generated/
+android/generated/
+dist/
+.idea/
+.vscode/
+tmp/
+*.private.tsx
+
+CLAUDE.md
+.claude/

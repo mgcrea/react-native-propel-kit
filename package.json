@@ -1,0 +1,37 @@
+{
+  "name": "@mgcrea/react-native-propel-kit",
+  "version": "2.0.0",
+  "description": "",
+  "author": "Olivier Louvignes <olivier@mgcrea.io> (https://github.com/mgcrea)",
+  "main": "./dist/index.js",
+  "homepage": "https://github.com/mgcrea/react-native-propel-kit#readme",
+  "repository": "github:mgcrea/react-native-propel-kit",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run build:babel && npm run build:types",
+    "build:babel": "babel src --out-dir dist --extensions '.ts,.tsx' --copy-files",
+    "build:types": "tsc --emitDeclarationOnly && tsc-alias",
+    "format": "prettier --write src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-native": ">=0.82",
+    "react-native-reanimated": ">=4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/runtime": "^7.28.4",
+    "@react-native/babel-preset": "0.83.0",
+    "@react-native/typescript-config": "0.83.0",
+    "babel-plugin-module-resolver": "^5.0.2",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "react": "^19.2.1",
+    "react-native": "^0.83.0",
+    "react-native-reanimated": "^4.2.0",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "pnpm@10.25.0"
+}
