@@ -9,5 +9,11 @@ export default {
         },
       },
     ],
+    [
+      "@mgcrea/react-native-tailwind/babel",
+      {
+        attributes: ["className", "*ClassName"],
+      },
+    ],
   ],
 };
