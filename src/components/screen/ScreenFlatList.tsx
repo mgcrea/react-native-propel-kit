@@ -4,7 +4,10 @@ import { useSafePaddingTop } from "src/hooks";
 
 const DEFAULT_ADJUSTMENT_BEHAVIOR = Platform.OS === "ios" ? "automatic" : undefined;
 
-export type ScreenFlatListProps<T> = FlatListProps<T>;
+export type ScreenFlatListProps<T> = FlatListProps<T> & {
+  className?: string;
+  contentContainerClassName?: string;
+};
 
 export const ScreenFlatList = <T,>({
   showsVerticalScrollIndicator = false,

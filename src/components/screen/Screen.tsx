@@ -3,7 +3,9 @@ import { Platform, View, type ViewProps } from "react-native";
 import { BottomTabBarHeightContext } from "react-native-bottom-tabs";
 import { useSafePaddingTop } from "src/hooks";
 
-export type ScreenProps = ViewProps;
+export type ScreenProps = ViewProps & {
+  className?: string;
+};
 
 export const Screen: FunctionComponent<PropsWithChildren<ScreenProps>> = ({
   style,

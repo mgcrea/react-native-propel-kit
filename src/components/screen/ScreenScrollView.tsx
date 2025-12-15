@@ -4,7 +4,10 @@ import { useSafePaddingTop } from "src/hooks";
 
 const DEFAULT_ADJUSTMENT_BEHAVIOR = Platform.OS === "ios" ? "automatic" : undefined;
 
-export type ScreenScrollViewProps = ScrollViewProps;
+export type ScreenScrollViewProps = ScrollViewProps & {
+  className?: string;
+  contentContainerClassName?: string;
+};
 
 export const ScreenScrollView: FunctionComponent<ScrollViewProps> = forwardRef<ScrollView, ScrollViewProps>(
   function ScreenScrollViewRender(
