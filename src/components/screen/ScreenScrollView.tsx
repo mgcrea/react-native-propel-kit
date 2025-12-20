@@ -9,35 +9,36 @@ export type ScreenScrollViewProps = ScrollViewProps & {
   contentContainerClassName?: string;
 };
 
-export const ScreenScrollView: FunctionComponent<ScrollViewProps> = forwardRef<ScrollView, ScrollViewProps>(
-  function ScreenScrollViewRender(
-    {
-      showsVerticalScrollIndicator = false,
-      contentInsetAdjustmentBehavior = DEFAULT_ADJUSTMENT_BEHAVIOR,
-      contentContainerStyle,
-      style,
-      ...otherProps
-    },
-    ref,
-  ) {
-    const safePaddingTop = useSafePaddingTop();
-    const contentPaddingStyles = Platform.select({
-      android: {
-        paddingTop: safePaddingTop,
-      },
-      ios: {},
-    });
-
-    return (
-      <ScrollView
-        style={[{ flex: 1 }, style]}
-        contentContainerStyle={[contentPaddingStyles, contentContainerStyle]}
-        showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-        contentInsetAdjustmentBehavior={contentInsetAdjustmentBehavior}
-        overScrollMode="always"
-        ref={ref}
-        {...otherProps}
-      />
-    );
+export const ScreenScrollView: FunctionComponent<ScreenScrollViewProps> = forwardRef<
+  ScrollView,
+  ScrollViewProps
+>(function ScreenScrollViewRender(
+  {
+    showsVerticalScrollIndicator = false,
+    contentInsetAdjustmentBehavior = DEFAULT_ADJUSTMENT_BEHAVIOR,
+    contentContainerStyle,
+    style,
+    ...otherProps
   },
-);
+  ref,
+) {
+  const safePaddingTop = useSafePaddingTop();
+  const contentPaddingStyles = Platform.select({
+    android: {
+      paddingTop: safePaddingTop,
+    },
+    ios: {},
+  });
+
+  return (
+    <ScrollView
+      style={[{ flex: 1 }, style]}
+      contentContainerStyle={[contentPaddingStyles, contentContainerStyle]}
+      showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+      contentInsetAdjustmentBehavior={contentInsetAdjustmentBehavior}
+      overScrollMode="always"
+      ref={ref}
+      {...otherProps}
+    />
+  );
+});

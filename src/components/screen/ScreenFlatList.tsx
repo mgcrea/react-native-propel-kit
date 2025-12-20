@@ -15,7 +15,7 @@ export const ScreenFlatList = <T,>({
   contentContainerStyle,
   style,
   ...otherProps
-}: FlatListProps<T>) => {
+}: ScreenFlatListProps<T>) => {
   const safePaddingTop = useSafePaddingTop();
   const contentPaddingStyles = Platform.select({
     android: {
