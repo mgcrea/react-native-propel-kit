@@ -7,6 +7,8 @@ const DEFAULT_ADJUSTMENT_BEHAVIOR = Platform.OS === "ios" ? "automatic" : undefi
 export type ScreenFlatListProps<T> = FlatListProps<T> & {
   className?: string;
   contentContainerClassName?: string;
+  ListHeaderComponentClassName?: string;
+  ListFooterComponentClassName?: string;
 };
 
 export const ScreenFlatList = <T,>({
