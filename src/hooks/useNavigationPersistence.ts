@@ -33,6 +33,9 @@ export const createNavigationPersistence = (useNavigationStore: UseBoundStore<St
       isReady,
       initialState,
       onStateChange: setNavigationState,
+      clearState: () => {
+        useNavigationStore.setState({ navigationState: undefined });
+      },
     };
   };
 };
