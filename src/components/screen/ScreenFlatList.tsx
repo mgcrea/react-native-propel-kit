@@ -37,4 +37,4 @@ export const ScreenFlatList = <T,>({
     />
   );
 };
-ScreenFlatList.displayName = "FlatList";
+ScreenFlatList.displayName = "ScreenFlatList";
