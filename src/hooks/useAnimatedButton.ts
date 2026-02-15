@@ -30,7 +30,8 @@ export const useAnimatedButton = ({
   inputRange = [0, 1],
   duration = [100, 300],
 }: AnimatedButtonConfig) => {
-  const isValid = isValidColorRange(background) || isValidColorRange(border) || isValidColorRange(text);
+  const isValid =
+    isValidColorRange(background) || isValidColorRange(border) || isValidColorRange(text) || isValidColorRange(textBorder);
 
   const { animatedValue, animateIn, animateOut } = useAnimatedTransition({
     duration,
