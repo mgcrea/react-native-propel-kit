@@ -32,6 +32,8 @@ export const useOnceReady = (
 ): void => {
   const { minDelay = 0 } = options;
   const hasExecutedRef = useRef(false);
+  const callbackRef = useRef(callback);
+  callbackRef.current = callback;
   const mountTimeRef = useRef<number | null>(null);
 
   // Capture mount time on first render (in effect to satisfy purity rules)
@@ -49,11 +51,11 @@ export const useOnceReady = (
       const remainingDelay = Math.max(0, minDelay - elapsed);
 
       if (remainingDelay > 0) {
-        const timeoutId = setTimeout(callback, remainingDelay);
+        const timeoutId = setTimeout(() => callbackRef.current(), remainingDelay);
         return () => clearTimeout(timeoutId);
       }
     }
 
-    callback();
-  }, [isReady, callback, minDelay]);
+    callbackRef.current();
+  }, [isReady, minDelay]);
 };
