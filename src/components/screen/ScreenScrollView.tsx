@@ -11,7 +11,7 @@ export type ScreenScrollViewProps = ScrollViewProps & {
 
 export const ScreenScrollView: FunctionComponent<ScreenScrollViewProps> = forwardRef<
   ScrollView,
-  ScrollViewProps
+  ScreenScrollViewProps
 >(function ScreenScrollViewRender(
   {
     showsVerticalScrollIndicator = false,
