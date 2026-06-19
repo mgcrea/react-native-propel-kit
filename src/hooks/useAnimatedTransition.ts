@@ -46,7 +46,7 @@ export const useAnimatedTransition = ({
       }
       animatedValue.value = withTiming(toValue, { duration: animateDuration });
     },
-    [animatedValue]
+    [animatedValue],
   );
 
   return {
